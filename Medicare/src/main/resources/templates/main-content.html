@@ -1,0 +1,50 @@
+<div class="home-sec" id="home">
+	<div class="overlay ">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="flexslider set-flexi" id="main-section">
+
+						<h1>ORDER WATER CANS ONLINE !</h1>
+						<div class="homeLabelClass">
+							<div class="sample">Select location</div>
+						</div>
+						<div class="homeLabelClass">
+							<select class="form-control inputdimension bar" id="sel1">
+								<option>Neeladri Nagar,Electronic City</option>
+							</select>
+						</div>
+						<div class="homeLabelClass" style="text-align: left;">
+							<button type="button" onclick="placeOrder()"
+								class="btn btn-primary goButton inputdimension go"
+								style="background-color: #1B76FF;">Proceed</button>
+						</div>
+						<div>
+							<div class="text-center">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<img id="offerImg" src="img/Early diwaliTreat.png"
+										alt="Cinque Terre" style="padding-top: 10%; margin: auto;"
+										class="img-responsive" width="80%" height="40px"
+										align="middle">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script th:inline="javascript">		
+
+	function placeOrder() {
+		$("#home").html("");
+		
+		//alert("placing order");
+		var url = "http://localhost:9000/order"
+		var container = "main-content";
+		callAjax(url, container, "GET");
+	}
+	
+</script>

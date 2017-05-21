@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>NirSeva</title>
+<link rel="icon" href="img/flogo.png">
+<!-- BOOTSTRAP CORE STYLE CSS -->
+<link href="css/bootstrap.css" rel="stylesheet" />
+<!-- FONT AWESOME CSS -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<!-- FLEXSLIDER CSS -->
+<link href="css/flexslider.css" rel="stylesheet" />
+<!-- Angular Date CSS -->
+<link href="css/angular-date-picker.css" rel="stylesheet" />
+<link href="css/bootstrap-select.css" rel="stylesheet" />
+<link href="css/style-notification.css" rel="stylesheet" />
+<link href="css/angular-ui-switch.css" rel="stylesheet" />
+<link href="css/select2.min.css" rel="stylesheet" />
+<!-- CUSTOM STYLE CSS -->
+<link href="css/styleV1_2.css" rel="stylesheet" />
+<!-- Google	Fonts -->
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300'
+	rel='stylesheet' type='text/css' />
+
+</head>
+
+<body id="myapp">
+
+	<div id="mycontroller">
+		<div style="box-shadow: 0px 0px 10px #1C3950;"
+			class="navbar navbar-inverse navbar-fixed-top " id="menu">
+			<div class="container" style="color: #666">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle badge1" data-badge="New"
+						data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#" style="color: #666"><img
+						class="logo-custom" src="img/fifokart_logo.png" alt="not found"
+						height="60px" width="60px" style="margin-top: -11px;" />&nbsp;&nbsp;NirSeva</a>
+				</div>
+				<div class="navbar-collapse collapse move-me menuline">
+					<ul id="leftOptions" style="font-size: 14px; font-weight: normal;"
+						class="nav navbar-nav navbar-right">
+						<li class="ipadHeader" data-toggle="collapse"
+							data-target=".navbar-collapse" style="cursor: default;"
+							href="tel:9660034628"><p href="tel:9660034628"
+								style="cursor: pointer">Call to order :
+								9019579815&nbsp;/&nbsp;9844844674 (9AM-9PM)</p></li>
+						<li style="display: none" class="ipadHeader1"
+							data-toggle="collapse" data-target=".navbar-collapse"
+							style="cursor:default;" href="tel:9660034628"><p
+								href="tel:9660034628" style="cursor: pointer">Call to order
+								: 9019579815</p></li>
+						<li data-toggle="collapse" data-target=".navbar-collapse"
+							style="cursor: default;"><p onclick="refer()"
+								style="cursor: pointer;">
+								Refer<sup><span class="badge"
+									style="font-size: 10px; padding: 1px 6px; background-color: red;">New</span></sup>
+							</p></li>
+						<li data-toggle="collapse" data-target=".navbar-collapse"
+							style="cursor: default;" ng-if="appVariables.showLogout"><i
+							class="fa fa-credit-card" aria-hidden="true"></i><i
+							class="fa fa-inr" aria-hidden="true" style="padding-left: 6px"></i>
+							<span ng-bind="appVariables.money" style="margin-left: -4px"></span></li>
+						<li data-toggle="collapse" data-target=".navbar-collapse"
+							onclick="sessionLogin()" ng-if="appVariables.showLogin">LOGIN</li>
+						<li data-toggle="collapse" data-target=".navbar-collapse"
+							onclick="sessionExpire()" ng-if="appVariables.showLogout">LOGOUT</li>
+						<!-- <li><a href="#features-sec">WHY US</a></li>
+                    <li><a href="#faculty-sec">HOW IT WORKS</a></li>
+                     <li><a href="#contact-sec">CONTACT</a></li>-->
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<!--NAVBAR SECTION END-->
+		<div>
+
+			<div id="conatinerDiv">
+				<div id="main-content"></div>
+			</div>
+
+		</div>
+		<style>
+body {
+	padding-top: 50px;
+}
+
+.dropdown.dropdown-lg .dropdown-menu {
+	margin-top: -1px;
+	padding: 6px 20px;
+}
+
+.input-group-btn .btn-group {
+	display: flex !important;
+}
+
+.btn-group .btn {
+	border-radius: 0;
+	margin-left: -1px;
+}
+
+.btn-group .btn:last-child {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.btn-group .form-horizontal .btn[type="submit"] {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.form-horizontal .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.form-group .form-control:last-child {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+	#adv-search {
+		width: 500px;
+		margin: 0 auto;
+	}
+	.dropdown.dropdown-lg {
+		position: static !important;
+	}
+	.dropdown.dropdown-lg .dropdown-menu {
+		min-width: 500px;
+	}
+}
+</style>
+
+		<!--HOME SECTION END-->
+		<div class="tag-line"></div>
+		<!--HOME SECTION TAG LINE END-->
+		<div id="features-sec" class="container ">
+			<img src="img/clock drop stamp.png"
+				class="whyus img-responsive imageres" alt="Cinque Terre"
+				width="100%" height="100%">
+		</div>
+
+		<!-- FEATURES SECTION END-->
+		<div id="faculty-sec"
+			style="background-color: white; min-height: 630px; color: #666">
+			<div class="container set-pad">
+				<div class="row text-center" style="">
+					<div
+						class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+						<h1 data-scroll-reveal="enter from the bottom after 0.1s"
+							class="header-line" style="color: #666">HOW IT WORKS</h1>
+						<p data-scroll-reveal="enter from the bottom after 0.3s"
+							style="margin-bottom: 50px;">Getting pure and hygienic
+							drinking water has never been so easy.</p>
+					</div>
+
+				</div>
+				<!--/.HEADER LINE END-->
+
+				<div class="row">
+
+
+					<div class="col-lg-3  col-md-3 col-sm-3"
+						data-scroll-reveal="enter from the bottom after 0.4s">
+						<div class="faculty-div" style="border: 0">
+							<img src="img/i1.png" style="margin-left: 21%" height="60%"
+								width="60%" />
+							<h3 style="margin-bottom: 31px; text-align: center">REGISTER
+							</h3>
+							<hr />
+							<h4 style="margin-bottom: 31px; text-align: center; color: #666">Register
+								with your mobile number .</h4>
+
+						</div>
+					</div>
+
+					<div class="col-lg-3  col-md-3 col-sm-3"
+						data-scroll-reveal="enter from the bottom after 0.4s">
+						<div class="faculty-div">
+							<img src="img/login.png" style="margin-left: 26%" height="50%"
+								width="40%" />
+							<h3 style="margin-bottom: 31px; text-align: center">LOGIN</h3>
+							<hr />
+							<h4 style="margin-bottom: 31px; text-align: center;">Login
+								using mobile number and password .</h4>
+
+						</div>
+					</div>
+
+
+					<div class="col-lg-3  col-md-3 col-sm-3"
+						data-scroll-reveal="enter from the bottom after 0.5s">
+						<div class="faculty-div">
+							<img src="img/order.png" style="margin-left: 30%" height="50%"
+								width="40%" />
+							<h3 style="margin-bottom: 31px; text-align: center">ORDER</h3>
+							<hr />
+							<h4 style="margin-bottom: 31px; text-align: center;">Select
+								delivery date & time .</h4>
+
+						</div>
+					</div>
+					<div class="col-lg-3  col-md-3 col-sm-3"
+						data-scroll-reveal="enter from the bottom after 0.6s">
+						<div class="faculty-div">
+							<img src="img/delivery.png" style="margin-left: 30%" height="50%"
+								width="40%" />
+							<h3 style="margin-bottom: 31px; text-align: center">DELIVERY</h3>
+							<hr />
+							<h4 style="margin-bottom: 31px; text-align: center;">Free
+								delivery to your door step.</h4>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="contact-sec">
+			<div class="overlay">
+				<div class="container set-pad">
+					<div class="row text-center">
+						<div
+							class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+							<h1 data-scroll-reveal="enter from the bottom after 0.1s"
+								class="header-line">CONTACT US</h1>
+
+						</div>
+
+					</div>
+					<!--/.HEADER LINE END-->
+					<div class="row set-row-pad"
+						data-scroll-reveal="enter from the bottom after 0.5s">
+
+
+						<div
+							class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+
+							<div class="form-group">
+								<input type="text" class="form-control "
+									ng-model="appVariables.name" name="name" required="required"
+									placeholder="Your Name" />
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control "
+									ng-model="appVariables.email" name="email" required="required"
+									placeholder="Your Email" />
+							</div>
+							<div class="form-group">
+								<textarea name="message" required="required"
+									ng-model="appVariables.msg" name="msg" class="form-control"
+									style="min-height: 150px;" placeholder="Message"></textarea>
+							</div>
+							<div class="form-group">
+								<button type="button" style="width: 100%;"
+									onclick="contactUs()" class="btn btn-info btn-block btn-lg">SUBMIT
+									REQUEST</button>
+							</div>
+
+
+						</div>
+
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container" style="color: #666">
+			<div class="row set-row-pad">
+				<div
+					class="col-lg-3 col-md-3 col-sm-3   col-lg-offset-1 col-md-offset-1 col-sm-offset-1 "
+					data-scroll-reveal="enter from the bottom after 0.4s">
+
+					<h2>
+						<strong>Our Location </strong>
+					</h2>
+					<hr />
+					<div style="color: #666">
+						<h4>Electronic City,Phase 1</h4>
+						<h4>Bengaluru</h4>
+						<h4>
+							<strong><i class="fa fa-mobile fa-lg" aria-hidden="true"
+								style="width: 20px; font-size: 35px; padding-left: 5px;"></i></strong>
+							&nbsp;&nbsp; 9844844674
+						</h4>
+						<h4>
+							<strong><i class="fa fa-envelope fa-lg"
+								aria-hidden="true"></i> </strong>&nbsp; happiness@condigence.com
+						</h4>
+					</div>
+
+
+				</div>
+				<div
+					class="col-lg-3 col-md-3 col-sm-3   col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+					data-scroll-reveal="enter from the bottom after 0.4s">
+
+					<h2>
+						<strong>Other Services </strong>
+					</h2>
+					<hr />
+					<div>
+						<h4>
+							<span class="glyphicon glyphicon-hand-right"></span><a
+								style="text-decoration: none; cursor: pointer; color: #666;"
+								onclick="refundCan()" target="_blank"> Request for refund
+								can </a>
+						</h4>
+					</div>
+				</div>
+
+				<div
+					class="col-lg-3 col-md-3 col-sm-3   col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+					data-scroll-reveal="enter from the bottom after 0.4s">
+
+					<h2 style="font-size: 29px">
+						<strong>Social Conectivity </strong>
+					</h2>
+					<hr />
+					<div>
+						<a href="https://www.facebook.com/CONDIGENCECOM-1123334311087530/"
+							target="_blank"> <img src="img/Social/facebook.png" alt="" />
+						</a>
+						<!-- <a href="#"> <img src="img/Social/google-plus.png" alt="" /></a>-->
+						&nbsp;&nbsp;&nbsp;&nbsp; <a href=" https://twitter.com/condigence"
+							target="_blank"> <img src="img/Social/twitter.png" alt="" /></a>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- CONTACT SECTION END-->
+	<div id="footer">
+		&copy 2016 condigence.com | All Rights Reserved | Design by : <a
+			href="https://www.condigence.com/" style="color: #E78200"
+			target="_blank"> ConDigence</a>
+	</div>
+	<!-- FOOTER SECTION END-->
+
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap-select.js"></script>
+	<script src="js/select2.min.js"></script>
+	<!-- script src="js/app.js"></script-->
+	<!-- script src="js/blocking_click.js"></script-->
+	<!--  Jquery Core Script -->
+	<!--  Core Bootstrap Script -->
+	<script src="js/bootstrap.js"></script>
+	<!--  Flexslider Scripts -->
+	<script src="js/jquery.flexslider.js"></script>
+	<!--  Scrolling Reveal Script -->
+	<script src="js/scrollReveal.js"></script>
+	<!--  Scroll Scripts -->
+	<script src="js/jquery.easing.min.js"></script>
+	<!--  Custom Scripts -->
+	<script src="js/custom.js"></script>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		function callAjax(url, container, callType) {
+			//alert("Ajax called");
+			$.ajax({
+				url : url,
+				type : callType,
+				crossDomain : true,
+				timeout : 50000,
+				success : function(response) {
+					$('#' + container).html(response);
+				},
+				error : function(xhr, status, error) {
+
+				}
+			});
+		}
+		
+		
+		
+		
+		var url = "http://localhost:9000/content"
+		var container = "main-content";
+		callAjax(url, container, "GET");
+		
+		function loadCanImages(imgpath, img){
+			//imgpath = "http://192.168.0.6:9000/"+imgpath;
+			//alert(imgpath);
+			$(".canImageDiv > img").attr("src","");
+			$(".canImageDiv > img").attr("src",imgpath);			
+		}
+		
+		
+
+		/*]]>*/
+	</script>
+
+
+
+</body>
+</html>

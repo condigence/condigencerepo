@@ -1,0 +1,59 @@
+<html><head></head><body><div id="login" class="container summary-sec" ng-init="init()">
+
+	<div class="row" style="color:#666">
+	
+		<div id="summaryGrp" class="col-md-12 summaryContainer" style="height:300px;width: 400px;">
+		
+			<div>
+			<div style="padding-left: 42px; font-size:25px;"><b>Order Placed Successfully</b></div>
+			<table class="table">
+    <thead>
+      <tr>
+        <th style="width: 50%;"></th>
+        <th></th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+		<td><b>Order ID</b></td>
+		<td>{{appVariables.orderid}}</td>
+      </tr>
+        <tr><td><b>Name</b></td>
+		<td>{{appVariables.login.name}}</td>
+      </tr>
+		<tr><td><b>Phone Number</b></td>
+		<td>{{appVariables.login.phoneNumber}}</td>
+	  </tr><tr>
+	  </tr>
+		<tr><td><b>Particulars</b></td>
+		<td>{{appVariables.particulars}}</td>
+	  </tr><tr>
+		<td><b>Price</b></td>
+		<td>Rs. {{appVariables.finalAmount}}</td>
+	  </tr>
+	  <tr>
+		<td><b>Delivery Date</b></td>
+		<td>{{appVariables.date}}</td>
+	  </tr>
+	  <tr>
+		<td><b>Delivery Slot</b></td>
+		<td>{{appVariables.slot}}</td>
+	  </tr>
+	  <tr>
+		<td><b>Address</b></td>
+		<td>{{appVariables.address}}</td>
+	  </tr>
+     
+      
+    </tbody>
+  </table>
+  
+  </div>
+		<div style="line-height: 20px;font-size: 14px;text-align: center;"><b>Note: </b>A refundable deposit of <b>Rs.150</b> is applicable in the absence of empty cans. </div>
+		
+		</div>
+	
+	</div>
+
+</div></body></html>

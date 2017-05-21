@@ -1,0 +1,46 @@
+<html><head></head><body><div id="login" class="container login-sec" ng-init="init()">
+
+	<div class="row" style="color:#666;">
+	
+		<div ng-if="appVariables.login.loginForm" id="loginGrp" class="col-md-12 loginContainer" style="height:155px;">
+			<div style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;text-align: center;">Validate Number</div>
+			<input ng-model="appVariables.login.phoneNumber" ng-class="{&quot;errorClass&quot;:appVariables.login.phoneNumberError}" placeholder="Enter Phone Number" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="loginInput" type="text">
+			<button ng-click="getOtp()" id="otpButton" style=" background-color: #31b0d5; border-color:#31b0d5; width: 35% !important;margin: auto;min-width:250px;display: block;" type="button" class="btn btn-success inputdimension">Get OTP</button>
+			
+		</div>
+		
+		<div ng-if="appVariables.login.otpForm" id="otpGrp" class="col-md-12 loginContainer" style="height:155px;">
+			<div style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;text-align: center;">Validate OTP</div>
+			<input ng-model="appVariables.login.phoneNumber" disabled="" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" type="text">
+			<input ng-model="appVariables.login.otp" ng-class="{&quot;errorClass&quot;:appVariables.login.otpError}" placeholder="Enter OTP" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="otpInput" type="text">
+			<button ng-click="verifyOtp()" id="otpButton" style="width: 35% !important;margin: auto;min-width:250px;display: block; background-color: #31b0d5; border-color:#31b0d5; " type="button" class="btn btn-success inputdimension">Verify OTP</button>
+			
+		</div>
+		
+		<div ng-if="appVariables.login.regForm" id="regGrp" class="col-md-12 loginContainer" style="height:220px;">
+			<div style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;text-align: center;">Enter Details</div>
+			<input ng-model="appVariables.login.phoneNumber" disabled="" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" type="text">
+			<input ng-class="{&quot;errorClass&quot;:appVariables.login.nameError}" ng-model="appVariables.login.name" placeholder="Enter Name" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="registerInput" type="text">
+			<input ng-class="{&quot;errorClass&quot;:appVariables.login.passwordError}" ng-model="appVariables.login.password" placeholder="Enter Password" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="registerInput2" type="password">
+			<input ng-model="appVariables.reference" placeholder="Enter Reference Number" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="registerInput2" ng-if="appVariables.login.forgotPass" type="text">
+			<button ng-click="insertRegData()" id="registerButton" style="width: 35% !important;margin: auto;min-width:250px;display: block; background-color: #31b0d5; border-color:#31b0d5;" type="button" class="btn btn-success inputdimension">Register</button>
+		</div>
+		
+		<div ng-if="appVariables.login.forgotForm" id="frgGrp" class="col-md-12 loginContainer" style="height:220px;">
+			<div style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;text-align: center;">Enter New Password</div>
+			<input placeholder="Enter Name" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="updateInput" type="text">
+			<input placeholder="Enter New Password" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="updateInput2" type="password">
+			<button id="updateButton" style="width: 35% !important;margin: auto;min-width:250px;display: block;" type="button" class="btn btn-success inputdimension">Update</button>
+		</div>
+		
+		<div ng-if="appVariables.login.initialLoginForm" id="initiallogGrp" class="col-md-12 loginContainer" style="height:220px;">
+			<div style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;text-align: center;">Login</div>
+			<input ng-class="{&quot;errorClass&quot;:appVariables.login.phoneNumberError}" ng-model="appVariables.login.phoneNumber" placeholder="Enter Phone Number" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="initialLoginNumber" type="text">
+			<input ng-class="{&quot;errorClass&quot;:appVariables.login.passwordError}" ng-model="appVariables.login.password" placeholder="Enter Password" style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;" class="form-control inputdimension" id="initialLoginPassword" type="password">
+			<button ng-click="loginFifort()" id="updateButton" style="width: 35% !important;margin: auto;min-width:250px;display: block; background-color: #31b0d5; border-color:#31b0d5; " type="button" class="btn btn-success inputdimension">Login</button>
+			<div style="width: 35% !important;margin: auto;min-width:250px;margin-bottom: 20px;text-align: center;"><span ng-click="forgotPass()" style="float:left; cursor:pointer">Forgot Password</span><span style="float:right; cursor:pointer" ng-click="gotoReg()">New User</span></div>
+		</div>
+	
+	</div>
+
+</div></body></html>

@@ -1,0 +1,187 @@
+<div class="container"  id="order-home">
+	<div class="row marginTop" style="display:flex;">
+		<div class="orderLeftDiv">
+			
+			<div class="canLogoDiv">
+				<ul id="waterLogos" class="list-group">
+				  <li class="loc" onclick="loadCanImages('img/localhero.jpg', 'loc')" class="list-group-item"><div class="imagesClass"><img src="img/ds1.png" class="img-rounded" alt="Cinque Terre" width="60px" height="60px"></div></li>
+				  <li class="liq" onclick="loadCanImages('img/liquacan.jpg', 'liq')" class="list-group-item"><div class="imagesClass"><img src="img/liq.jpg" class="img-rounded" alt="Cinque Terre" width="60px" height="60px"></div></li>
+				  <li class="bis" onclick="loadCanImages('img/bis.jpg', 'bis')" class="list-group-item"><div class="imagesClass"><img src="img/Bisleri.jpg" class="img-rounded" alt="Cinque Terre" width="60px" height="60px"></div></li>
+				  <li class="kin" onclick="loadCanImages('img/kin.jpg', 'kin')" class="list-group-item"><div class="imagesClass"><img src="img/kinley.jpg" class="img-rounded" alt="Cinque Terre" width="60px" height="60px"></div></li>
+				</ul>
+				
+			</div>
+			<div class="canImageDiv">
+				<img src="" class="img-rounded" alt="Cinque Terre" width="100%" height="100%">
+			</div>
+			
+		</div>
+		
+		<div class="orderRightDiv">
+			<div class="quantityDiv">
+				<ul id="waterQuantities" class="list-group">
+					<li class="{'brandSelected':appVariables.brand == 'loc'}" class="list-group-item">
+						<div class="quantityInnerDiv">
+							<div style="margin:auto;">
+								<div class="{'overlayHide': (appVariables.quantityStock.daily &gt; 0) &amp;&amp; (appVariables.brand == 'loc' || appVariables.quantity['loc'] &gt; 0) }" class="overlayDiv"><span ng-if="appVariables.quantityStock.daily &lt;= 0">No Stock Available</span></div>
+								<div class="orderRightMargin quantityWidth">
+									<button type="button" class="btn btn-primary" onclick="decreaseQ('loc')">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</button>
+									<span class="qSpan" ng-bind="appVariables.quantity.loc"></span>
+									<button type="button" class="btn btn-primary" onclick="increaseQ('loc')">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</button>
+									
+									
+								</div>
+								<div class="brandNameDiv orderRightMargin">Daily Special</div>
+								<div class="quantityPriceDiv orderRightMargin"><span ng-bind="appVariables.amount.loc"></span> <i class="fa fa-inr" aria-hidden="true"></i></div>
+								<div class="cancelDiv">
+									<button style="background-color: #424E4F;color: #fff;" type="button" class="btn" onclick="emptyQ('loc')">
+										<i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="{'brandSelected':appVariables.brand == 'liq'}" class="list-group-item">
+						<div class="quantityInnerDiv">
+							<div style="margin:auto;">
+								<div class="{'overlayHide': appVariables.quantityStock.liqua &gt; 0 &amp;&amp; (appVariables.brand == 'liq' || appVariables.quantity['liq'] &gt; 0)}" class="overlayDiv"><span ng-if="appVariables.quantityStock.liqua &lt;= 0">No Stock Available</span></div>
+								<div class="orderRightMargin quantityWidth">
+									<button type="button" class="btn btn-primary" onclick="decreaseQ('liq')">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</button>
+									<span class="qSpan" ng-bind="appVariables.quantity.liq"></span>
+									<button type="button" class="btn btn-primary" onclick="increaseQ('liq')">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</button>
+									
+									
+								</div>
+								<div class="brandNameDiv orderRightMargin">Liqua</div>
+								<div class="quantityPriceDiv orderRightMargin"><span ng-bind="appVariables.amount.liq"></span> <i class="fa fa-inr" aria-hidden="true"></i></div>
+								<div class="cancelDiv">
+									<button style="background-color: #424E4F;color: #fff;" type="button" class="btn" onclick="emptyQ('liq')">
+										<i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="{'brandSelected':appVariables.brand == 'bis'}" class="list-group-item">
+						<div class="quantityInnerDiv">
+							<div style="margin:auto;">
+								<div class="{'overlayHide':appVariables.quantityStock.bislery &gt; 0 &amp;&amp; (appVariables.brand == 'bis' || appVariables.quantity['bis'] &gt; 0)}" class="overlayDiv"><span ng-if="appVariables.quantityStock.bislery &lt;= 0">No Stock Available</span></div>
+								<div class="orderRightMargin quantityWidth">
+									<button type="button" class="btn btn-primary" onclick="decreaseQ('bis')">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</button>
+									<span class="qSpan" ng-bind="appVariables.quantity.bis"></span>
+									<button type="button" class="btn btn-primary" onclick="increaseQ('bis')">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</button>
+									
+									
+								</div>
+								<div class="brandNameDiv orderRightMargin">Bisleri</div>
+								<div class="quantityPriceDiv orderRightMargin"><span ng-bind="appVariables.amount.bis"></span> <i class="fa fa-inr" aria-hidden="true"></i></div>
+								<div class="cancelDiv">
+									<button style="background-color: #424E4F;color: #fff;" type="button" class="btn" onclick="emptyQ('bis')">
+										<i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="{'brandSelected':appVariables.brand == 'kin'}" class="list-group-item">
+						<div class="quantityInnerDiv">
+							<div style="margin:auto;">
+								<div class="{'overlayHide':appVariables.quantityStock.kinley &gt; 	  0 &amp;&amp; (appVariables.brand == 'kin' || appVariables.quantity['kin'] &gt; 0)}" class="overlayDiv">
+								<span ng-if="appVariables.quantityStock.kinley &lt;= 0">No Stock Available</span>
+								</div>
+								<div class="orderRightMargin quantityWidth">
+									<button type="button" class="btn btn-primary" onclick="decreaseQ('kin')">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</button>
+									<span class="qSpan" ng-bind="appVariables.quantity.kin"></span>
+									<button type="button" class="btn btn-primary" onclick="increaseQ('kin')">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+									</button>
+									
+									
+								</div>
+								<div class="brandNameDiv orderRightMargin">Kinley</div>
+								<div class="quantityPriceDiv orderRightMargin"><span ng-bind="appVariables.amount.kin"></span> <i class="fa fa-inr" aria-hidden="true"></i></div>
+								<div class="cancelDiv">
+									<button style="background-color: #424E4F;color: #fff;" type="button" class="btn" onclick="emptyQ('kin')">
+										<i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</li>
+				
+					<li class="list-group-item">
+						<div class="quantityTotalPriceDiv">
+							<div style="margin:auto;">
+								<div class="orderRightMargin quantityWidth">
+									<span class="mobDiv">Total Price:</span>								
+									
+								</div>
+								<div class="brandNameDiv orderRightMargin">Total Price</div>
+								<div class="quantityPriceDiv orderRightMargin"><span ng-bind="appVariables.Totalamount"></span> <i class="fa fa-inr" aria-hidden="true"></i></div>
+								
+							</div>
+							<div class="cancelDiv">
+									
+								</div>
+						</div>
+					</li>
+				
+				
+				</ul>
+				<div class="desktopDiv">
+					<div class="prmocodeDiv">
+						<input placeholder="Promocode" ng-model="appVariables.promocode" class="form-control inputdimension" id="pcode" type="text">
+						<button onclick="applyCode()" id="promButton" type="button" class="btn btn-primary inputdimension">Apply</button>
+					</div>
+					<div class="cbDiv">
+						<button type="button" onclick="checkOut()" class="btn btn-success inputdimension buttons">Check Out</button>				
+					</div>
+					<div style="float: left;width: 100%;" ng-if="appVariables.codeApplied ">Promocode FIFO70 applied. (Flat 10% off on Daily Special)<i onclick="removeCode()" style="cursor:pointer; margin-left:5px; font-size:20px" class="fa fa-times" aria-hidden="true"></i></div>
+					</div>
+	
+
+				</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+<div class="mobDiv">
+	<div class="prmocodeDiv">
+		<input placeholder="Promocode" ng-model="appVariables.promocode" class="form-control inputdimension" id="pcode" type="text">
+		<button onclick="applyCode()" id="promButton" type="button" class="btn btn-primary inputdimension">Apply</button>
+	</div>
+	<div class="cbDiv">
+		<button type="button" onclick="checkOut()" class="btn btn-success inputdimension buttons">Check Out</button>				
+	</div>
+	<div style="float: left;width: 100%;" ng-if="appVariables.codeApplied ">Promocode NIRSEVAO70 applied. (Flat 10% off on Daily Special)<i onclick="removeCode()" style="cursor:pointer; margin-left:5px; font-size:20px" class="fa fa-times" aria-hidden="true"></i></div>
+					</div>
+<script th:inline="javascript">		
+
+	function checkOut() {
+		$("#order-home").html("");
+		
+		//alert("placing order");
+		var url = "http://localhost:9000/checkout"
+		var container = "order-home";
+		callAjax(url, container, "GET");
+	}
+	
+</script>
+					

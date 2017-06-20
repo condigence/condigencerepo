@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<title>Medicare Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+	th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+ <link rel="stylesheet" href="/library/webjars/fontawesome/4.6.3/css/font-awesome.min.css">
+ <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+
+<!-- link href="../static/css/guru.css" th:href="@{css/guru.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/guru.css" th:href="@{css/guru.css}"
+	rel="stylesheet" media="screen" /-->
+<link href="css/login.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="form">
+		<div class="header">
+			<h2>Sign In</h2>
+		</div>
+		<div class="login">
+			<form action="">
+				<ul>
+					<li><span class="un"><i class="fa fa-user"></i></span><input
+						type="text" class="text" placeholder="User Name Or Email" /></li>
+					<li><span class="un"><i class="fa fa-lock"></i></span><input
+						type="password" class="text" placeholder="User Password" /></li>
+					<li>
+						<button class="btn">
+							<a href="/home">Login</a>							
+						</button>
+					</li>
+					<li><div class="span">
+							<span class="ch"><input type="checkbox" id="r"> <label
+								for="r">Remember Me</label> </span> <span class="ch"><a href="#">Forgot
+									Password?</a></span>
+						</div></li>
+				</ul>
+			</form>
+
+		</div>
+		<br />
+		<!-- div class="sign">
+			<div class="need">Need new account ?</div>
+			<div class="up">
+				<a href="">Sign Up</a>
+			</div>
+		</div>
+	</div-->
+</body>
+</html>

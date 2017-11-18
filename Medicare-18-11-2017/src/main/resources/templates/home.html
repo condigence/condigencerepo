@@ -21,7 +21,6 @@
 <link href="css/demo.css" rel="stylesheet" />
 <!--     Fonts and icons     -->
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/formValidation.min.css">
 <link href="fonts/glyphicons-halflings-regular.woff">
 <link href="fonts/glyphicons-halflings-regular.eot">
 <link href="fonts/fontawesome-webfont.woff">
@@ -33,6 +32,7 @@
 <script src="stats/billboard.js"></script>
 <link rel="stylesheet" href="stats/billboard.css">
 <link rel="stylesheet" href="css/daterangepicker.css">
+
 
 
 </head>
@@ -64,6 +64,79 @@ body {
 	background: transparent ! important;
 	color: black ! important;
 }
+
+span.multiselect-native-select {
+	position: relative
+}
+span.multiselect-native-select select {
+	border: 0!important;
+	clip: rect(0 0 0 0)!important;
+	height: 1px!important;
+	margin: -1px -1px -1px -3px!important;
+	overflow: hidden!important;
+	padding: 0!important;
+	position: absolute!important;
+	width: 1px!important;
+	left: 50%;
+	top: 30px
+}
+.multiselect-container {
+	position: absolute;
+	list-style-type: none;
+	margin: 0;
+	padding: 0
+}
+.multiselect-container .input-group {
+	margin: 5px
+}
+.multiselect-container>li {
+	padding: 0
+}
+.multiselect-container>li>a.multiselect-all label {
+	font-weight: 700
+}
+.multiselect-container>li.multiselect-group label {
+	margin: 0;
+	padding: 3px 20px 3px 20px;
+	height: 100%;
+	font-weight: 700
+}
+.multiselect-container>li.multiselect-group-clickable label {
+	cursor: pointer
+}
+.multiselect-container>li>a {
+	padding: 0
+}
+.multiselect-container>li>a>label {
+	margin: 0;
+	height: 100%;
+	cursor: pointer;
+	font-weight: 400;
+	padding: 3px 0 3px 30px
+}
+.multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox {
+	margin: 0
+}
+.multiselect-container>li>a>label>input[type=checkbox] {
+	margin-bottom: 5px
+}
+.btn-group>.btn-group:nth-child(2)>.multiselect.btn {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px
+}
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+	padding: 3px 20px 3px 40px
+}
+.form-inline .multiselect-container li a label.checkbox input[type=checkbox], .form-inline .multiselect-container li a label.radio input[type=radio] {
+	margin-left: -20px;
+	margin-right: 0
+}
+
+
+
+
+
+
 </style>
 <body>
 
@@ -203,59 +276,61 @@ body {
 
 
 	<!-- Add User Modal -->
-	<div class="modal fade" id="addUser" role="dialog" 	style="width: initial; margin: auto; overflow-x: hidden; overflow-y: hidden;">
-		
+	<div class="modal fade" id="addUser" role="dialog"
+		style="width: initial; margin: auto; overflow-x: hidden; overflow-y: hidden;">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
-			<form  name="addUser" id="addUserform" >
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #d6cdcd; padding-left: 1%; padding-right: 1%"
 						type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"
-						style="color: white; padding-bottom: 2%; text-align: center">New User</h4>
+						style="color: white; padding-bottom: 2%; text-align: center">New
+						User</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-				
 					<div class="row">
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Name</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" name="add_user_name" id="add_user_name" type="text" placeholder="ANkit">
+								<input class="form-control pname" id="add_user_name" type="text">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Surname</label>
+							<label class="col-md-3 col-sm-12 control-label"">Surname</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" name="add_user_last_name" id="add_user_last_name" type="text">
+								<input class="form-control pname" id="add_user_last_name"
+									type="text">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Email</label>
+							<label class="col-md-3 col-sm-12 control-label"">Email</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" name="add_user_email" id="add_user_email" type="text" placeholder="john@doe.com">
+								<input class="form-control pname" id="add_user_email"
+									type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Password</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" name="add_user_password" id="add_user_password" type="password" >
+								<input class="form-control pname" id="add_user_password"
+									type="password">
 							</div>
 						</div>
 					</div>
-					
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm  add-user-btn"	>Add</button>
-					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary btn-sm  add-user-btn"
+						data-dismiss="modal">Add</button>
+					<button type="button" class="btn btn-primary btn-sm"
+						data-dismiss="modal">Cancel</button>
 				</div>
-				</form>
 			</div>
 		</div>
 	</div>
 
-	<!-- Edit Modal -->
+	<!-- Edit User Modal -->
 	<div class="modal fade" id="editUser" role="dialog"
 		style="width: initial; margin: auto; overflow-x: hidden; overflow-y: hidden;">
 		<div class="modal-dialog">
@@ -308,15 +383,18 @@ body {
 									id="edit_user_active">
 									<option value="true">True</option>
 									<option value="false">False</option>
-
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Role</label>
-							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_user_role" readonly="readonly"
-									id="edit_user_role" value="" type="text"></input>
+							<div class="col-md-9 col-sm-6">							
+							<select class="form-control edit_user_role"
+									id="edit_user_role">
+									<option value="2">ADMIN</option>
+									<option value="3">USER</option>
+								</select>							
+								
 							</div>
 						</div>
 
@@ -325,7 +403,7 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button"
-						class="btn btn-primary btn-sm save-updated-user-btn"
+						class="btn btn-primary btn-sm save-updated-user-btn" onclick="updateUser(this.id)"
 						data-dismiss="modal">Update</button>
 				</div>
 			</div>
@@ -533,28 +611,9 @@ body {
 				<div class="modal-body" style="text-align: center;">
 
 					<div class="row">
-
-						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Services</label>
-							<div class="col-md-9 col-sm-6">
-								<select class="form-control add_appointment_serviceTypeId"
-									val="">
-									<option value="1">Blood Test</option>
-									<option value="2">X-ray</option>
-									<option value="3">ECG</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Date </label>
-							<div class="col-md-9 col-sm-6">
-
-								<input type='date' placeholder="Select date"
-									class="form-control add_appointment_dateTime" val=""
-									id='datetimepicker2' />
-							</div>
-						</div>
+					
+					
+					
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Name </label>
 							<div class="col-md-9 col-sm-6">
@@ -572,7 +631,40 @@ body {
 							</div>
 						</div>
 
+						<!-- div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Services</label>
+							<div class="col-md-9 col-sm-6">
+								<select class="form-control add_appointment_serviceTypeId"  style="border: 1px solid #eee;
+    cursor: pointer;"
+									val="">
+									<option value="0">All Test</option>
+									<option value="1">Blood Test</option>
+									<option value="2">X-ray</option>
+									<option value="3">ECG</option>
+								</select>
+							</div>
+						</div-->
+						
 						<div class="form-group">
+    <label class="col-md-4 control-label" for="rolename">Services</label>
+    <div class="col-md-4">
+        <select id="dates-field2" class="add_appointment_serviceTypeId multiselect-ui form-control" multiple="multiple">
+            <option value="0">All Test</option>
+            <option value="1">Blood Test</option>
+            <option value="2">X-ray</option>
+            <option value="3">ECG</option>
+        </select>
+    </div>
+</div>
+						
+						
+						
+						
+						
+						
+						
+						
+							<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Age</label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control add_appointment_age" val=""
@@ -617,7 +709,20 @@ body {
 									type="text">
 							</div>
 						</div>
+						
 
+						<div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Date </label>
+							<div class="col-md-9 col-sm-6">
+
+								<input type='date' placeholder="Select date"
+									class="form-control add_appointment_dateTime" val=""
+									id='datetimepicker2' />
+							</div>
+						</div>
+					
+
+					
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Slot</label>
 							<div class="col-md-9 col-sm-6">
@@ -630,11 +735,11 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Ref.
 								Doctor</label>
-							<div class="col-md-9 col-sm-6">
+							<div class="col-md-9 col-sm-6" >
 
-								<select class="form-control add_appointment_referredByDoctorId"
-									val="">
-
+								<select class="form-control add_appointment_referredByDoctorId"  style="border: 1px solid #eee;
+    cursor: pointer;" val="">
+									<option value="0">None</option>
 									<option value="1">Dr. Vishal</option>
 									<option value="2">Dr. Sahil</option>
 									<option value="3">Dr. Kripa</option>
@@ -822,7 +927,8 @@ body {
 
 
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Billing No </label>
+							<label class="col-md-3 col-sm-12 control-label">Billing
+								No </label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control pname" type="text">
 							</div>
@@ -1258,7 +1364,6 @@ body {
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
-			<form name="addService" id="addServiceform">
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #d6cdcd; padding-left: 1%; padding-right: 1%"
@@ -1269,26 +1374,44 @@ body {
 				</div>
 				<div class="modal-body" style="text-align: center;">
 					<div class="row">
+						<!--  div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Services</label>
+							<div class="col-md-9 col-sm-6">
+								<select class="form-control" id="add-new-serviceType">
+									<option value="Blood Test">Blood Test</option>
+									<option value="X Ray">X-ray</option>
+									<option value="ECG">ECG</option>
+								</select>
+							</div>
+						</div-->
+
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Service
 								Type</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control" type="text" name="add_new_serviceType" id="add_new_serviceType">
+								<input class="form-control" type="text" id="add-new-serviceType">
 							</div>
 						</div>
+
+
+
+
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Price</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control" type="text" name="add_new_serviceType_price" id="add_new_serviceType_price">
+								<input class="form-control" type="text"
+									id="add-new-serviceType-price">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm add_new_serviceType_btn" >Add</button>
-					<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
+					<button type="button"
+						class="btn btn-primary btn-sm add-new-serviceType-btn"
+						data-dismiss="modal">Add</button>
+					<button type="button" class="btn btn-info btn-sm"
+						data-dismiss="modal">Cancel</button>
 				</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -1441,41 +1564,45 @@ body {
 
 			<!-- Modal content-->
 			<div class="modal-content">
-			<form  name="addDoctor" id="addDoctorform">
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #d6cdcd; padding-left: 1%; padding-right: 1%"
 						type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"
-						style="color: white; padding-bottom: 2%; text-align: center">New Doctor</h4>
+						style="color: white; padding-bottom: 2%; text-align: center">New
+						Doctor</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
+
 					<div class="row">
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Name</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_name" name="add_doctor_name" type="text" >
+								<input class="form-control add_doctor_name" type="type" value="">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Mobile</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_contactNo" type="text" name="add_doctor_contactNo">
+								<input class="form-control add_doctor_contactNo" type="text"
+									value="">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Email</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_email" type="text" name="add_doctor_email">
+								<input class="form-control add_doctor_email" type="text"
+									value="">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Hospital</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_hospitalName" type="text" name="add_doctor_hospitalName">
+								<input class="form-control add_doctor_hospitalName" type="text"
+									value="">
 							</div>
 						</div>
 
@@ -1483,36 +1610,39 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Qualification</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_qualification" type="text" name="add_doctor_qualification">
+								<input class="form-control add_doctor_qualification" type="text"
+									value="">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Speciality</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_speciality" type="text" name="add_doctor_speciality">
+								<input class="form-control add_doctor_speciality" type="text"
+									value="">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Address</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_address" type="text" name="add_doctor_address">
+								<input class="form-control add_doctor_address" type="text"
+									value="">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">commission</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_commission" type="text" name="add_doctor_commission">
+								<input class="form-control add_doctor_commission" type="text"
+									value="">
 							</div>
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm add-doctor-btn"	>Add</button>
-					<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary btn-sm add-doctor-btn"
+						data-dismiss="modal">Add</button>
 				</div>
-				</form>
 			</div>
 
 		</div>
@@ -1523,12 +1653,8 @@ body {
 
 </body>
 <!--   Core JS Files   -->
-
 <script src="js/jquery-3.1.0.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
-<script src="js/formValidation.min.js" type="text/javascript"></script>
-<script src="js/framework/bootstrap.min.js" type="text/javascript"></script>
-<script src="js/jquery.form.min.js" type="text/javascript"></script> 
 
 <script src="js/jquery.datetimepicker.min.js"></script>
 <script src="js/jquery.datetimepicker.full.min.js"></script>
@@ -1540,12 +1666,11 @@ body {
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="js/demo.js"></script>
 <script src="js/medicare.js" type="text/javascript"></script>
-<script src="js/validation.js" type="text/javascript"></script><!-- 
-<script src="js/jquery.form.min.js" type="text/javascript"></script>
- -->
+
 <script src="js/moment.js" type="text/javascript"></script>
 <script src="js/daterangepicker.js" type="text/javascript"></script>
-
+<script src="js/bootstrap-multiselect.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/bootstrap-multiselect.css">
 
 <script th:inline="javascript">
         /*<![CDATA[*/
@@ -1553,10 +1678,12 @@ body {
 
     var port = [[${port}]];
     var host = [[${host}]];
-    var baseUrl = "http://"+host+":"+port;	
-	var dashboardurl = baseUrl+"/dashboard";	
+	var baseUrl = "http://"+host+":"+port+"/medicare";	
 	
-	alert(dashboardurl);
+	//alert("baseUrl : "+baseUrl);
+	var dashboardurl = baseUrl+"/dashboard";	
+	//alert("dashboardurl : "+dashboardurl);
+	
 	var container = "content";
 	callAjax(dashboardurl, container, "GET");	
 	$(".nav > .tab").click(function() {
@@ -1582,13 +1709,17 @@ body {
 				$(this).toggleClass('active').next().slideToggle("fast");
 				$(this).children('i').toggleClass('icon-plus icon-minus');
 			});
-	
-	
 	   /*]]>*/
     </script>
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker2').datetimepicker();
+	});
+	
+	$(function() {
+	    $('.multiselect-ui').multiselect({
+	        includeSelectAllOption: true
+	    });
 	});
 </script>
 </html>

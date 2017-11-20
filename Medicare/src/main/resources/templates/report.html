@@ -17,55 +17,11 @@
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 						    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 						    <span></span> <b class="caret"></b>
-</div>
-					
+					</div>
 					<hr/>
-					<table class="table table-hover">
-						<thead class="text-primary">
-
-							<th>S.No</th>
-							<th>Service</th>
-							<th>Price</th>
-							<th>Patients</th>
-							<th>Amount</th>
-							<th>Ref. Doctors</th>
-							<th>Commission</th>
-							<th>Total Amount</th>
-							<!-- <th>Action </th> -->
-						</thead>
-						<tbody>
-							<tr>
-
-								<td>1</td>
-								<td class="text-danger">KUB</td>
-								<td>500</td>
-								<td>5</td>
-								<td>2500</td>
-								<td>5</td>
-								<td>1250</td>
-								<td>1250</td>
-
-								<!-- <td><button class="btn-primary"
-										style="border: transparent; margin: 0.5%" data-toggle="modal"
-										data-target="#editService"><i class="fa fa-pencil"></i></button>
-									<button class="btn-primary"
-										style="border: transparent; margin: 0.5%"
-										title="Cancel Appointment"><i class="fa fa-trash"></i></button></td>
- -->
-							</tr>
-							<tr>
-
-								<td>2</td>
-								<td class="text-danger">Anomaly</td>
-								<td>1200</td>
-								<td>10</td>
-								<td>12000</td>
-								<td>8</td>
-								<td>4800</td>
-								<td>7200</td>
-
-							</tr>
-						</tbody>
+					<table class="table table-hover ">
+						<thead class="text-primary headerdata" />
+						<tbody class="rowdata" />
 					</table>
 					<div class="row">
 						
@@ -78,13 +34,15 @@
 	</div>
 </div>
 <script type="text/javascript">
+
+
 $(function() {
 
     var start = moment().subtract(29, 'days');
     var end = moment();
 
     function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        $('#reportrange span').html(start.format('MM DD YYYY') + ' - ' + end.format('MM DD YYYY'));
     }
 
     $('#reportrange').daterangepicker({
@@ -96,18 +54,115 @@ $(function() {
            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
            'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+           'Last Year': [moment(), moment().subtract(1, 'year').endOf('year')]
         }
     }, cb);
 
     cb(start, end);
     
 });
+
+var container = "content";
+/* var urlPerfix = "http://localhost:9900";
+url = urlPerfix + "/report/all"; */
+
+var reportUrl = baseUrl + "/report/all";
+var jsonData = getJSON(reportUrl);
+
+
+function getJSON(url) {
+	$.ajax({
+		url : url,
+		type : "GET",
+		crossDomain : true,
+		timeout : 50000,
+		success : function(response) {
+
+			populateData(response);
+		},
+		error : function(xhr, status, error) {
+		}
+	});
+
+}
+
+
+function populateData(response) {
+		
+		var headerdataStr = "";
+		
+		
+		 headerdataStr = headerdataStr + "<th>S.No</th>" + "<th>Service</th>" + "<th>Price</th>"
+				+  "<th>Patients</th>" +  "<th>Amount</th>" + "<th>Ref. Doctors</th>" + "<th>Commission</th>" + "<th>Total Amount</th>"; 
+
+		$('.headerdata').html(headerdataStr);
+
+		var rowDataStr = ""; 
+		
+		 for (i = 0; i < response.length; i++) {
+
+			rowDataStr = rowDataStr
+					+ "<tr id='row_" + i + "'>"
+					
+					+ "<td id='service_Name_" + i + "'>"
+					+ i
+					+ "</td>"
+					
+					+ "<td class='text-danger' id='service_Name_" + i + "'>"
+					+ response[i].serviceName
+					+ "</td>"
+					
+					+ "<td  id='per_Service_Cost_" + i + "'>"
+					+ response[i].perServiceCost
+					+ "</td>"
+					
+					+ "<td  id='no_Of_Patient_" + i + "'>"
+					+ response[i].noOfPatient
+					+ "</td>"
+					
+					+ "<td  id='total_Service_Cost_" + i + "'>"
+					+ response[i].totalServiceCost
+					+ "</td>"
+					
+					+ "<td  id='no_Of_Ref_Doctor_" + i + "'>"
+					+ response[i].noOfRefDoctor
+					+ "</td>"
+					
+					+ "<td  id='doctor_Commission_" + i + "'>"
+					+ response[i].doctorCommission
+					+ "</td>"
+					
+					+ "<td  id='total_Amount_" + i + "'>"
+					+ response[i].totalAmount
+					+ "</td>"
+					
+					+ "</tr>";
+		} 
+		$('.rowdata').html(rowDataStr);
+
+	}
+
+
+
+
 </script>
 <script type="text/javascript">
             $(function () {
                 $('#datetimepicker1').datetimepicker({
                 	
                 });
+                
+                $( ".ranges" ).click(function() {
+              	  alert( "Handler for .click() called."+$('#reportrange span').text());
+              	url = urlPerfix + "/report/dates/"+$('#reportrange span').text();
+              	var jsonData = getJSON(url);
+
+              	  
+              	}); 
             });
+            
+            
+          
+            
         </script>

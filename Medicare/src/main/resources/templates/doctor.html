@@ -172,10 +172,12 @@ p {
 </script>
 <script type="text/javascript">
 	var container = "content";
-	var urlPerfix = baseUrl;
-	url = urlPerfix + "/doctor/all";
+	/* var urlPerfix = "http://localhost:9900/";
+	url = urlPerfix + "doctor/all"; */
+	var doctorUrl = baseUrl + "/doctor/all";
+	
 	var jsonData = "";
-	getJSON(url);
+	getJSON(doctorUrl);
 
 	function getJSON(url) {
 		$.ajax({
@@ -200,49 +202,20 @@ p {
 			//alert("deleting...");
 			var idStr = $(this).attr("id");
 			var id = idStr.split('_')[1];
-			url = urlPerfix + "/doctor/" + id;
-			alert(url);
+			//alert(" id "+id);
+			url = baseUrl + "/doctor/" + id;
+			//alert(url);
 			$.ajax({
 				url : url,
 				type : "DELETE",
 				crossDomain : true,
 				timeout : 50000,
 				success : function(response) {
+					 location.reload(true);
 				},
 				error : function(xhr, status, error) {
 				}
 			});
-		});
-
-		$(".add-doctor-btn").click(function() {
-
-			var name = $(".add_doctor_name").val();				
-		
-			var contactNo =	$(".add_doctor_contactNo").val();
-			var email =	$(".add_doctor_email").val();
-			var hospitalName = $(".add_doctor_hospitalName").val();
-			var qualification = $(".add_doctor_qualification").val();
-			var speciality = $(".add_doctor_speciality").val();
-			var address =	$(".add_doctor_address").val();
-			var commission = $(".add_doctor_commission").val();
-
-			var jsondata = {};
-			jsondata["name"] = name;
-			jsondata["contactNo"] = contactNo;
-			jsondata["email"] = email;
-			jsondata["hospitalName"] = hospitalName;
-			jsondata["qualification"] = qualification;
-			jsondata["speciality"] = speciality;
-			jsondata["address"] = address;			
-			jsondata["commission"] = commission;
-			jsondata["addedByUserId"] = 1;
-
-			var urlPerfix = baseUrl;
-			url = urlPerfix + "/doctor/add";
-			//alert(JSON.stringify(jsondata));
-			callAjaxPostJSON(url, "POST", "", jsondata);
-
-			clearForm();
 		});
 
 		$(".editbtn")
@@ -258,17 +231,7 @@ p {
 							var speciality = $("#doctor_speciality_" + id).text();
 							var address = $("#doctor_address_" + id).text();
 							var commission = $("#doctor_commission_" + id).text();	
-							
-							/*
-							alert(name);
-							alert(contactNo);
-							alert(email);
-							alert(hospitalName);
-							alert(qualification);
-							alert(speciality);
-							alert(address);
-							alert(commission);
-							*/
+
 							$(".edit_doctor_id").val(id);
 							$(".edit_doctor_name").val(name);
 							$(".edit_doctor_contactNo").val(contactNo);
@@ -292,17 +255,6 @@ p {
 			var speciality = $(".edit_doctor_speciality").val();
 			var address =	$(".edit_doctor_address").val();
 			var commission = $(".edit_doctor_commission").val();
-			/*
-			alert(id);
-			alert(name);
-			alert(contactNo);
-			alert(email);
-			alert(hospitalName);
-			alert(qualification);
-			alert(speciality);
-			alert(address);
-			alert(commission);
-			*/
 						
 			var jsondata = {};
 			jsondata["id"] = id;
@@ -316,8 +268,8 @@ p {
 			jsondata["commission"] = commission;
 			jsondata["addedByUserId"] = 1;
 
-			var urlPerfix = baseUrl;
-			url = urlPerfix + "/doctor/" + id;
+			//var urlPerfix = "http://localhost:9900";
+			url = baseUrl + "/doctor/" + id;
 			//alert(url)
 			callAjaxPostJSON(url, "PUT", "", jsondata);
 			clearForm();

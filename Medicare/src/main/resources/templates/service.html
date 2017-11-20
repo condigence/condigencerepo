@@ -62,7 +62,7 @@ $( document ).ready(function() {
 			//alert("deleting...");
 			var idStr = $(this).attr("id");
 			var id = idStr.split('_')[1];
-			url = urlPerfix + "/servicetype/" + id;
+			url = baseUrl + "/servicetype/" + id;
 			//alert(url);
 			$.ajax({
 				url : url,
@@ -70,6 +70,7 @@ $( document ).ready(function() {
 				crossDomain : true,
 				timeout : 50000,
 				success : function(response) {
+					location.reload(true);
 				},
 				error : function(xhr, status, error) {
 				}

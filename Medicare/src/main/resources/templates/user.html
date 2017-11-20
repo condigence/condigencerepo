@@ -45,8 +45,7 @@
 	}
 	
 	$(".add-user-btn").click(function() {
-	//	alert("Adding...");
-		
+
 		var name = $("#add_user_name").val();
 		var lastName = $("#add_user_last_name").val();
 		var email = $("#add_user_email").val();
@@ -84,8 +83,7 @@
 			});
 		});
 	
-	$(".editbtn").click(
-			function() {
+	$(".editbtn").click(function() {
 				
 				//alert("heloo.... ");
 				var id = $(this).attr("id").split('_')[2];
@@ -94,6 +92,7 @@
 				var email = $("#user_email_" + id).text();
 				var active = $("#user_active_" + id).text();
 				var role = $("#user_role_" + id).text();
+				//alert(" role  "+role);
 				
 				$(".edit_user_id").val(id);
 				$(".edit_user_name").val(firstName);
@@ -104,15 +103,13 @@
 
 			});
 	
-	function updateUser(idstr){
+	$("#userUpdate").click(function() {
 		
 		var id = $("#edit_user_id").val();
 		var name = $("#edit_user_name").val();	
 		
 		var lastName = $(".edit_user_last_name").val();
 		var email = $(".edit_user_email").val();
-		var active = $(".edit_user_active").val();
-		var role = $(".edit_user_role").val();
 		var active = $(".edit_user_active option:selected" ).val();
 		var role =  $(".edit_user_role option:selected" ).val();
 				
@@ -120,7 +117,7 @@
 		jsondata["id"]= id;
 		jsondata["name"]= name;
 		jsondata["lastName"]= lastName;
-
+		jsondata["active"] = active;
 		jsondata["email"]= email;
 
 		jsondata["role"]= role;
@@ -128,14 +125,12 @@
 					
 		var urlPerfix = baseUrl;
 		url = urlPerfix + "/users/"+id;
-		//alert(JSON.stringify(url));
 		callAjaxPostJSON(url, "PUT", "", jsondata);
 		clearForm();
 		
-	}
+	});
 	
-	}	
-		
+	}
 		
 		function populateData(response) {
          //alert("hello "+response);

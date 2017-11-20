@@ -378,8 +378,7 @@ span.multiselect-native-select select {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Active</label>
 							<div class="col-md-9 col-sm-6">
-								<select class="form-control edit_user_active"
-									id="edit_user_active">
+								<select class="form-control edit_user_active"id="edit_user_active">
 									<option value="true">True</option>
 									<option value="false">False</option>
 								</select>
@@ -388,10 +387,10 @@ span.multiselect-native-select select {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Role</label>
 							<div class="col-md-9 col-sm-6">							
-							<select class="form-control edit_user_role"
-									id="edit_user_role">
-									<option value="2">ADMIN</option>
-									<option value="3">USER</option>
+							<select class="form-control edit_user_role"	id="edit_user_role">
+							        <option value="SUPERADMIN">SUPERADMIN</option>
+									<option value="ADMIN">ADMIN</option>
+									<option value="USER">USER</option>
 								</select>							
 								
 							</div>
@@ -402,8 +401,7 @@ span.multiselect-native-select select {
 				</div>
 				<div class="modal-footer">
 					<button type="button"
-						class="btn btn-primary btn-sm save-updated-user-btn" onclick="updateUser(this.id)"
-						data-dismiss="modal">Update</button>
+						class="btn btn-primary btn-sm save-updated-user-btn" id="userUpdate" data-dismiss="modal">Update</button>
 				</div>
 			</div>
 
@@ -429,28 +427,20 @@ span.multiselect-native-select select {
 						style="color: white; padding-bottom: 2%; text-align: center">New
 						Patients</h4>
 				</div>
+				<form name="addPatient" id="addPatientform">
 				<div class="modal-body" style="text-align: center;">
 
 					<div class="row">
-
-
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Name </label>
+							<label class="col-md-3 col-sm-12 control-label">First Name </label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" type="text">
+								<input class="form-control pname add_patient_firstname" name="add_patient_firstname"  type="text">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Referred
-								Doctor</label>
+							<label class="col-md-3 col-sm-12 control-label">Last Name</label>
 							<div class="col-md-9 col-sm-6">
-								<select class="form-control" id="add-appointment-refdoc">
-									<option value=""></option>
-
-									<option value="2">Dr. Vishal</option>
-									<option value="3">Dr. Sahil</option>
-									<option value="4">Dr. Kripa</option>
-								</select>
+							<input class="form-control pname add_patient_lastName" name="add_patient_lastName" type="text">
 							</div>
 
 						</div>
@@ -458,17 +448,23 @@ span.multiselect-native-select select {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Mobile </label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pcontact"
-									id="add-appointment-address" type="text">
+								<input class="form-control pcontact add_patient_contactNo" name="add_patient_contactNo" id="add-patient-mobile" type="text">
 							</div>
 						</div>
 
 						<div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Email </label>
+							<div class="col-md-9 col-sm-6">
+								<input class="form-control pcontact add_patient_email" name="add_patient_email" id="add-patient-mobile" type="text">
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Gender </label>
 							<div class="col-md-9 col-sm-6">
-								<select class="form-control" id="add-appointment-gender">
-									<option value="male">Male</option>
-									<option value="female">Female</option>
+								<select class="form-control add_patient_gender" name="add_patient_gender" id="add-patient-gender">
+								    <option value=""></option>
+									<option value="M">Male</option>
+									<option value="F">Female</option>
 
 								</select>
 							</div>
@@ -476,28 +472,27 @@ span.multiselect-native-select select {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Age </label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pcontact" type="text">
+								<input class="form-control pcontact add_patient_age" name="add_patient_age" type="text">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Address</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control serviceType"
-									id="add-appointment-serviceType" type="text">
+								<input class="form-control serviceType add_patient_address"
+									id="add-patient-address" name="add_patient_address" type="text">
 							</div>
 						</div>
 
 					</div>
 
 				</div>
+				
 				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-primary btn-sm add-patient-btn"
-						data-dismiss="modal">Add</button>
-					<button type="button" class="btn btn-info btn-sm"
-						data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary btn-sm add-patient-btn" >Add</button>
+					<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
 				</div>
+				</form>
 			</div>
 
 		</div>
@@ -519,35 +514,48 @@ span.multiselect-native-select select {
 				</div>
 				<div class="modal-body" style="text-align: center;">
 
+
 					<div class="row">
-
-
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Name </label>
+							<label class="col-md-3 col-sm-12 control-label">Id</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" type="text">
+								<input class="form-control pname edit_patient_id" type="text">
+							</div>
+						</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">First Name</label>
+							<div class="col-md-9 col-sm-6">
+								<input class="form-control pname edit_patient_firstname" type="text">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Referred
-								Doctor</label>
+							<label class="col-md-3 col-sm-12 control-label">Last Name </label>
 							<div class="col-md-9 col-sm-6">
-								<select class="form-control" id="add-appointment-refdoc">
-									<option value=""></option>
-
-									<option value="2">Dr. Vishal</option>
-									<option value="3">Dr. Sahil</option>
-									<option value="4">Dr. Kripa</option>
-								</select>
+								<input class="form-control pname edit_patient_lastName" type="text">
 							</div>
-
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Mobile </label>
+							<label class="col-md-3 col-sm-12 control-label">Age </label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pcontact"
-									id="add-appointment-address" type="text">
+								<input class="form-control pname edit_patient_age" type="text">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Address </label>
+							<div class="col-md-9 col-sm-6">
+								<input class="form-control pname edit_patient_address" type="text">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Mobile No. </label>
+							<div class="col-md-9 col-sm-6">
+								<input class="form-control pcontact edit_patient_contactNo"
+									id="add-patient-address " type="text">
 							</div>
 						</div>
 
@@ -555,42 +563,31 @@ span.multiselect-native-select select {
 							<label class="col-md-3 col-sm-12 control-label">Gender </label>
 							<div class="col-md-9 col-sm-6">
 
-								<select class="form-control" id="add-appointment-gender">
-									<option value="male">Male</option>
-									<option value="female">Female</option>
+								<select class="form-control edit_patient_gender" id="add-patient-gender">
+									<option value="M">Male</option>
+									<option value="F">Female</option>
 
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Age </label>
+							<label class="col-md-3 col-sm-12 control-label">Email </label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pcontact" type="text">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Address</label>
-							<div class="col-md-9 col-sm-6">
-								<input class="form-control serviceType"
-									id="add-appointment-serviceType" type="text">
+								<input class="form-control pcontact edit_patient_email" type="text">
 							</div>
 						</div>
 
 					</div>
 					<div class="modal-footer">
-						<button type="button"
-							class="btn btn-primary btn-sm edit-patient-btn"
-							data-dismiss="modal">Update</button>
-						<button type="button" class="btn btn-info btn-sm"
-							data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary btn-sm edit-patient-btn" data-dismiss="modal">Update</button>
+						<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 
 			</div>
 
 		</div>
-
+</div>
 	</div>
 	<!-- Add appointment Modal -->
 	<div class="modal fade" id="addAppo" role="dialog"
@@ -608,11 +605,7 @@ span.multiselect-native-select select {
 						Appointment</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-
 					<div class="row">
-					
-					
-					
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Name </label>
 							<div class="col-md-9 col-sm-6">
@@ -655,14 +648,6 @@ span.multiselect-native-select select {
         </select>
     </div>
 </div>
-						
-						
-						
-						
-						
-						
-						
-						
 							<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Age</label>
 							<div class="col-md-9 col-sm-6">
@@ -693,7 +678,6 @@ span.multiselect-native-select select {
 
 								<select class="form-control add_appointment_gender" val="">
 									<option value=""></option>
-
 									<option value="M">M</option>
 									<option value="F">F</option>
 									<option value="O">O</option>
@@ -708,8 +692,6 @@ span.multiselect-native-select select {
 									type="text">
 							</div>
 						</div>
-						
-
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Date </label>
 							<div class="col-md-9 col-sm-6">
@@ -719,9 +701,6 @@ span.multiselect-native-select select {
 									id='datetimepicker2' />
 							</div>
 						</div>
-					
-
-					
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Slot</label>
 							<div class="col-md-9 col-sm-6">
@@ -730,14 +709,11 @@ span.multiselect-native-select select {
 							</div>
 						</div>
 
-
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Ref.
 								Doctor</label>
 							<div class="col-md-9 col-sm-6" >
-
-								<select class="form-control add_appointment_referredByDoctorId"  style="border: 1px solid #eee;
-    cursor: pointer;" val="">
+								<select class="form-control add_appointment_referredByDoctorId"  style="border: 1px solid #eee; cursor: pointer;" val="">
 									<option value="0">None</option>
 									<option value="1">Dr. Vishal</option>
 									<option value="2">Dr. Sahil</option>
@@ -1538,53 +1514,48 @@ span.multiselect-native-select select {
 
 		</div>
 	</div>
-
-	<!-- Add doctor Modal -->
+<!-- Add doctor Modal -->
 	<div class="modal fade" id="addDoctor" role="dialog"
 		style="width: initial; margin: auto; overflow-x: hidden; overflow-y: hidden;">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
 			<div class="modal-content">
+			<form  name="addDoctor" id="addDoctorform">
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #d6cdcd; padding-left: 1%; padding-right: 1%"
 						type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"
-						style="color: white; padding-bottom: 2%; text-align: center">New
-						Doctor</h4>
+						style="color: white; padding-bottom: 2%; text-align: center">New Doctor</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-
 					<div class="row">
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Name</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_name" type="type" value="">
+								<input class="form-control add_doctor_name" name="add_doctor_name" type="text" >
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Mobile</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_contactNo" type="text"
-									value="">
+								<input class="form-control add_doctor_contactNo" type="text" name="add_doctor_contactNo">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Email</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_email" type="text"
-									value="">
+								<input class="form-control add_doctor_email" type="text" name="add_doctor_email">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Hospital</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_hospitalName" type="text"
-									value="">
+								<input class="form-control add_doctor_hospitalName" type="text" name="add_doctor_hospitalName">
 							</div>
 						</div>
 
@@ -1592,43 +1563,42 @@ span.multiselect-native-select select {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Qualification</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_qualification" type="text"
-									value="">
+								<input class="form-control add_doctor_qualification" type="text" name="add_doctor_qualification">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Speciality</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_speciality" type="text"
-									value="">
+								<input class="form-control add_doctor_speciality" type="text" name="add_doctor_speciality">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Address</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_address" type="text"
-									value="">
+								<input class="form-control add_doctor_address" type="text" name="add_doctor_address">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">commission</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_commission" type="text"
-									value="">
+								<input class="form-control add_doctor_commission" type="text" name="add_doctor_commission">
 							</div>
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-sm add-doctor-btn"
-						data-dismiss="modal">Add</button>
+					<button type="submit" class="btn btn-primary btn-sm add-doctor-btn"	>Add</button>
+					<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
 				</div>
+				</form>
 			</div>
 
 		</div>
 	</div>
+
+
 
 
 

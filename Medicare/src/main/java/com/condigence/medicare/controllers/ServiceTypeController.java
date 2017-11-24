@@ -84,7 +84,11 @@ public class ServiceTypeController {
 		logger.info("Fetching & Deleting Service Type with id {}", id);
 
 		ServiceType serviceType = serviceTypeRepository.findOne(id);
-		serviceTypeRepository.delete(serviceType.getId());
+		serviceType.setDeleted(true);
+		serviceTypeRepository.save(serviceType);
+		//serviceTypeRepository.delete(serviceType.getId());
+		
+		
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
 		if (serviceTypes.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);

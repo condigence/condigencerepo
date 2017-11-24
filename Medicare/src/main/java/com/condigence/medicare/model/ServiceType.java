@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "service_type")
+@Where(clause = "is_deleted='false'")
 public class ServiceType implements Serializable{
 
 	@Id
@@ -27,7 +30,11 @@ public class ServiceType implements Serializable{
 
 	@Column(name = "created_date_time")
 	private Date createdDateTime;
-
+	
+	
+	@Column(name = "is_deleted")
+	private boolean isDeleted;	
+	
 	@Column(name = "modified_date_time")
 	private Date modifiedDateTime;
 
@@ -80,6 +87,14 @@ public class ServiceType implements Serializable{
 
 	public void setCreatedByUserId(Integer createdByUserId) {
 		this.createdByUserId = createdByUserId;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	@Override

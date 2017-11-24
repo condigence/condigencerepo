@@ -6,7 +6,8 @@
 				<div class="card-header" data-background-color="purple">
 					<h4 class="title">User Permission</h4>
 					<!-- <p class="category">Choose NGO</p> -->
-					
+					<button class="category btn btn-default btn-sm addBtnBg" data-toggle="modal"
+						data-target="#addPermission">Add</button>
 				</div>
 				<!-- <div style="padding:2%"><input class="form-control"type="text" placeholder="Search...." style="width:100%"></div> -->
 				<div class="card-content table-responsive">
@@ -55,8 +56,8 @@ function populateData(response) {
 		var headerdataStr = "";
 		
 		
-		 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Name</th>" + "<th>Role</th>"
-				+  "<th class='hide'>Add</th>" +  "<th  class='hide'>Edit</th>" + "<th  class='hide'>Delete</th>" + "<th class='hide'>Action</th>"; 
+		 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Role</th>"
+		 +  "<th>All</th>"  +  "<th>Add</th>" +  "<th>Edit</th>" + "<th>Delete</th>" + "<th>Action</th>"; 
 
 		$('.headerdata').html(headerdataStr);
 
@@ -74,33 +75,35 @@ function populateData(response) {
 					+ response[i].id
 					+ "</td>"
 					
-					+ "<td class='text-danger' id='user_id_" + response[i].id + "'>"
-					+ response[i].name
-					+ "</td>"
 					
 					+ "<td  id='userRole_name_" + response[i].id + "'>"
 					+ response[i].roles[0].role
 					+ "</td>"
 					
-					+ "<td class='hide'>"
-					+ "<input type='checkbox' id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+					+ "<td>"
+					+ "<input type='checkbox'  id='userRole_all_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
 					+ "</td>"
 					
-					+ "<td class='hide'>"
-					+ "<input type='checkbox' id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+					
+					+ "<td>"
+					+ "<input type='checkbox'  id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
 					+ "</td>"
 					
-					+ "<td class='hide'>"
-					+ "<input type='checkbox' id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+					+ "<td>"
+					+ "<input type='checkbox'  id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
 					+ "</td>"
 					
-					+ "<td class='hide'>"
+					+ "<td>"
+					+ "<input type='checkbox'  id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+					+ "</td>"
+					
+					+ "<td>"
 
 					+ "<button id='userRole_savebtn_" + response[i].id + "' class='btn-primary saveBtn'>"
 					+ "<span class='glyphicon glyphicon-floppy-disk'></span>"
 					+ "</button>"
 
-					+ "<button id='userRole_delbtn_" + response[i].id + "'  class='btn-primary'>"
+					+ "<button        id='userRole_delbtn_" + response[i].id + "'  class='btn-primary'>"
 					+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
 
 					+ "</tr>";
@@ -108,5 +111,8 @@ function populateData(response) {
 		$('.rowdata').html(rowDataStr);
 
 	}
+	
+	
+
 
 </script>

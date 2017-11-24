@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,11 +34,11 @@ public class PatientController {
 	public ResponseEntity<?> createPatient(@RequestBody Patient patient, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Patient : {}", patient);
 
-		if (StringUtils.isEmpty(patient.getEmail()) && patientRepository.findByEmail(patient.getEmail()) != null) {
-			logger.error("Unable to User. A User with name {} already	 exist", patient.getFirstName());
-			
+		if (patientRepository.exists(patient.getId())) {
+			logger.error("Unable to patient. A patient with name {} already exist", patient.getFirstName());
 			return new ResponseEntity(
-					new CustomErrorType("Unable to create. A Users with name " + patient.getFirstName() + " already exist."),
+					new CustomErrorType(
+							"Unable to create. A Patient with name " + patient.getFirstName() + " already exist."),
 					HttpStatus.CONFLICT);
 		}
 		patientRepository.save(patient);
@@ -64,18 +63,18 @@ public class PatientController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updatePatient(@PathVariable("id") int id, @RequestBody Patient patient) {
+	public ResponseEntity<?> updatePatient(@PathVariable("id") int id, @RequestBody Patient patient1) {
 		logger.info("Updating Patient with id {}", id);
 
-		//Patient patient = patientRepository.findOne(id);
+		Patient patient = patientRepository.findOne(id);
 
-		/*if (patient1 == null) {
+		if (patient1 == null) {
 			logger.error("Unable to update. Patient with id {} not found.", id);
 			return new ResponseEntity(new CustomErrorType("Unable to upate. Patient with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
-		}*/
+		}
 
-		//patient.setContactNo(patient1.getContactNo());
+		patient.setContactNo(patient1.getContactNo());
 
 		patientRepository.save(patient);
 		return new ResponseEntity<Patient>(patient, HttpStatus.OK);

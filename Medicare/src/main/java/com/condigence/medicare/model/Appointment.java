@@ -17,8 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "appointment")
+@Where(clause = "is_deleted='false'")
 public class Appointment implements Serializable {
 
 	@Id

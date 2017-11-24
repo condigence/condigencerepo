@@ -309,6 +309,7 @@ CREATE TABLE `service_type` (
   `service_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `service_type` varchar(255) NOT NULL,
   `price` double DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
   `created_date_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_date_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `created_by_user_id` int(11) DEFAULT NULL,
@@ -324,7 +325,7 @@ CREATE TABLE `service_type` (
 
 LOCK TABLES `service_type` WRITE;
 /*!40000 ALTER TABLE `service_type` DISABLE KEYS */;
-INSERT INTO `service_type` VALUES (1,'X-ray',5000,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(2,'CT-Scan',10000,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(4,'CT-Scan',9000,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(6,'Blood-Test',25223535,NULL,NULL,NULL),(7,'Blood-Test',99999999999999,NULL,NULL,NULL),(8,'dfdhfhfd',99999000,NULL,NULL,NULL),(9,'Blood-Test',8989,NULL,NULL,NULL),(10,'CT-Scan',11111222,NULL,NULL,NULL),(11,'cxnxgjgs',5255322,NULL,NULL,NULL);
+INSERT INTO `service_type` VALUES (1,'X-ray',5000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(2,'CT-Scan',10000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(4,'CT-Scan',9000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(6,'Blood-Test',25223535,0,NULL,NULL,NULL),(7,'Blood-Test',99999999999999,0,NULL,NULL,NULL),(8,'dfdhfhfd',99999000,0,NULL,NULL,NULL),(9,'Blood-Test',8989,0,NULL,NULL,NULL),(10,'CT-Scan',11111222,0,NULL,NULL,NULL),(11,'cxnxgjgs',5255322,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `service_type` ENABLE KEYS */;
 UNLOCK TABLES;
 

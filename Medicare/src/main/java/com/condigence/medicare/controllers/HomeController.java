@@ -70,5 +70,10 @@ public class HomeController {
 	public String print() {
 		return "print";
 	}
+	
+	@RequestMapping("/add-appointment")
+	public String addAppointment() {
+		return "add-appointment";
+	}
 
 }

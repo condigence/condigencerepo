@@ -6,8 +6,25 @@
 				<div class="card-header" data-background-color="purple">
 					<h4 class="title">Our User List</h4>
 					<!-- <p class="category">Choose NGO</p> -->
-					<button class="category btn btn-default btn-sm" data-toggle="modal"
+					<button class="category btn btn-default btn-sm addBtnBg" data-toggle="modal"
 						data-target="#addUser">Add</button>
+				</div>
+				<div style="padding: 2%">
+					<div>
+					
+					 <!--  label><input type="radio" name="gender" value="male">Male</label--> 
+					
+						<label><input type="radio" name="optradio" value="name">
+							Name</label>
+					</div>
+
+					<input id="app-search" type="text" placeholder="Search By"
+						style="width: 75%; margin: 0px !important"> <input
+						type="button" class="search-btn" disabled="true"
+						onclick="search();"
+						style="width: 20%; color: #fff margin: 0px !important"
+						value="Search">
+
 				</div>
 				<!-- <div style="padding:2%"><input class="form-control"type="text" placeholder="Search...." style="width:100%"></div> -->
 				<div class="card-content table-responsive">

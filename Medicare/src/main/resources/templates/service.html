@@ -6,10 +6,19 @@
 					<div class="card-header" data-background-color="purple">
 						<h4 class="title">Our Services List</h4>
 						<!-- <p class="category">Choose NGO</p> -->
-						<button class="category btn btn-default btn-sm"
+						<button class="category btn btn-default btn-sm addBtnBg"
 							data-toggle="modal" data-target="#addService">Add</button>
 					</div>
-					<!-- <div style="padding:2%"><input class="form-control"type="text" placeholder="Search...." style="width:100%"></div> -->
+					
+					<!-- div style="padding: 2%">
+					
+					<input type="text" placeholder="Search By Service Name"
+						style="width: 75%; margin: 0px !important"> <input
+						type="button"
+						style="width: 20%; color: #fff margin: 0px !important"
+						value="Search">
+
+				</div-->
 					<div class="card-content table-responsive">
 						<table class="table table-hover">
 							<thead class="text-primary headerdata">
@@ -38,6 +47,22 @@ $( document ).ready(function() {
 
 	 // console.log( "ready!" );
 });
+
+
+$('#app-search').click(function() {
+	$(".search-btn").removeAttr("disabled", "disabled");
+});
+
+function search() {		
+	// var radioValue = $("input[name='optradio']:checked").val();
+   //  if(radioValue){
+        // alert("Your have selected - " + radioValue);
+  //   }         
+	var nameval = $('#app-search').val();
+	var searchUrl = baseUrl + "/search/ServiceType/by/name" + nameval;
+	var searchData = getJSON(searchUrl);
+	$('#app-search').val("");
+}
 	
 	function getJSON(serviceurl) {
 		$.ajax({
@@ -100,6 +125,9 @@ $( document ).ready(function() {
 							var id = $(this).attr("id").split('_')[1];
 							var name = $("#servicetype_" + id).text();
 							var price = $("#price_" + id).text();
+							
+							/*
+							
 							var optStr = "";
 							var selStr = '<select class="form-control" id="edit-serviceType">';
 
@@ -118,6 +146,10 @@ $( document ).ready(function() {
 							}
 							selStr = selStr + optStr + "</select>";
 							$(".st-select-container").html(selStr);
+						*/
+							
+						
+						$(".edit_serviceType_name").val(name);
 							$(".edit-serviceType-id").val(id);
 							$(".edit-serviceType-price").val(price);
 
@@ -127,7 +159,8 @@ $( document ).ready(function() {
 
 			var id = $(".edit-serviceType-id").val();
 
-			var name = $("#edit-serviceType option:selected").text();
+		//	var name = $("#edit-serviceType option:selected").text();
+			var name = $(".edit_serviceType_name").val();
 			var price = $(".edit-serviceType-price").val();
 
 			var jsondata = {};
@@ -200,7 +233,7 @@ $( document ).ready(function() {
 					+ "<span class='glyphicon glyphicon-pencil'></span>"
 					+ "</button>"
 
-					+ "<button id='delbtn_" + response[i].id + "' class='btn-primary delbtn' title='Delete Service Type'>"
+					+ "<button  onclick='deleteServiceType(this.id)' id='delbtn_" + response[i].id + "' class='btn-primary delbtn' title='Delete Service Type'>"
 					+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
 
 					+ "</tr>";
@@ -208,4 +241,19 @@ $( document ).ready(function() {
 		$('.rowdata').html(rowDataStr);
 
 	}
+	
+	
+	function deleteServiceType(id){
+		 var id = id.split('_')[1];	
+		 alert(id);
+		 alert('Deleted ');			
+		 
+		 var urlPerfix = baseUrl;
+			url = urlPerfix + "/servicetype/" + id;
+			callAjaxPostJSON(url, "DELETE", "", "");
+		 
+	}	
+	
+	
+	
 </script>

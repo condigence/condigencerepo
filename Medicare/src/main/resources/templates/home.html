@@ -175,6 +175,26 @@ body {
     background-color: #fff;
 }
 
+.btn-group > .btn:first-child {
+    margin-left: 0;
+    width: 100% !important;
+    background :#fff;
+}
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width:100% !important;
+    
+}
+.btn-group .dropdown-menu, .btn-group-vertical .dropdown-menu {
+    border-radius: 0 0 3px 3px;
+    width: 100%;
+    text-align: center;
+}
+
+
+
 
 </style>
 
@@ -194,9 +214,9 @@ body {
 
 			<div class="sidebar-wrapper" style="background: aliceblue;">
 				<ul class="nav">
-					<li class=" tab" id="add-appointment"><a> <span
+					<!--  li class=" tab" id="add-appointment"><a> <span
 							class="glyphicon glyphicon-paperclip"></span> New Appointment
-					</a></li>
+					</a></li-->
 					<li class="active tab" id="dashboard"><a> <span
 							class="glyphicon glyphicon-th-large"></span> Dashboard
 					</a></li>
@@ -801,7 +821,7 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Date </label>
 							<div class="col-md-9 col-sm-6">
 
-								<input type='date' placeholder="Select date"
+								<input type='text' placeholder="Select date"
 									class="form-control add_appointment_dateTime" val=""
 									id='datetimepicker2' />
 							</div>
@@ -1599,6 +1619,8 @@ body {
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content" style="padding: 13px 10px;">
+			<form name="editService" id="editServiceform">
+			
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #fff; padding-left: 1%; padding-right: 1%"
@@ -1609,7 +1631,7 @@ body {
 				</div>
 				<div class="modal-body" style="text-align: center;">
 					<div class="row">
-						<input class="form-control edit-serviceType-id hide" type="text"
+						<input class="form-control edit-serviceType-id hide"  type="text"
 							value="">
 
 						<div class="form-group">
@@ -1617,7 +1639,7 @@ body {
 							<!-- div class="col-md-9 col-sm-6 st-select-container"></div-->
 							
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_serviceType_name" type="text" name="edit_serviceType_name" id="edit_serviceType_name" placeholder="Enter Service Type example    X-RAY">
+								<input class="form-control edit_serviceType_name" id="edit_serviceType_name" name="edit_serviceType_name" type="text" name="edit_serviceType_name" id="edit_serviceType_name" placeholder="Enter Service Type example    X-RAY">
 							</div>
 							
 							
@@ -1625,18 +1647,18 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Price</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit-serviceType-price" type="text"
+								<input class="form-control edit-serviceType-price" id="edit-serviceType-price" name="edit-serviceType-price" type="text"
 									value="">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-primary btn-sm servicetype-update-btn"
-						data-dismiss="modal">Update</button>
+					<button type="submit"
+						class="btn btn-primary btn-sm servicetype-update-btn">Update</button>
 						<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -1650,6 +1672,7 @@ body {
 
 			<!-- Modal content-->
 			<div class="modal-content" style="padding: 13px 10px;">
+			<form  name="editDoctor" id="editDoctorform" >
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #fff; padding-left: 1%; padding-right: 1%"
@@ -1719,23 +1742,23 @@ body {
 							</div>
 						</div>
 
-						<div class="form-group">
+						<!-- div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">commission</label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control edit_doctor_commission" type="text"
 									value="">
 							</div>
-						</div>
+						</div-->
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-primary btn-sm edit_doctor_btn"
-						data-dismiss="modal">Update</button>
+					<button type="submit"
+						class="btn btn-primary btn-sm edit_doctor_btn">Update</button>
 						<button type="button" class="btn btn-info btn-sm"
 						data-dismiss="modal">Cancel</button>
 				</div>
+				</form>
 			</div>
 
 		</div>
@@ -1748,6 +1771,7 @@ body {
 
 			<!-- Modal content-->
 			<div class="modal-content">
+			<form  name="addDoctor" id="addDoctorform" >
 				<div class="modal-header" style="background-color: #2a6294;">
 					<button
 						style="background-color: #d6cdcd; padding-left: 1%; padding-right: 1%"
@@ -1762,14 +1786,14 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Name</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_name" type="type" value="" placeholder="Doctor Name">
+								<input class="form-control add_doctor_name" name="add_doctor_name" type="type" value="" placeholder="Doctor Name">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Mobile</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_contactNo" type="text"
+								<input class="form-control add_doctor_contactNo" name="add_doctor_contactNo" type="text"
 									value="" placeholder="Mobile Number">
 							</div>
 						</div>
@@ -1777,7 +1801,7 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Email</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_email" type="text"
+								<input class="form-control add_doctor_email" name="add_doctor_email" type="text"
 									value="" placeholder="Email Id">
 							</div>
 						</div>
@@ -1785,7 +1809,7 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Hospital</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_hospitalName" type="text"
+								<input class="form-control add_doctor_hospitalName" name="add_doctor_hospitalName" type="text"
 									value="" placeholder="Hospital Name">
 							</div>
 						</div>
@@ -1794,7 +1818,7 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Qualification</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_qualification" type="text"
+								<input class="form-control add_doctor_qualification" name="add_doctor_qualification" type="text"
 									value="" placeholder="Doctor Qualification">
 							</div>
 						</div>
@@ -1802,36 +1826,36 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Speciality</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_speciality" type="text"
+								<input class="form-control add_doctor_speciality" name="add_doctor_speciality" type="text"
 									value="" placeholder="Speciality">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Address</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control add_doctor_address" type="text"
+								<input class="form-control add_doctor_address" name="add_doctor_address" type="text"
 									value="" placeholder="Address">
 							</div>
 						</div>
-						<div class="form-group">
+						<!--  div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">commission</label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control add_doctor_commission" type="text"
 									value="" placeholder="Commission">
 							</div>
 						</div>
-					</div>
+					</div-->
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-sm add-doctor-btn"
-						data-dismiss="modal">Add</button>
+					<button type="submit" class="btn btn-primary btn-sm add-doctor-btn">Add</button>						
 						<button type="button" class="btn btn-info btn-sm"
 						data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
-
+</form>
 		</div>
+		
 	</div>
 
 

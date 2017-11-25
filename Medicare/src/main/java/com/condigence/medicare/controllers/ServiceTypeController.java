@@ -8,7 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +25,7 @@ import com.condigence.medicare.repository.ServiceTypeRepository;
 import com.condigence.medicare.util.CustomErrorType;
 
 @RestController
-@RequestMapping("/servicetype")
+@CrossOrigin(origins = { "*" }, maxAge = 4800, allowCredentials = "false")
 public class ServiceTypeController {
 
 	public static final Logger logger = LoggerFactory.getLogger(ServiceTypeController.class);
@@ -28,7 +33,10 @@ public class ServiceTypeController {
 	@Autowired
 	ServiceTypeRepository serviceTypeRepository;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	/**
+	 * @return
+	 */
+	@GetMapping(value = "/services")
 	public ResponseEntity<List<ServiceType>> listAllServiceTypes() {
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
 		if (serviceTypes.isEmpty()) {
@@ -37,7 +45,7 @@ public class ServiceTypeController {
 		return new ResponseEntity<List<ServiceType>>(serviceTypes, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "services/{id}")
 	public ResponseEntity<?> getServiceType(@PathVariable("id") int id) {
 		logger.info("Fetching Service Type with id {}", id);
 		ServiceType servicetype = serviceTypeRepository.findOne(id);
@@ -49,7 +57,7 @@ public class ServiceTypeController {
 		return new ResponseEntity<ServiceType>(servicetype, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@PostMapping(value = "/services")
 	public ResponseEntity<List<ServiceType>> createServiceType(@RequestBody ServiceType servicetype,
 			UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Service Type : {}", servicetype);
@@ -62,7 +70,7 @@ public class ServiceTypeController {
 	// // ------------------- Update a Service Type
 	// // ------------------------------------------------
 	//
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@PutMapping(value = "services/{id}")
 	public ResponseEntity<List<ServiceType>> updateServiceType(@PathVariable("id") int id,
 			@RequestBody ServiceType serviceType) {
 		logger.info("Updating Service Type with id {}", id);
@@ -79,16 +87,15 @@ public class ServiceTypeController {
 	/**
 	 * This method will delete service type by it's id value.
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "services/{id}")
 	public ResponseEntity<List<ServiceType>> deleteServiceType(@PathVariable("id") int id) {
 		logger.info("Fetching & Deleting Service Type with id {}", id);
 
 		ServiceType serviceType = serviceTypeRepository.findOne(id);
 		serviceType.setDeleted(true);
 		serviceTypeRepository.save(serviceType);
-		//serviceTypeRepository.delete(serviceType.getId());
-		
-		
+		// serviceTypeRepository.delete(serviceType.getId());
+
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
 		if (serviceTypes.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -98,7 +105,7 @@ public class ServiceTypeController {
 
 	// // ------------------- Delete All ServiceTypes Type -----------------
 
-	@RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/services")
 	public ResponseEntity<List<ServiceType>> deleteAllServiceType() {
 		logger.info("Deleting All ServiceTypes");
 		serviceTypeRepository.deleteAll();

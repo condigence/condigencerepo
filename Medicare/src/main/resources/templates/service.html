@@ -40,7 +40,7 @@ $( document ).ready(function() {
 
 	var container = "page-content";
 	//alert("load all");
-	var serviceurl = baseUrl+"/servicetype/all";
+	var serviceurl = baseUrl+"/services";
 	//alert(serviceurl);
 	var jsonData = "";
 	getJSON(serviceurl);
@@ -114,7 +114,7 @@ function search() {
 			jsondata["price"] = price;
 
 			var urlPerfix = baseUrl;
-			url = urlPerfix + "/servicetype/add";
+			url = urlPerfix + "/services";
 
 			callAjaxPostJSON(url, "POST", "", jsondata);
 
@@ -171,7 +171,7 @@ function search() {
 			jsondata["price"] = price;
 
 			var urlPerfix = baseUrl;
-			url = urlPerfix + "/servicetype/" + id;
+			url = urlPerfix + "/services/" + id;
 			callAjaxPostJSON(url, "PUT", "", jsondata);
 			clearForm();
 		});
@@ -216,11 +216,11 @@ function search() {
 		//alert(response.length);
 		var rowDataStr = "";
 		for (i = 0; i < response.length; i++) {
-		
+			var a = i +1;
 			rowDataStr = rowDataStr
 					+ "<tr id='row_" + response[i].id + "'>"
 					+ "<td id='id_" + response[i].id + "'>"
-					+ response[i].id
+					+ a
 					+ "</td>"
 					+ "<td id='servicetype_" + response[i].id + "'>"
 					+ response[i].name
@@ -251,7 +251,7 @@ function search() {
 		 alert('Service Deleted!');			
 		 
 		 var urlPerfix = baseUrl;
-			url = urlPerfix + "/servicetype/" + id;
+			url = urlPerfix + "/services/" + id;
 			callAjaxPostJSON(url, "DELETE", "", "");
 		 
 	}	

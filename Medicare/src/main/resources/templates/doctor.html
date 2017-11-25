@@ -174,7 +174,7 @@ p {
 	var container = "content";
 	/* var urlPerfix = "http://localhost:9900/";
 	url = urlPerfix + "doctor/all"; */
-	var doctorUrl = baseUrl + "/doctor/all";
+	var doctorUrl = baseUrl + "/doctors";
 	
 	var jsonData = "";
 	getJSON(doctorUrl);
@@ -203,7 +203,7 @@ p {
 			var idStr = $(this).attr("id");
 			var id = idStr.split('_')[1];
 			//alert(" id "+id);
-			url = baseUrl + "/doctor/" + id;
+			url = baseUrl + "/doctors/" + id;
 			//alert(url);
 			$.ajax({
 				url : url,
@@ -269,7 +269,7 @@ p {
 			jsondata["addedByUserId"] = 1;
 
 			//var urlPerfix = "http://localhost:9900";
-			url = baseUrl + "/doctor/" + id;
+			url = baseUrl + "/doctors/" + id;
 			//alert(url)
 			callAjaxPostJSON(url, "PUT", "", jsondata);
 			clearForm();
@@ -323,12 +323,12 @@ p {
 		//alert(response.length);
 		var rowDataStr = "";
 		for (i = 0; i < response.length; i++) {
-
+			var index = i + 1;
 			rowDataStr = rowDataStr
 					+ "<tr id='row_" + response[i].id + "'>"
 
 					+ "<td id='doctor_id_" + response[i].id + "'>"
-					+ i + 1
+					+ index
 					+ "</td>"
 
 					+ "<td id='doctor_name_" + response[i].id + "'>"

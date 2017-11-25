@@ -83,7 +83,7 @@ function search() {
 
 	function initClickEvent() {
 
-	/*	$(".delbtn").click(function() {
+		$(".delbtn").click(function() {
 			//alert("deleting...");
 			var idStr = $(this).attr("id");
 			var id = idStr.split('_')[1];
@@ -101,8 +101,6 @@ function search() {
 				}
 			});
 		});
-	
-	*/
 
 		$(".add-new-serviceType-btn").click(function() {
 			
@@ -247,8 +245,8 @@ function search() {
 	
 	function deleteServiceType(id){
 		 var id = id.split('_')[1];	
-		// alert(id);
-		 alert('Service Deleted!');			
+		 alert(id);
+		 alert('Deleted ');			
 		 
 		 var urlPerfix = baseUrl;
 			url = urlPerfix + "/servicetype/" + id;

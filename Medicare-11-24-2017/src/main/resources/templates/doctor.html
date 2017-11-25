@@ -230,7 +230,7 @@ p {
 							var qualification = $("#doctor_qualification_" + id).text();
 							var speciality = $("#doctor_speciality_" + id).text();
 							var address = $("#doctor_address_" + id).text();
-						//	var commission = $("#doctor_commission_" + id).text();	
+							var commission = $("#doctor_commission_" + id).text();	
 
 							$(".edit_doctor_id").val(id);
 							$(".edit_doctor_name").val(name);
@@ -240,7 +240,7 @@ p {
 							$(".edit_doctor_qualification").val(qualification);
 							$(".edit_doctor_speciality").val(speciality);
 							$(".edit_doctor_address").val(address);
-							//$(".edit_doctor_commission").val(commission);
+							$(".edit_doctor_commission").val(commission);
 
 						});
 
@@ -254,7 +254,7 @@ p {
 			var qualification = $(".edit_doctor_qualification").val();
 			var speciality = $(".edit_doctor_speciality").val();
 			var address =	$(".edit_doctor_address").val();
-			//var commission = $(".edit_doctor_commission").val();
+			var commission = $(".edit_doctor_commission").val();
 						
 			var jsondata = {};
 			jsondata["id"] = id;
@@ -265,7 +265,7 @@ p {
 			jsondata["qualification"] = qualification;
 			jsondata["speciality"] = speciality;
 			jsondata["address"] = address;			
-			//jsondata["commission"] = commission;
+			jsondata["commission"] = commission;
 			jsondata["addedByUserId"] = 1;
 
 			//var urlPerfix = "http://localhost:9900";
@@ -316,7 +316,7 @@ p {
 				+ "<th>Qualification</th>" 				
 				+ "<th>Speciality</th>" 
 				+ "<th>Address</th>" 
-				
+				 + "<th>Commission</th>"  
 				+ "<th>Action</th>";
 
 		$('.headerdata').html(headerdataStr);
@@ -328,7 +328,7 @@ p {
 					+ "<tr id='row_" + response[i].id + "'>"
 
 					+ "<td id='doctor_id_" + response[i].id + "'>"
-					+ i + 1
+					+ response[i].id
 					+ "</td>"
 
 					+ "<td id='doctor_name_" + response[i].id + "'>"
@@ -360,7 +360,9 @@ p {
 					+ response[i].address
 					+ "</td>"
 
-				
+					+ "<td id='doctor_commission_" + response[i].id + "'>"
+					+ response[i].commission
+					+ "</td>"
 
 					+ "<td>"
 

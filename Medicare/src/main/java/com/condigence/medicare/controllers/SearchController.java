@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.condigence.medicare.dto.AppointmentDTO;
+import com.condigence.medicare.dto.UserDTO;
 import com.condigence.medicare.model.Appointment;
 import com.condigence.medicare.model.Patient;
 import com.condigence.medicare.model.User;
@@ -21,6 +22,7 @@ import com.condigence.medicare.repository.AppointmentRepository;
 import com.condigence.medicare.repository.PatientRepository;
 import com.condigence.medicare.repository.UserRepository;
 import com.condigence.medicare.services.AppointmentService;
+import com.condigence.medicare.services.UserService;
 
 @RestController
 @RequestMapping("/search")
@@ -31,6 +33,10 @@ public class SearchController {
 	
 	@Autowired
 	AppointmentService appointmentService;
+	
+	@Autowired
+	UserService userService;
+
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/{entity}/by/{attribute}/{string}", method = RequestMethod.GET)
@@ -50,6 +56,14 @@ public class SearchController {
 				objList = (ArrayList<AppointmentDTO>) appointmentService.findAppointmentsByPatientName(string);
 			} else if (attribute.equalsIgnoreCase("contactNo")) {
 				objList = (ArrayList<AppointmentDTO>) appointmentService.findAppointmentsByPatientContact(string);
+			}
+			return new ResponseEntity<List<?>>(objList, HttpStatus.OK);
+		} else if (entity.equalsIgnoreCase("user")) {
+			objList = new ArrayList<>();
+			if (attribute.equalsIgnoreCase("name")) {
+				objList = (ArrayList<UserDTO>) userService.findUsersByName(string);
+			} else if (attribute.equalsIgnoreCase("email")) {
+				objList = (ArrayList<UserDTO>) userService.findUsersByEmail(string);
 			}
 			return new ResponseEntity<List<?>>(objList, HttpStatus.OK);
 		} else {

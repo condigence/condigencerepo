@@ -23,7 +23,7 @@ import com.condigence.medicare.util.GlobalProperties;
 
 @Controller
 public class LoginController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
 	private AppProperties app;
@@ -85,24 +85,45 @@ public class LoginController {
 		User user = userService.findUserByEmail(auth.getName());
 		Set<Role> roles = user.getRoles();
 		boolean isAdmin = false;
+		boolean isSuperAdmin = false;
+		boolean isManager = false;
+		boolean isUser = false;
+		String uRole = "";
 		for (Role r : roles) {
-			// logger.info("role of user : " + r.getRole());
 			String role = r.getRole();
 			isAdmin = role.equals("ADMIN") ? true : false;
+			isSuperAdmin = role.equals("SUPERADMIN") ? true : false;
+			isManager = role.equals("MANAGER") ? true : false;
+			isUser = role.equals("USER") ? true : false;
 		}
 
-		//String appProperties = app.toString();
-		//String globalProperties = global.toString();
+		if (isAdmin) {
+			uRole ="ADMIN";
+		} else if (isSuperAdmin) {
+			uRole ="SUPERADMIN";
+		} else if (isManager) {
+			uRole ="MANAGER";
+		} else {
+			uRole ="USER";
+		}
 
 		logger.debug("Welcome {}, {}", app, global);
-		
+
 		modelAndView.addObject("host", app.getHost());
 		modelAndView.addObject("port", app.getPort());
-		
-		modelAndView.addObject("userRole", isAdmin);
+
+		modelAndView.addObject("isSuperAdmin", isSuperAdmin);
+		modelAndView.addObject("isAdmin", isAdmin);
+		modelAndView.addObject("isManager", isManager);
+		modelAndView.addObject("isUser", isUser);
+
+		modelAndView.addObject("userRole", uRole);
 		modelAndView.addObject("userName", user.getName());
 		modelAndView.addObject("userEmail", user.getEmail());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+		modelAndView.addObject("superAdminMessage", "Content Available Only for Users with Super Admin Role");
+		modelAndView.addObject("managerMessage", "Content Available Only for Users with Manager Role");
+				
 		modelAndView.setViewName("home");
 		return modelAndView;
 	}

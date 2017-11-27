@@ -12,54 +12,63 @@
         	add_user_name: {
                 validators: {
                     notEmpty: {
-                        message: 'The username is required'
+                        message: 'First Name is required'
                     }
                 }
             },
             add_user_last_name: {
                 validators: {
                     notEmpty: {
-                        message: 'The user lastname is required'
+                        message: 'Last Name is required'
                     }
                 }
-            },
+            },            
+            add_user_role: {
+                validators: {
+                    notEmpty: {
+                        message: ' Role is required'
+                    }
+                }
+            },          
             add_user_email: {
                 validators: {
                     notEmpty: {
-                        message: 'The user email is required'
+                        message: 'Email is required'
                     },
                     emailAddress: {
-                        message: 'The input is not a valid email address'
+                        message: 'Not a valid email address'
                     } 
                 }
             },
             add_user_password: {
                 validators: {
                     notEmpty: {
-                        message: 'The password is required'
+                        message: 'Password is required'
                     }
                 }
             }
         }
     }).on('success.form.fv', function(e) {
     	
-    	e.preventDefault();
-    	
+    	//e.preventDefault();    	
     	var name = $("#add_user_name").val();
 		var lastName = $("#add_user_last_name").val();
 		var email = $("#add_user_email").val();
-		var password = $("#add_user_password").val();
-		
+		var password = $("#add_user_password").val();		
+		var role = $("#add_user_role option:selected").text();
+				
 		var jsondata = {};
 		jsondata["name"]= name;
 		jsondata["lastName"]= lastName;
 		jsondata["email"]= email;
 		jsondata["password"]= password;
-				
-		 var userAddUrl = baseUrl + "/user/add";
-		callAjaxPostJSON(userAddUrl, "POST", "", jsondata);
+		jsondata["role"] = role;	
+		
+		 var userAddUrl = baseUrl + "/users";
+		 callAjaxPostJSON(userAddUrl, "POST", "", jsondata);
 		 $("#addUser").modal('hide');
 		 location.reload(true);
+		 
     });
   
  /*---------------------form Validation to Add User----------------------*/
@@ -81,7 +90,7 @@
     	 add_doctor_name: {
              validators: {
                  notEmpty: {
-                     message: 'The doctor name is required'
+                     message: 'Doctor name is required'
                  },
                  /*stringLength: {
                      min: 6,
@@ -160,7 +169,7 @@
  }).on('success.form.fv', function(e) {
  	
 	 
-	 alert("Adding new doctor!");
+	// alert("Adding new doctor!");
  	e.preventDefault();
  	
  	var name = $(".add_doctor_name").val();				
@@ -431,6 +440,51 @@
 //    });
 
 
+ /*---------------------form Validation to Add Role Permission----------------------*/
+ $('#addRolePermissionform').formValidation({
+     framework: 'bootstrap',
+     excluded: ':disabled',
+     icon: {
+         valid: 'glyphicon glyphicon-ok',
+         invalid: 'glyphicon glyphicon-remove',
+         validating: 'glyphicon glyphicon-refresh'
+     },
+     fields: {     
+     	add_role_name: {
+             validators: {
+                 notEmpty: {
+                     message: 'The role is required'
+                 }
+             }
+         },           
+         add_permissiontype: {
+             validators: {
+                 notEmpty: {
+                     message: 'The permission type is required'
+                 }
+             }
+         }
+         }
+ }).on('success.form.fv', function(e) {
+ 	
+ 	e.preventDefault();
+ 	
+ 	var roleName = $(".add_role_name").val();				
+ 	var permissionType = $(".add_permissiontype").val();
+	
+	var jsondata = {};
+	jsondata["roleName"] = roleName;
+	jsondata["permissionType"] = permissionType;
+	
+	
+	var rolePermissionAddUrl = baseUrl + "/permission/add";
+	alert(JSON.stringify(jsondata));
+	alert(rolePermissionAddUrl);
+	callAjaxPostJSON(rolePermissionAddUrl, "POST", "", jsondata);
+
+		 $("#addRolePermission").modal('hide');
+		 location.reload(true);
+ });
 
 
 

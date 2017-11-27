@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.condigence.medicare.dto.UserDTO;
 import com.condigence.medicare.model.Role;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.RoleRepository;
@@ -68,5 +69,39 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				user.isActive(), true, true, true, authorities);
+	}
+
+	@Override
+	public List<UserDTO> findUsersByName(String name) {
+		List<UserDTO> userDTOs = new ArrayList<>();
+		List<User> users = userRepository.findByName(name);
+		for (User user : users) {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setActive(user.isActive());
+			userDTO.setEmail(user.getEmail());
+			userDTO.setId((int) user.getId());
+			userDTO.setLastName(user.getLastName());
+			userDTO.setName(user.getName());
+			userDTO.setRole(user.getRoles().iterator().next().getRole());
+			userDTOs.add(userDTO);
+		}
+
+		return userDTOs;
+	}
+
+	@Override
+	public List<UserDTO> findUsersByEmail(String email) {
+		List<UserDTO> userDTOs = new ArrayList<>();
+		UserDTO userDTO = new UserDTO();
+		User user = userRepository.findByEmail(email);
+		userDTO.setActive(user.isActive());
+		userDTO.setEmail(user.getEmail());
+		userDTO.setId((int) user.getId());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setName(user.getName());
+		userDTO.setRole(user.getRoles().iterator().next().getRole());
+		userDTOs.add(userDTO);
+
+		return userDTOs;
 	}
 }

@@ -221,11 +221,11 @@ body {
 							class="glyphicon glyphicon-th-large"></span> Dashboard
 					</a></li>
 					<li class="tab" id="user"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-user"></span> Employees </a></li>
 
 					<li class="tab" id="user-type"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-lock"></span> Roles </a></li>
 
 					<li class="tab" id="patient"><a><span
@@ -233,24 +233,24 @@ body {
 					<li class="tab" id="appointment"><a><span
 							class="glyphicon glyphicon-paperclip"></span> Appointments </a></li>
 					<li class="tab" id="doctor"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-user"></span> Doctors </a></li>
 					<li class="tab" id="service-type"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-list"></span> Services </a></li>
 
 					<li class="tab" id="commission"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-piggy-bank"></span> Commissions </a></li>
 
 					<li class="tab" id="report"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-list-alt"></span> Reports </a></li>
 
 					<li class="tab" id="billing"><a><span
 							class="glyphicon glyphicon-file"></span> Billings </a></li>
 					<li class="tab" id="chart"
-						th:classappend="${userRole} ? 'hide' :  ''"><a><span
+						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
 							class="glyphicon glyphicon-file"></span> Statistics </a></li>
 
 
@@ -360,23 +360,38 @@ body {
 				
 					<div class="row">
 						<div class="form-group">
-							<label class="col-md-3 col-sm-12 control-label">Fiest Name</label>
+							<label class="col-md-3 col-sm-12 control-label">First Name</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" name="add_user_name" id="add_user_name" type="text" placeholder="First Name">
+								<input class="form-control pname" name="add_user_name" id="add_user_name" type="text" placeholder="Enter First Name">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Last Name</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pname" name="add_user_last_name" id="add_user_last_name" type="text" placeholder="Last Name">
+								<input class="form-control pname" name="add_user_last_name" id="add_user_last_name" type="text" placeholder="Enter Last Name">
 							</div>
 						</div>
+						
+						<div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Role</label>
+							<div class="col-md-9 col-sm-6">
+								<select class="form-control  add_user_role" id="add_user_role" name="add_user_role" >	
+									<option value="2">ADMIN</option>
+									<option value="3">MANAGER</option>
+									<option value="4">USER</option>
+								</select>								
+							</div>
+						</div>					
+						
+						
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Email</label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control pname" name="add_user_email" id="add_user_email" type="text" placeholder="Email">
 							</div>
-						</div>
+						</div>	
+						
+						
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Password</label>
 							<div class="col-md-9 col-sm-6">
@@ -416,11 +431,9 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Role</label>
 							<div class="col-md-9 col-sm-6">
 								<select class="form-control">
-									<option value="">Choose Role</option>
-									<option value="">SUPERADMIN </option>
-									<option value="">ADMIN</option>
-									<option value="">MANAGER</option>
-									<option value="">LAB INCHARGE</option>
+									<option value="2">ADMIN</option>
+									<option value="3">MANAGER</option>
+									<option value="4">USER</option>
 								</select>
 							</div>
 						</div>
@@ -457,7 +470,7 @@ body {
 
 					<div class="row">
 
-						<div class="form-group">
+						<div class="form-group hide">
 							<label class="col-md-3 col-sm-12 control-label">Id</label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control edit_user_id" id="edit_user_id"
@@ -499,10 +512,10 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Role</label>
 							<div class="col-md-9 col-sm-6">							
 							<select class="form-control edit_user_role"
-									id="edit_user_role">
-									<option value="0">SELECT</option>
+									id="edit_user_role">									
 									<option value="2">ADMIN</option>
-									<option value="3">USER</option>
+									<option value="3">MANAGER</option>
+									<option value="4">USER</option>
 								</select>							
 								
 							</div>
@@ -513,7 +526,7 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button"
-						class="btn btn-primary btn-sm save-updated-user-btn" onclick="updateUser(this.id)"
+						class="btn btn-primary btn-sm save-updated-user-btn" 
 						data-dismiss="modal">Update</button>
 						 <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
 				</div>
@@ -1587,13 +1600,13 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Service
 								Type</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control" type="text" name="add_new_serviceType" id="add_new_serviceType" placeholder="Enter Service Type example    X-RAY">
+								<input class="form-control" type="text" name="add_new_serviceType" id="add_new_serviceType" placeholder="E.g.  X-RAY">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Price</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control" type="text" name="add_new_serviceType_price" id="add_new_serviceType_price" placeholder="Enter Service Price example   500">
+								<input class="form-control" type="text" name="add_new_serviceType_price" id="add_new_serviceType_price" placeholder="E.g.   500">
 							</div>
 						</div>
 					</div>
@@ -1639,7 +1652,7 @@ body {
 							<!-- div class="col-md-9 col-sm-6 st-select-container"></div-->
 							
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_serviceType_name" id="edit_serviceType_name" name="edit_serviceType_name" type="text" name="edit_serviceType_name" id="edit_serviceType_name" placeholder="Enter Service Type example    X-RAY">
+								<input class="form-control edit_serviceType_name" id="edit_serviceType_name" name="edit_serviceType_name" type="text" name="edit_serviceType_name" id="edit_serviceType_name" placeholder="E.g.  X-RAY">
 							</div>
 							
 							
@@ -1647,7 +1660,7 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Price</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit-serviceType-price" id="edit-serviceType-price" name="edit-serviceType-price" type="text"
+								<input class="form-control edit-serviceType-price" id="edit-serviceType-price" name="edit-serviceType-price" type="text" placeholder="E.g.  500"
 									value="">
 							</div>
 						</div>
@@ -1878,8 +1891,7 @@ body {
 <script src="js/jquery.datetimepicker.min.js"></script>
 <script src="js/jquery.datetimepicker.full.min.js"></script>
 <!--  Google Maps Plugin    -->
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js"></script>
+
 <!-- Material Dashboard javascript methods -->
 <!-- <script src="js/material-dashboard.js"></script> -->
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->

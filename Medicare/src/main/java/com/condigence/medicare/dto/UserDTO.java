@@ -32,7 +32,9 @@ public class UserDTO {
 	
 	private boolean active;
 	
-	private Set<RoleDTO> roles;
+	private String role;
+	
+	//private Set<RoleDTO> roles;
 
 	public int getId() {
 		return id;
@@ -82,12 +84,32 @@ public class UserDTO {
 		this.active = active;
 	}
 
-	public Set<RoleDTO> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<RoleDTO> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", lastName="
+				+ lastName + ", active=" + active + ", role=" + role + "]";
+	}
+
+//	public Set<RoleDTO> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(Set<RoleDTO> roles) {
+//		this.roles = roles;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "UserDTO [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", lastName="
+//				+ lastName + ", active=" + active + ", roles=" + roles + "]";
+//	}
 
 }

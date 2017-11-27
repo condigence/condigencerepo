@@ -20,6 +20,10 @@
 --
 
 DROP TABLE IF EXISTS `appointment`;
+
+
+
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `appointment` (
@@ -57,7 +61,8 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,1,1,1,2,0,0,0,123456,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',1),(2,1,1,2,2,0,0,0,123434,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',1),(3,2,2,1,2,0,0,0,123578,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',2),(4,3,4,4,2,0,0,0,234555,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',2),(5,4,3,2,2,0,0,0,234344,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',3);
+ALTER TABLE `appointment` AUTO_INCREMENT = 1;
+INSERT INTO `appointment` VALUES (1,1,1,1,1,0,0,0,123456,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',1);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +91,8 @@ CREATE TABLE `appointment_services` (
 
 LOCK TABLES `appointment_services` WRITE;
 /*!40000 ALTER TABLE `appointment_services` DISABLE KEYS */;
-INSERT INTO `appointment_services` VALUES (1,1),(2,1),(3,2),(4,4);
+ALTER TABLE `appointment_services` AUTO_INCREMENT = 1;
+INSERT INTO `appointment_services` VALUES (1,1);
 /*!40000 ALTER TABLE `appointment_services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +178,8 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'Ankit ',9876543210,'ankit@gmail.com','BTM','MBBS`','Bone','BTM',0,500,1),(2,'Vishal',9876543210,'vishal@gmail.com','HSR','MBBS','Neuro','HSR',0,300,1),(3,'Mohit',9876543210,'mohit@gmail.com','madivala','MBBS','skin','Madivala',0,400,1),(4,'Sanjay',9876543210,'sanjay@gmail.com','banashankri','MBBSd','tooth','banshankari',0,600,1),(7,'ererywyer',235252352,'qrqr@sdgsgds.com','sgsgsdgd','lihlkh','kk','kjkj',0,2424242,1);
+ALTER TABLE `doctor` AUTO_INCREMENT = 1;
+INSERT INTO `doctor` VALUES (1,'Ankit ',9876543210,'ankit@gmail.com','BTM','MBBS`','Bone','BTM',0,500,1);
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +212,8 @@ CREATE TABLE `invoice` (
 
 LOCK TABLES `invoice` WRITE;
 /*!40000 ALTER TABLE `invoice` DISABLE KEYS */;
-INSERT INTO `invoice` VALUES (1,1,5500,'2017-05-22 14:56:59','2017-05-23 14:56:59',2,'1'),(2,2,11000,'2017-05-22 14:56:59','2017-05-23 14:56:59',2,'1'),(3,3,5500,'2017-05-22 14:56:59','2017-05-23 14:56:59',2,'1'),(4,4,8750,'2017-05-22 14:56:59','2017-05-23 14:56:59',2,'1'),(5,5,11000,'2017-05-22 14:56:59','2017-05-23 14:56:59',2,'1');
+ALTER TABLE `invoice` AUTO_INCREMENT = 1;
+INSERT INTO `invoice` VALUES (1,1,5500,'2017-05-22 14:56:59','2017-05-23 14:56:59',2,'1');
 /*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +243,8 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'rani','mukari',44,'Mumbai','rani@gmail.com',9876543210,'F'),(2,'mahesh','batt',44,'Mumbai','mahes@gmail.com',9876543210,'M'),(3,'Akil','Bharti',40,'Mumbai','akhil@gmail.com',9876543210,'F'),(4,'Amit','Sharma',55,'Mumbai','amit@gmail.com',9742085972,'M');
+ALTER TABLE `patient` AUTO_INCREMENT = 1;
+INSERT INTO `patient` VALUES (1,'rani','mukari',44,'Mumbai','rani@gmail.com',9876543210,'F');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,6 +303,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+ALTER TABLE `role` AUTO_INCREMENT = 1;
 INSERT INTO `role` VALUES (1,'SUPERADMIN'),(2,'ADMIN');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -325,7 +335,8 @@ CREATE TABLE `service_type` (
 
 LOCK TABLES `service_type` WRITE;
 /*!40000 ALTER TABLE `service_type` DISABLE KEYS */;
-INSERT INTO `service_type` VALUES (1,'X-ray',5000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(2,'CT-Scan',10000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(4,'CT-Scan',9000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1),(6,'Blood-Test',25223535,0,NULL,NULL,NULL),(7,'Blood-Test',99999999999999,0,NULL,NULL,NULL),(8,'dfdhfhfd',99999000,0,NULL,NULL,NULL),(9,'Blood-Test',8989,0,NULL,NULL,NULL),(10,'CT-Scan',11111222,0,NULL,NULL,NULL),(11,'cxnxgjgs',5255322,0,NULL,NULL,NULL);
+ALTER TABLE `service_type` AUTO_INCREMENT = 1;
+INSERT INTO `service_type` VALUES (1,'X-ray',5000,0,'2017-05-22 14:56:59','2017-05-23 14:56:59',1);
 /*!40000 ALTER TABLE `service_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,6 +350,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `active` char(1) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
   `email` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -353,7 +365,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'1','condigence@gmail.com','Saini','Ankit','$2a$10$j7wqSscsLrPTVEffNhSBt.Dm6.U2R8tUX/unPpoKb9ICUnqe1OW9m'),(2,'0','condigenceadmin@gmail.com','Aryans','Vishal','$2a$10$avBlWj510fh6v266ngCVNuFBzr/2LAJ2RKSZy.Qy9ZzOUwA.LnpHa'),(3,'1','medicare@condigence.com','Aryan','Vishal','$2a$10$BshymWucZ7RbVqkDjvYotuqFJLAv8W/DzpRZx42U1QX2pU0rufKzK'),(4,'1','dggf@sdgd.com','hjgvhgh','hghkgk','$2a$10$iBrBalZfMNmxl3wA9v712OWmOjqicLR7zYfnQ7033iDthqykp35Ra'),(5,'1','test@test.com','Vishal','Aryan','$2a$10$drXg3yBi27sShM3BXxCFWe5ZNw8y6S1DYtD.FLIPj0TVsErVGaZjq'),(6,'1','sg@test.com','Garg','Suresh','$2a$10$FFm/jcZHqWouoFti4LmeGekVTFRyRrt3J2aS6JQqOkgpp4bYMEh1i'),(7,'1','admin@test.com','Aryan','Vishal','$2a$10$jZ3D4WC2DNTWNKyQPl3GtuIfXeFebE72lucCLnGkT0SQWZc/60WUC'),(8,'1','admin@medicare.com','admin','admin','$2a$10$UH8L9G5HtGA5SlzkZpRlBODrCLOVSs8NqXOBNelTShJTJUeJWlw1W');
+ALTER TABLE `user` AUTO_INCREMENT = 1;
+INSERT INTO `user` VALUES (1,'1',0,'condigence@gmail.com','Saini','Ankit','$2a$10$j7wqSscsLrPTVEffNhSBt.Dm6.U2R8tUX/unPpoKb9ICUnqe1OW9m');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,33 +393,22 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1),(3,1),(5,1),(6,1),(7,1),(8,1),(2,2),(4,2);
+ALTER TABLE `user_role` AUTO_INCREMENT = 1;
+INSERT INTO `user_role` VALUES (1,1);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `user_type`
---
 
-DROP TABLE IF EXISTS `user_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `permission`;
+
+CREATE TABLE `permission` (
+  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11),
+  `permission_type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user_type`
---
-
-LOCK TABLES `user_type` WRITE;
-/*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

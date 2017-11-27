@@ -28,6 +28,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.condigence.medicare.dto.UserDTO;
 import com.condigence.medicare.model.Role;
+import com.condigence.medicare.model.ServiceType;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.RoleRepository;
 import com.condigence.medicare.repository.UserRepository;
@@ -75,7 +76,8 @@ public class UserController {
 		user.setEmail(userdto.getEmail());
 		user.setActive(true);
 		Set<Role> roles = new HashSet<Role>();
-		Role role = roleRepository.findByRole("ADMIN");
+		//Role role = roleRepository.findByRole("ADMIN");
+		Role role = roleRepository.findByRole(userdto.getRole());
 		roles.add(role);
 		user.setRoles(roles);
 		userRepository.save(user);
@@ -105,9 +107,10 @@ public class UserController {
 		user.setLastName(userdto.getLastName());
 		//user.setPassword(passwordEncoder.encode(userdto.getPassword()));
 		user.setEmail(userdto.getEmail());
-		user.setActive(true);
+		user.setActive(userdto.isActive());
+		
 		Set<Role> roles = new HashSet<Role>();
-		Role role = roleRepository.findByRole("ADMIN");
+		Role role = roleRepository.findByRole(userdto.getRole());
 		roles.add(role);
 		user.setRoles(roles);
 		userRepository.save(user);
@@ -127,7 +130,10 @@ public class UserController {
 					new CustomErrorType("Unable to delete. User	 Type with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-		userRepository.delete(id);
+		//userRepository.delete(id);	
+		user.setDeleted(true);
+		userRepository.save(user);	
+		
 		List<User> users = (ArrayList<User>) userRepository.findAll();
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);		
 	}

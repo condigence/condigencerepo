@@ -12,8 +12,7 @@
 				<div style="padding: 2%">
 					<div>
 					
-					 <!--  label><input type="radio" name="gender" value="male">Male</label--> 
-					
+									
 						<label><input type="radio" name="optradio" value="name">
 							Name</label>
 					</div>
@@ -45,6 +44,24 @@
 	url = urlPerfix + "/users/";
 	var jsonData = getJSON(url);
 	
+	
+	
+	$('#app-search').click(function() {
+		$(".search-btn").removeAttr("disabled", "disabled");
+	});
+
+	function search() {		
+		 var radioValue = $("input[name='optradio']:checked").val();
+         if(radioValue){
+             alert("Your have selected - " + radioValue);
+         }         
+		var number = $('#app-search').val();
+		var searchUrl = baseUrl + "/search/user/by/"+radioValue+"/" + number;
+		var searchData = getJSON(searchUrl);
+		$('#app-search').val("");
+	}
+	
+		
 	function getJSON(url) {
 		$.ajax({
 			url : url,
@@ -61,56 +78,18 @@
 
 	}
 	
-	$(".add-user-btn").click(function() {
-
-		var name = $("#add_user_name").val();
-		var lastName = $("#add_user_last_name").val();
-		var email = $("#add_user_email").val();
-		var password = $("#add_user_password").val();
-		
-		var jsondata = {};
-		jsondata["name"]= name;
-		jsondata["lastName"]= lastName;
-		jsondata["email"]= email;
-		jsondata["password"]= password;
-					
-		var urlPerfix = baseUrl;
-		url = urlPerfix + "/users";
-		//alert(JSON.stringify(jsondata));
-		callAjaxPostJSON(url, "POST", "", jsondata);
-		clearForm();
-	});
 	
 	function initClickEvent() {
-		$(".delbtn").click(function() {
-			//alert("deleting...");
-			var idStr = $(this).attr("id");
-			var id = idStr.split('_')[2];
-			url = urlPerfix + "/users/" + id;
-			//alert(url);
-			$.ajax({
-				url : url,
-				type : "DELETE",
-				crossDomain : true,
-				timeout : 50000,
-				success : function(response) {
-				},
-				error : function(xhr, status, error) {
-				}
-			});
-		});
-	
-	$(".editbtn").click(function() {
 				
-				//alert("heloo.... ");
+		
+	$(".editbtn").click(function() {				
 				var id = $(this).attr("id").split('_')[2];
 				var firstName = $("#user_name_" + id).text();
 				var lastName = $("#user_lastName_" + id).text();
 				var email = $("#user_email_" + id).text();
 				var active = $("#user_active_" + id).text();
 				var role = $("#user_role_" + id).text();
-				//alert(" role  "+role);
-				
+							
 				$(".edit_user_id").val(id);
 				$(".edit_user_name").val(firstName);
 				$(".edit_user_last_name").val(lastName);
@@ -118,28 +97,36 @@
 				$(".edit_user_active").val(active);
 				$(".edit_user_role").val(role);
 
-			});
+			});	
 	
-	$("#userUpdate").click(function() {
-		
-		var id = $("#edit_user_id").val();
+	
+	 $(".save-updated-user-btn").click(function(){		
+		 
+		// alert("hiiii");
+	
+		 var id = $("#edit_user_id").val();
+		// alert(id);
 		var name = $("#edit_user_name").val();	
-		
+		// alert(name);
 		var lastName = $(".edit_user_last_name").val();
+		// alert(lastName);
 		var email = $(".edit_user_email").val();
-		var active = $(".edit_user_active option:selected" ).val();
-		var role =  $(".edit_user_role option:selected" ).val();
-				
+		// alert(email);
+		var active = $(".edit_user_active option:selected" ).text();
+		// alert(active);
+		//var role =  $(".edit_user_role option:selected" ).val();
+		var role = $(".edit_user_role option:selected").text();	
+		 alert(role);
+		
 		var jsondata = {};
 		jsondata["id"]= id;
 		jsondata["name"]= name;
 		jsondata["lastName"]= lastName;
 		jsondata["active"] = active;
 		jsondata["email"]= email;
+		jsondata["role"]= role;		
 
-		jsondata["role"]= role;
-
-					
+		JSON.stringify(jsondata);		
 		var urlPerfix = baseUrl;
 		url = urlPerfix + "/users/"+id;
 		callAjaxPostJSON(url, "PUT", "", jsondata);
@@ -147,7 +134,9 @@
 		
 	});
 	
-	}
+	 
+	}	
+	
 		
 		function populateData(response) {
          //alert("hello "+response);
@@ -200,7 +189,7 @@
 						+ "<span class='glyphicon glyphicon-pencil'></span>"
 						+ "</button>"
 
-						+ "<button id='user_delbtn_" + response[i].id + "' class='btn-primary delbtn' style='border: transparent; margin: 0.5%' title='Cancel User'>"
+						+ "<button   onclick='deleteUser(this.id)'   id='user_delbtn_" + response[i].id + "' class='btn-primary delbtn' style='border: transparent; margin: 0.5%' title='Cancel User'>"
 						+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
 
 						+ "</tr>";
@@ -240,7 +229,15 @@
 		
 		
 		function clearForm() {
-
 			$(".form-control").val("");
-		}
+		}		
+		
+		function deleteUser(id){
+			 var id = id.split('_')[2];				
+			 alert('User Deleted!');				 
+			 var urlPerfix = baseUrl;
+				url = urlPerfix + "/users/" + id;
+				callAjaxPostJSON(url, "DELETE", "", "");			 
+		}	
+		
 	</script>	

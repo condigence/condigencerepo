@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,6 +22,7 @@ import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name = "user")
+@Where(clause = "is_deleted='false'")
 public class User implements Serializable{
 
 	@Id
@@ -42,12 +44,24 @@ public class User implements Serializable{
 	@Column(name = "last_name")
 	@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
+	
 	@Column(name = "active")
 	private boolean active;
+	
+	@Column(name = "is_deleted")
+	private boolean isDeleted;	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
 	public long getId() {
 		return id;

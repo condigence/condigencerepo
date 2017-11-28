@@ -4,7 +4,7 @@
 		<div class="col-md-12">
 			<div class="card ">
 				<div class="card-header" data-background-color="purple">
-					<h4 class="title">User Permission</h4>
+					<h4 class="title">User Role and Permission</h4>
 					<!-- <p class="category">Choose NGO</p> -->
 					<button class="category btn btn-default btn-sm addBtnBg" data-toggle="modal"
 						data-target="#addPermission">Add</button>
@@ -28,7 +28,7 @@ $(".saveBtn").click(function() {
 
 var container = "content";
 var urlPerfix = baseUrl;
-url = urlPerfix + "/users";
+url = urlPerfix + "/roles";
 var jsonData = getJSON(url);
 
 
@@ -50,6 +50,63 @@ function getJSON(url) {
 
 }
 
+
+function deleteUserType(id){
+	 var id = id.split('_')[2];	
+	// alert(id);
+	 alert('Role Deleted!');			
+	 
+	 var urlPerfix = baseUrl;
+		url = urlPerfix + "/roles/" + id;
+		callAjaxPostJSON(url, "DELETE", "", "");
+	 
+}
+
+
+
+function addRole(){	
+		
+		var role = $("#add_user_type_role").val();
+		var jsondata = {};
+		jsondata["role"] = role;
+		
+		//alert(JSON.stringify(jsondata));
+
+		var urlPerfix = baseUrl;
+		url = urlPerfix + "/roles";
+		
+		//alert(url);
+		callAjaxPostJSON(url, "POST", "", jsondata);	
+}
+
+function callAjaxPostJSON(urlMapping, callType, container, data) {
+
+	$.ajax({
+		type : callType,
+		contentType : "application/json",
+		url : urlMapping,
+		data : JSON.stringify(data),
+		crossDomain : true,
+		dataType : 'json',
+		timeout : 100000,
+		success : function(response) {
+			console.log("SUCCESS: ", data);
+			if (!data.error)
+				location.reload(true);
+		},
+		error : function(xhr, status, error) {
+			console.log("ERROR: ", error);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+
+}
+
+
+
+
 function populateData(response) {
     //alert("hello "+response);
 		
@@ -57,57 +114,51 @@ function populateData(response) {
 		
 		
 		 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Role</th>"
-		 +  "<th>All</th>"  +  "<th>Add</th>" +  "<th>Edit</th>" + "<th>Delete</th>" + "<th>Action</th>"; 
+		 +  "<th>Add</th>" +  "<th>Edit</th>" + "<th>Delete</th>" + "<th>Action</th>"; 
 
 		$('.headerdata').html(headerdataStr);
 
 		var rowDataStr = ""; 
-		
 		 for (i = 0; i < response.length; i++) {
-			//alert(JSON.stringify(response[i].roles[0].role));
+				
+				rowDataStr = rowDataStr
+						+ "<tr id='row_" + response[i].id + "'>"
+						
+						+ "<td id='user_id_" + response[i].id + "'>"
+						+ response[i].id
+						+ "</td>"
+						
+						
+						+ "<td  id='userRole_name_" + response[i].id + "'>"
+						+ response[i].role
+						+ "</td>"
+						
+					
+						
+						
+						+ "<td>"
+						+ "<input type='checkbox'  id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "</td>"
+						
+						+ "<td>"
+						+ "<input type='checkbox'  id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "</td>"
+						
+						+ "<td>"
+						+ "<input type='checkbox'  id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "</td>"
+						
+						+ "<td>"
 
-			//var id = response[i].appointmentId;
-			
-			rowDataStr = rowDataStr
-					+ "<tr id='row_" + response[i].id + "'>"
-					
-					+ "<td id='user_id_" + response[i].id + "'>"
-					+ response[i].id
-					+ "</td>"
-					
-					
-					+ "<td  id='userRole_name_" + response[i].id + "'>"
-					+ response[i].roles[0].role
-					+ "</td>"
-					
-					+ "<td>"
-					+ "<input type='checkbox'  id='userRole_all_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
-					+ "</td>"
-					
-					
-					+ "<td>"
-					+ "<input type='checkbox'  id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
-					+ "</td>"
-					
-					+ "<td>"
-					+ "<input type='checkbox'  id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
-					+ "</td>"
-					
-					+ "<td>"
-					+ "<input type='checkbox'  id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
-					+ "</td>"
-					
-					+ "<td>"
+						+ "<button id='userRole_savebtn_" + response[i].id + "' class='btn-primary saveBtn'>"
+						+ "<span class='glyphicon glyphicon-floppy-disk'></span>"
+						+ "</button>"
 
-					+ "<button id='userRole_savebtn_" + response[i].id + "' class='btn-primary saveBtn'>"
-					+ "<span class='glyphicon glyphicon-floppy-disk'></span>"
-					+ "</button>"
+						+ "<button  onclick='deleteUserType(this.id)'       id='userRole_delbtn_" + response[i].id + "'  class='btn-primary'>"
+						+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
 
-					+ "<button        id='userRole_delbtn_" + response[i].id + "'  class='btn-primary'>"
-					+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
-
-					+ "</tr>";
-		} 
+						+ "</tr>";
+			} 
 		$('.rowdata').html(rowDataStr);
 
 	}

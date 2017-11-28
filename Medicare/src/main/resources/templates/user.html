@@ -53,7 +53,7 @@
 	function search() {		
 		 var radioValue = $("input[name='optradio']:checked").val();
          if(radioValue){
-             alert("Your have selected - " + radioValue);
+           //  alert("Your have selected - " + radioValue);
          }         
 		var number = $('#app-search').val();
 		var searchUrl = baseUrl + "/search/user/by/"+radioValue+"/" + number;
@@ -139,7 +139,7 @@
 	
 		
 		function populateData(response) {
-         //alert("hello "+response);
+        
 			
 			var headerdataStr = "";
 			
@@ -152,9 +152,9 @@
 			var rowDataStr = ""; 
 			
 			 for (i = 0; i < response.length; i++) {
-				//alert(JSON.stringify(response[i].roles[0].role));
-
-				//var id = response[i].appointmentId;
+				
+				//alert(JSON.stringify(response));
+				
 				
 				rowDataStr = rowDataStr
 						+ "<tr id='row_" + response[i].id + "'>"

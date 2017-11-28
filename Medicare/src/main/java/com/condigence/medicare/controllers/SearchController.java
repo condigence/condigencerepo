@@ -61,9 +61,9 @@ public class SearchController {
 		} else if (entity.equalsIgnoreCase("user")) {
 			objList = new ArrayList<>();
 			if (attribute.equalsIgnoreCase("name")) {
-				objList = (ArrayList<UserDTO>) userService.findUsersByName(string);
+				objList = (ArrayList<User>) userService.findUsersByName(string);
 			} else if (attribute.equalsIgnoreCase("email")) {
-				objList = (ArrayList<UserDTO>) userService.findUsersByEmail(string);
+				objList = (ArrayList<User>) userService.findUsersByEmail(string);
 			}
 			return new ResponseEntity<List<?>>(objList, HttpStatus.OK);
 		} else {

@@ -76,7 +76,9 @@ public class DoctorController {
 			return new ResponseEntity(new CustomErrorType("Unable to delete. Doctor with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-		doctorRepository.delete(id);
+		doctor.setDeleted(true);
+		doctorRepository.save(doctor);
+		//doctorRepository.delete(id);
 		return new ResponseEntity<Doctor>(HttpStatus.NO_CONTENT);
 	}
 

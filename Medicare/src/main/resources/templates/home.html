@@ -422,29 +422,24 @@ body {
 						style="background-color: white; padding-left: 1%; padding-right: 1%"
 						type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"
-						style="color: white; padding-bottom: 2%; text-align: center">Add Permission</h4>
+						style="color: white; padding-bottom: 2%; text-align: center">Add Role</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
 				
 					<div class="row">
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Role</label>
+														
 							<div class="col-md-9 col-sm-6">
-								<select class="form-control">
-									<option value="2">ADMIN</option>
-									<option value="3">MANAGER</option>
-									<option value="4">USER</option>
-								</select>
+								<input class="form-control pname" name="add_user_role" id="add_user_type_role" type="text" placeholder="Enter Role Name">
 							</div>
-						</div>
-						
-						
+						</div>						
 						
 					</div>
 					
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm  add-permission-btn"	>Add</button>
+					<button type="submit" class="btn btn-primary btn-sm  add-permission-btn" onclick="addRole()"	>Add</button>
 					<button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cancel</button>
 				</div>
 				</form>

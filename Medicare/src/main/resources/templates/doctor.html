@@ -322,7 +322,7 @@ p {
 		$('.headerdata').html(headerdataStr);
 		//alert(response.length);
 		var rowDataStr = "";
-		for (i = 0; i < response.length; i++) {
+		for (var i = 0; i < response.length; i++) {
 			var index = i + 1;
 			rowDataStr = rowDataStr
 					+ "<tr id='row_" + response[i].id + "'>"

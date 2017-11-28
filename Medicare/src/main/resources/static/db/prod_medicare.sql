@@ -293,6 +293,7 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(255) DEFAULT NULL,
+   `is_deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -304,7 +305,7 @@ CREATE TABLE `role` (
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
 ALTER TABLE `role` AUTO_INCREMENT = 1;
-INSERT INTO `role` VALUES (1,'SUPERADMIN'),(2,'ADMIN');
+INSERT INTO `role` VALUES (1,'SUPERADMIN',0),(2,'ADMIN',0);
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -9,7 +9,7 @@ import com.condigence.medicare.repository.DoctorRepository;
 import com.condigence.medicare.repository.PatientRepository;
 import com.condigence.medicare.repository.ServiceTypeRepository;
 import com.condigence.medicare.repository.UserRepository;
-import com.condigence.medicare.repository.UserTypeRepository;
+import com.condigence.medicare.repository.RoleRepository;
 
 @Service
 public class StatService {
@@ -30,7 +30,7 @@ public class StatService {
 	UserRepository userRepository;
 
 	@Autowired
-	UserTypeRepository userTypeRepository;
+	RoleRepository userTypeRepository;
 
 	public Dashboard getStats() {
 
@@ -39,8 +39,9 @@ public class StatService {
 		long appointmentcount = appointmentRepository.count();
 		dashboard.setTotalAppointments(String.valueOf(appointmentcount));
 
-//		long canceledappointmentcount = appointmentRepository.findByCanceledAppointment();
-//		dashboard.setCancelAppointments(String.valueOf(canceledappointmentcount));
+		// long canceledappointmentcount =
+		// appointmentRepository.findByCanceledAppointment();
+		// dashboard.setCancelAppointments(String.valueOf(canceledappointmentcount));
 
 		long doctorcount = doctorRepository.count();
 		dashboard.setTotalDoctors(String.valueOf(doctorcount));

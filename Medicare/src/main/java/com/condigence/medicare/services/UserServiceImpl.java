@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepository.findByEmail(email).get(0);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// Here User name is email id only
-		User user = userRepository.findByEmail(email);
+		User user = userRepository.findByEmail(email).get(0);
 		List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
 		return buildUserForAuthentication(user, authorities);
 	}
@@ -70,38 +70,49 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				user.isActive(), true, true, true, authorities);
 	}
-
+	
+	
 	@Override
-	public List<UserDTO> findUsersByName(String name) {
-		List<UserDTO> userDTOs = new ArrayList<>();
-		List<User> users = userRepository.findByName(name);
-		for (User user : users) {
-			UserDTO userDTO = new UserDTO();
-			userDTO.setActive(user.isActive());
-			userDTO.setEmail(user.getEmail());
-			userDTO.setId((int) user.getId());
-			userDTO.setLastName(user.getLastName());
-			userDTO.setName(user.getName());
-			userDTO.setRole(user.getRoles().iterator().next().getRole());
-			userDTOs.add(userDTO);
-		}
-
-		return userDTOs;
+	public List<User> findUsersByName(String name) {
+		return userRepository.findByName(name);
+	}
+	
+	@Override
+	public List<User> findUsersByEmail(String name) {
+		return userRepository.findByEmail(name);
 	}
 
-	@Override
-	public List<UserDTO> findUsersByEmail(String email) {
-		List<UserDTO> userDTOs = new ArrayList<>();
-		UserDTO userDTO = new UserDTO();
-		User user = userRepository.findByEmail(email);
-		userDTO.setActive(user.isActive());
-		userDTO.setEmail(user.getEmail());
-		userDTO.setId((int) user.getId());
-		userDTO.setLastName(user.getLastName());
-		userDTO.setName(user.getName());
-		userDTO.setRole(user.getRoles().iterator().next().getRole());
-		userDTOs.add(userDTO);
-
-		return userDTOs;
-	}
+//	@Override
+//	public List<UserDTO> findUsersByName(String name) {
+//		List<UserDTO> userDTOs = new ArrayList<>();
+//		List<User> users = userRepository.findByName(name);
+//		for (User user : users) {
+//			UserDTO userDTO = new UserDTO();
+//			userDTO.setActive(user.isActive());
+//			userDTO.setEmail(user.getEmail());
+//			userDTO.setId((int) user.getId());
+//			userDTO.setLastName(user.getLastName());
+//			userDTO.setName(user.getName());
+//			userDTO.setRole(user.getRoles().iterator().next().getRole());
+//			userDTOs.add(userDTO);
+//		}
+//
+//		return userDTOs;
+//	}
+//
+//	@Override
+//	public List<UserDTO> findUsersByEmail(String email) {
+//		List<UserDTO> userDTOs = new ArrayList<>();
+//		UserDTO userDTO = new UserDTO();
+//		User user = userRepository.findByEmail(email);
+//		userDTO.setActive(user.isActive());
+//		userDTO.setEmail(user.getEmail());
+//		userDTO.setId((int) user.getId());
+//		userDTO.setLastName(user.getLastName());
+//		userDTO.setName(user.getName());
+//		userDTO.setRole(user.getRoles().iterator().next().getRole());
+//		userDTOs.add(userDTO);
+//
+//		return userDTOs;
+//	}
 }

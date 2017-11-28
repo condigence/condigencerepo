@@ -11,7 +11,7 @@ public interface UserService {
 
 	public void saveUser(User user);
 
-	public List<UserDTO> findUsersByName(String name);
+	public List<User> findUsersByName(String name);
 
-	public List<UserDTO> findUsersByEmail(String email);
+	public List<User> findUsersByEmail(String email);
 }

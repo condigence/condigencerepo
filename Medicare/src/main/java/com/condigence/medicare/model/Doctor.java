@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "doctor")
+@Where(clause = "is_deleted='false'")
 public class Doctor implements Serializable{
 
 	@Id

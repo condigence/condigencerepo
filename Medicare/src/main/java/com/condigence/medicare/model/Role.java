@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "role")
+@Where(clause = "is_deleted='false'")
 public class Role implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +21,9 @@ public class Role implements Serializable{
 	private int id;
 	@Column(name="role")
 	private String role;
+	
+	@Column(name = "is_deleted")
+	private boolean isDeleted;	
 	
 	public int getId() {
 		return id;
@@ -31,6 +37,19 @@ public class Role implements Serializable{
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

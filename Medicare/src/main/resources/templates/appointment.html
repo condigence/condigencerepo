@@ -7,7 +7,7 @@
 					<h4 class="title">Appointments List</h4>
 					<!-- <p class="category">Recently book for appointment</p> -->
 					<button class="category btn btn-default btn-sm addBtnBg"
-						data-toggle="modal" data-target="#addAppo">Add</button>
+						data-toggle="modal" data-target="#addAppo">Add Appointment</button>
 
 				</div>
 				<!-- div style="padding: 2%">
@@ -53,7 +53,7 @@
 <script type="text/javascript">
 	var container = "content";
 	
-	var appointmentUrl = baseUrl + "/appointment/all";
+	var appointmentUrl = baseUrl + "/appointments";
 	var jsonData = getJSON(appointmentUrl);
 
 	$('#app-search').click(function() {
@@ -93,8 +93,8 @@
 		$(".delbtn").click(function() {
 			var idStr = $(this).attr("id");
 			var id = idStr.split('_')[3];
-			var deleteAppointmentUrl = baseUrl + "/appointment/" + id;
-			//alert(url);
+			var deleteAppointmentUrl = baseUrl + "/appointments/" + id;
+			
 			$.ajax({
 				url : deleteAppointmentUrl,
 				type : "DELETE",
@@ -108,53 +108,7 @@
 
 		});
 
-		$(".add-appointment-btn")
-				.click(
-						function() {
-
-							//alert("adding");
-							var firstName = $(".add_appointment_firstName")
-									.val();
-							var lastName = $(".add_appointment_lastName").val();
-							var age = $(".add_appointment_age").val();
-							var address = $(".add_appointment_address").val();
-							var contactNo = $(".add_appointment_contactNo")
-									.val();
-							var gender = $(
-									".add_appointment_gender option:selected")
-									.text();
-							var email = $(".add_appointment_email").val();
-							var referredByDoctorId = $(
-									".add_appointment_referredByDoctorId option:selected")
-									.val();
-							var serviceTypeId = $(
-									".add_appointment_serviceTypeId option:selected")
-									.val();
-							var dateTime = $(".add_appointment_dateTime").val();
-
-							var jsondata = {};
-							jsondata["firstName"] = firstName;
-							jsondata["lastName"] = lastName;
-							jsondata["age"] = age;
-							jsondata["address"] = address;
-							jsondata["contactNo"] = contactNo;
-							jsondata["gender"] = gender;
-							jsondata["email"] = email;
-							jsondata["referredByDoctorId"] = referredByDoctorId;
-							jsondata["serviceTypeId"] = serviceTypeId;
-							jsondata["dateTime"] = "";
-							jsondata["status"] = "";
-							jsondata["slot"] = 1;
-							jsondata["token"] = 1412412;
-							jsondata["createdByUserId"] = 1;
-
-							//alert(JSON.stringify(jsondata));
-						
-							var appointmentAddUrl = baseUrl + "/appointment/add";
-							callAjaxPostJSON(appointmentAddUrl, "POST", "", jsondata);
-							clearForm();
-						});
-
+		
 		$(".editbtn").click(
 				function() {
 					var id = $(this).attr("id").split('_')[3];
@@ -236,7 +190,7 @@
 							//alert(JSON.stringify(jsondata));
 
 							var urlPerfix = "http://localhost:8080";
-							url = urlPerfix + "/appointment/" + id;
+							url = urlPerfix + "/appointments/" + id;
 							//alert(JSON.stringify(url));
 							callAjaxPostJSON(url, "PUT", "", jsondata);
 							clearForm();
@@ -268,8 +222,8 @@
 			timeout : 100000,
 			success : function(response) {
 				console.log("SUCCESS: ", data);
-				if (!data.error)
-					location.reload(true);
+				//if (!data.error)
+					//location.reload(true);
 				//window.location.reload();
 			},
 			error : function(xhr, status, error) {
@@ -289,7 +243,7 @@
 				+ "<th>Services</th>" + "<th>Name</th>" + "<th>Age</th>"
 				+ "<th>Contact</th>" + "<th>Gender</th>"
 				+ "<th>Ref. Doctor</th>" + "<th>Created By</th>"
-				+ "<th>Token</th>" + "<th>Slot</th>" + "<th>Staus</th>"
+				+ "<th>Token</th>" + "<th>Slot</th>" 
 				+ "<th>Action</th>";
 
 		$('.headerdata').html(headerdataStr);
@@ -297,15 +251,25 @@
 		var rowDataStr = "";
 		//alert(response.length);
 		for (i = 0; i < response.length; i++) {
+			
+		var a = i + 1;
 			//alert(JSON.stringify(response[i]));
 			//alert(response[i].appointmentId);
+			var services = "";
+			for(j = 0; j < response[i].serviceType.length; j++){
+				services = services +  "<li  style='margin-left: -40px;'>"+response[i].serviceType[0].name+"</li>"
+			}			
+			
+		 var serviceStr = 	'<ul style="list-style-type:none">'							
+  				             + services
+			                '</ul>';  			
 
 			var id = response[i].appointmentId;
 			rowDataStr = rowDataStr
 					+ "<tr id='row_" + id + "'>"
 
 					+ "<td id='appointment_id_" + id + "'>"
-					+ id
+					+ a
 					+ "</td>"
 
 					+ "<td id='appointment_dateTime_" + id + "'>"
@@ -313,7 +277,7 @@
 					+ "</td>"
 
 					+ "<td id='appointment_serviceTypeId_" + id + "'>"
-					+ response[i].serviceTypeId
+					+ serviceStr
 					+ "</td>"
 
 					+ "<td id='appointment_firstName_" + id + "'>"
@@ -348,9 +312,7 @@
 					+ response[i].token
 					+ "</td>"
 
-					+ "<td id='appointment_status_" + id + "'>"
-					+ response[i].status
-					+ "</td>"
+				
 
 					+ "<td>"
 					+ "<button id='edit_appointment_btn_" + id + "' class='btn-primary editbtn' data-toggle='modal'" + "data-target='#appoEditModal' title='Edit Appointment'>"

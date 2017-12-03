@@ -30,7 +30,6 @@ CREATE TABLE `appointment` (
   `appointment_id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_id` int(11) DEFAULT NULL,
   `referred_by_doctor_id` int(11) DEFAULT NULL,
-  `service_type_id` int(11) DEFAULT NULL,
   `created_by_user_id` int(11) DEFAULT NULL,
   `is_deleted` tinyint(1) DEFAULT '0',
   `is_modified` tinyint(1) DEFAULT '0',
@@ -38,21 +37,19 @@ CREATE TABLE `appointment` (
   `token` int(11) DEFAULT '1',
   `date_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `modified_date_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  `status` varchar(20) DEFAULT NULL,
+  `status` varchar(80) DEFAULT NULL,
   `slot` int(11) DEFAULT '1',
   PRIMARY KEY (`appointment_id`),
   KEY `fk_patient_id` (`patient_id`),
   KEY `fk_referred_by_doctor_id` (`referred_by_doctor_id`),
-  KEY `fk_service_type_id` (`service_type_id`),
   KEY `fk_created_by_user_id` (`created_by_user_id`),
   CONSTRAINT `FK4apif2ewfyf14077ichee8g06` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
   CONSTRAINT `FK525s7ulw6y3ohbau7tovbl837` FOREIGN KEY (`created_by_user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKks95bqub7kirixp2ww0axqjap` FOREIGN KEY (`referred_by_doctor_id`) REFERENCES `doctor` (`doctor_id`),
   CONSTRAINT `fk_created_by_user_id` FOREIGN KEY (`created_by_user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `fk_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `fk_referred_by_doctor_id` FOREIGN KEY (`referred_by_doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `fk_service_type_id` FOREIGN KEY (`service_type_id`) REFERENCES `service_type` (`service_type_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_referred_by_doctor_id` FOREIGN KEY (`referred_by_doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +59,7 @@ CREATE TABLE `appointment` (
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
 ALTER TABLE `appointment` AUTO_INCREMENT = 1;
-INSERT INTO `appointment` VALUES (1,1,1,1,1,0,0,0,123456,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',1);
+INSERT INTO `appointment` VALUES (1,1,1,1,0,0,0,123456,'2017-05-25 14:56:59','2017-05-25 14:56:59','1',1);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,10 +104,10 @@ CREATE TABLE `commission` (
   `commission_id` int(11) NOT NULL AUTO_INCREMENT,
   `total_commission` bigint(11) DEFAULT NULL,
   `status` char(1) DEFAULT NULL,
-  `doctor_id` int(11) DEFAULT NULL,
+  `appointment_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`commission_id`),
-  KEY `fk_doctor_id` (`doctor_id`),
-  CONSTRAINT `fk_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`)
+  KEY `fk_appointment_id` (`appointment_id`),
+  CONSTRAINT `fk_appointment_id` FOREIGN KEY (`appointment_id`) REFERENCES `appointment` (`appointment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,31 +117,8 @@ CREATE TABLE `commission` (
 
 LOCK TABLES `commission` WRITE;
 /*!40000 ALTER TABLE `commission` DISABLE KEYS */;
+INSERT INTO `visharya_medicare_db`.`commission` (`total_commission`, `status`, `appointment_id`) VALUES ('500', '1', '1');
 /*!40000 ALTER TABLE `commission` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `condyn`
---
-
-DROP TABLE IF EXISTS `condyn`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `condyn` (
-  `condyn_id` int(11) NOT NULL AUTO_INCREMENT,
-  `age` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`condyn_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `condyn`
---
-
-LOCK TABLES `condyn` WRITE;
-/*!40000 ALTER TABLE `condyn` DISABLE KEYS */;
-/*!40000 ALTER TABLE `condyn` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -156,13 +130,13 @@ DROP TABLE IF EXISTS `doctor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `doctor` (
   `doctor_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
+  `name` varchar(80) DEFAULT NULL,
   `contact_no` bigint(11) DEFAULT NULL,
-  `email` varchar(20) DEFAULT NULL,
-  `hospital_name` varchar(20) DEFAULT NULL,
-  `qualification` varchar(20) DEFAULT NULL,
-  `speciality` varchar(20) DEFAULT NULL,
-  `address` varchar(20) DEFAULT NULL,
+  `email` varchar(80) DEFAULT NULL,
+  `hospital_name` varchar(80) DEFAULT NULL,
+  `qualification` varchar(80) DEFAULT NULL,
+  `speciality` varchar(80) DEFAULT NULL,
+  `address` varchar(80) DEFAULT NULL,
   `is_deleted` tinyint(1) DEFAULT '0',
   `commission` bigint(11) DEFAULT NULL,
   `added_by_user_id` int(11) DEFAULT NULL,
@@ -197,7 +171,7 @@ CREATE TABLE `invoice` (
   `created_date_time` datetime DEFAULT NULL,
   `modified_date_time` datetime DEFAULT NULL,
   `created_by_user_id` int(11) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
+  `status` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`invoice_id`),
   KEY `fk_inv_created_by_user_id` (`created_by_user_id`),
   KEY `fk_inv_appointment_id` (`appointment_id`),
@@ -226,11 +200,12 @@ DROP TABLE IF EXISTS `patient`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `patient` (
   `patient_id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(20) DEFAULT NULL,
-  `last_name` varchar(20) DEFAULT NULL,
+  `first_name` varchar(80) DEFAULT NULL,
+  `last_name` varchar(80) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
-  `address` varchar(20) DEFAULT NULL,
-  `email` varchar(20) DEFAULT NULL,
+  `address` varchar(80) DEFAULT NULL,
+  `email` varchar(80) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
   `contact_number` bigint(10) DEFAULT NULL,
   `gender` char(1) DEFAULT NULL,
   PRIMARY KEY (`patient_id`)
@@ -244,7 +219,7 @@ CREATE TABLE `patient` (
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
 ALTER TABLE `patient` AUTO_INCREMENT = 1;
-INSERT INTO `patient` VALUES (1,'rani','mukari',44,'Mumbai','rani@gmail.com',9876543210,'F');
+INSERT INTO `patient` VALUES (1,'rani','mukari',44,'Mumbai','rani@gmail.com',0, 9876543210,'F');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +232,7 @@ DROP TABLE IF EXISTS `report`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `report` (
   `report_id` int(11) NOT NULL AUTO_INCREMENT,
-  `report_type` varchar(20) DEFAULT NULL,
+  `report_type` varchar(80) DEFAULT NULL,
   `report_created_date_time` datetime DEFAULT NULL,
   `generated_by_user_id` int(11) DEFAULT NULL,
   `total_appointment` int(11) DEFAULT NULL,

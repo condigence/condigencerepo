@@ -1,6 +1,7 @@
 package com.condigence.medicare.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,12 +11,18 @@ import org.springframework.stereotype.Service;
 
 import com.condigence.medicare.dto.AppointmentDTO;
 import com.condigence.medicare.model.Appointment;
+import com.condigence.medicare.model.Commission;
 import com.condigence.medicare.model.Doctor;
 import com.condigence.medicare.model.Patient;
+import com.condigence.medicare.model.Role;
 import com.condigence.medicare.model.ServiceType;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.AppointmentRepository;
+import com.condigence.medicare.repository.CommissionRepository;
+import com.condigence.medicare.repository.DoctorRepository;
 import com.condigence.medicare.repository.PatientRepository;
+import com.condigence.medicare.repository.ServiceTypeRepository;
+import com.condigence.medicare.repository.UserRepository;
 
 @Service("appointmentService")
 public class AppointmentServiceImpl implements AppointmentService {
@@ -24,7 +31,19 @@ public class AppointmentServiceImpl implements AppointmentService {
 	AppointmentRepository appointmentRepository;
 
 	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	DoctorRepository doctorRepository;
+
+	@Autowired
+	ServiceTypeRepository serviceTypeRepository;
+
+	@Autowired
 	PatientRepository patientRepository;
+
+	@Autowired
+	CommissionRepository commissionRepository;
 
 	@Override
 	public List<AppointmentDTO> findAppointments() {
@@ -49,7 +68,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 				set.add(serviceType);
 			}
 
-			appointmentDTO.setServiceType(set);
+			appointmentDTO.setServiceType(new ArrayList<>(set));
 
 			appointmentDTO.setDateTime(appointment.getDateTime());
 			appointmentDTO.setSlot(appointment.getSlot());
@@ -82,18 +101,23 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public void save(AppointmentDTO appointmentDto) {
 		Appointment appointment = new Appointment();
-		Patient patient = new Patient();
+
 		appointment.setCancled(appointmentDto.isCancled());
-		// appointment.setCreatedByUserId(appointmentDto.getCreatedByUserId());
-		appointment.setDateTime(appointmentDto.getDateTime());
-		appointment.setDeleted(appointmentDto.isDeleted());
-		appointment.setModified(appointmentDto.isModified());
-		appointment.setModifiedDateTime(appointmentDto.getModifiedDateTime());
-		// appointment.setReferredByDoctorId(appointmentDto.getReferredByDoctorId());
-		// appointment.setServiceTypeId(appointmentDto.getServiceTypeId());
-		appointment.setSlot(appointmentDto.getSlot());
-		appointment.setStatus(appointmentDto.getStatus());
-		appointment.setToken(appointmentDto.getToken());
+
+		User user = userRepository.findOne(appointmentDto.getCreatedByUserId().getId());
+		appointment.setCreatedByUser(user);
+
+		Doctor doctor = doctorRepository.findOne(appointmentDto.getReferredByDoctor().getId());
+		appointment.setReferredByDoctor(doctor);
+
+		Set<ServiceType> servicesSet = new HashSet<>();
+		for (ServiceType obj : appointmentDto.getServiceType()) {
+			ServiceType serviceType = serviceTypeRepository.findById(obj.getId());
+			servicesSet.add(serviceType);
+		}
+		appointment.setServices(servicesSet);
+
+		Patient patient = new Patient();
 		patient.setAddress(appointmentDto.getAddress());
 		patient.setAge(appointmentDto.getAge());
 		patient.setContactNo(appointmentDto.getContactNo());
@@ -102,8 +126,34 @@ public class AppointmentServiceImpl implements AppointmentService {
 		patient.setGender(appointmentDto.getGender().toString());
 		patient.setId(appointmentDto.getAppointmentId());
 		patient.setLastName(appointmentDto.getLastName());
+
+		appointment.setDateTime(appointmentDto.getDateTime());
+		appointment.setDeleted(appointmentDto.isDeleted());
+		appointment.setModified(appointmentDto.isModified());
+		appointment.setModifiedDateTime(appointmentDto.getModifiedDateTime());
+		appointment.setSlot(appointmentDto.getSlot());
+		appointment.setStatus(appointmentDto.getStatus());
+		appointment.setToken(appointmentDto.getToken());
 		appointment.setPatient(patient);
-		appointmentRepository.save(appointment);
+
+		Appointment app = appointmentRepository.save(appointment);
+
+		Commission commission = new Commission();
+		commission.setAppointmentId(app.getId());		
+		float totalCommission = calculateTotalCommission(app);		
+		commission.setTotalCommission((int)totalCommission);		
+		commissionRepository.save(commission);
+
+	}
+
+	private float calculateTotalCommission(Appointment app) {
+		int fixPercentOfDoc = 10;		
+		int totalPrice = 0;
+		for(ServiceType serviceType :app.getServices()) {
+			totalPrice = (int) (totalPrice + serviceType.getPrice());
+		}		
+		float percent = (fixPercentOfDoc * totalPrice) /  100.0f;		
+		return  percent;
 	}
 
 	@Override
@@ -130,7 +180,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 				set.add(serviceType);
 			}
 
-			appointmentDTO.setServiceType(set);
+			appointmentDTO.setServiceType(new ArrayList<>(set));
 
 			appointmentDTO.setDateTime(appointment.getDateTime());
 			appointmentDTO.setSlot(appointment.getSlot());
@@ -185,7 +235,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 				set.add(serviceType);
 			}
 
-			appointmentDTO.setServiceType(set);
+			appointmentDTO.setServiceType(new ArrayList<>(set));
 
 			appointmentDTO.setDateTime(appointment.getDateTime());
 			appointmentDTO.setSlot(appointment.getSlot());

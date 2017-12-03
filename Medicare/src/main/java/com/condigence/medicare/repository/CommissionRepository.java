@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.condigence.medicare.model.Commission;
 
-public interface CommissionRepository extends CrudRepository<Commission, Integer> {
+public interface CommissionRepository extends CrudRepository<Commission, Long> {
 
-	public Commission findById(String id);
+	public Commission findById(Long id);
 }

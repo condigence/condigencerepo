@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.condigence.medicare.model.Permission;
 
 @Repository("permissionRepository")
-public interface PermissionRepository extends JpaRepository<Permission, Integer> {
+public interface PermissionRepository extends JpaRepository<Permission, Long> {
 	///Permission findByPermissionName(String permissionType);
 
 }

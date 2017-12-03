@@ -1,59 +1,69 @@
- package com.condigence.medicare.dto;
+package com.condigence.medicare.dto;
 
 public class Dashboard {
 
-	private String totalAppointments;
-	private String cancelAppointments;
-	private String totalUsers;
-	private String totalDoctors;
-	private String totalServices;
-	private String totalPatients;
+	private long totalAppointments;
+	private long cancelAppointments;
+	private long totalUsers;
+	private long totalDoctors;
+	private long totalServices;
+	private long totalPatients;
+	private long totalRoles;
 
-	public String getTotalPatients() {
-		return totalPatients;
+	public long getTotalRoles() {
+		return totalRoles;
 	}
 
-	public void setTotalPatients(String totalPatients) {
-		this.totalPatients = totalPatients;
+	public void setTotalRoles(long totalRoles) {
+		this.totalRoles = totalRoles;
 	}
 
-	public String getTotalAppointments() {
+	public long getTotalAppointments() {
 		return totalAppointments;
 	}
 
-	public void setTotalAppointments(String totalAppointments) {
+	public void setTotalAppointments(long totalAppointments) {
 		this.totalAppointments = totalAppointments;
 	}
 
-	public String getCancelAppointments() {
+	public long getCancelAppointments() {
 		return cancelAppointments;
 	}
 
-	public void setCancelAppointments(String cancelAppointments) {
+	public void setCancelAppointments(long cancelAppointments) {
 		this.cancelAppointments = cancelAppointments;
 	}
 
-	public String getTotalUsers() {
+	public long getTotalUsers() {
 		return totalUsers;
 	}
 
-	public void setTotalUsers(String totalUsers) {
+	public void setTotalUsers(long totalUsers) {
 		this.totalUsers = totalUsers;
 	}
 
-	public String getTotalDoctors() {
+	public long getTotalDoctors() {
 		return totalDoctors;
 	}
 
-	public void setTotalDoctors(String totalDoctors) {
+	public void setTotalDoctors(long totalDoctors) {
 		this.totalDoctors = totalDoctors;
 	}
 
-	public String getTotalServices() {
+	public long getTotalServices() {
 		return totalServices;
 	}
 
-	public void setTotalServices(String totalServices) {
+	public void setTotalServices(long totalServices) {
 		this.totalServices = totalServices;
 	}
+
+	public long getTotalPatients() {
+		return totalPatients;
+	}
+
+	public void setTotalPatients(long totalPatients) {
+		this.totalPatients = totalPatients;
+	}
+
 }

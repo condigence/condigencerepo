@@ -37,23 +37,26 @@ public class StatService {
 		Dashboard dashboard = new Dashboard();
 
 		long appointmentcount = appointmentRepository.count();
-		dashboard.setTotalAppointments(String.valueOf(appointmentcount));
+		dashboard.setTotalAppointments(appointmentcount);
 
 		// long canceledappointmentcount =
 		// appointmentRepository.findByCanceledAppointment();
-		// dashboard.setCancelAppointments(String.valueOf(canceledappointmentcount));
+		// dashboard.setCancelAppointments(canceledappointmentcount);
 
 		long doctorcount = doctorRepository.count();
-		dashboard.setTotalDoctors(String.valueOf(doctorcount));
+		dashboard.setTotalDoctors(doctorcount);
 
 		long patientcount = patientRepository.count();
-		dashboard.setTotalPatients((String.valueOf(patientcount)));
+		dashboard.setTotalPatients(patientcount);
 
 		long usercount = userRepository.count();
-		dashboard.setTotalUsers(String.valueOf(usercount));
+		dashboard.setTotalUsers(usercount);
 
 		long serviceTypecount = serviceTypeRepository.count();
-		dashboard.setTotalServices((String.valueOf(serviceTypecount)));
+		dashboard.setTotalServices(serviceTypecount);
+
+		long userTypecount = userTypeRepository.count();
+		dashboard.setTotalRoles(userTypecount);
 
 		return dashboard;
 

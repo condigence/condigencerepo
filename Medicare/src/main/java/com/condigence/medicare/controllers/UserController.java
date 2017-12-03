@@ -28,7 +28,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.condigence.medicare.dto.UserDTO;
 import com.condigence.medicare.model.Role;
-import com.condigence.medicare.model.ServiceType;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.RoleRepository;
 import com.condigence.medicare.repository.UserRepository;
@@ -80,6 +79,7 @@ public class UserController {
 		Role role = roleRepository.findByRole(userdto.getRole());
 		roles.add(role);
 		user.setRoles(roles);
+		
 		userRepository.save(user);
 		// HttpHeaders headers = new HttpHeaders();
 		// headers.setLocation(ucBuilder.path("/api/addAppointment/{id}").buildAndExpand(user.getId()).toUri());
@@ -107,7 +107,7 @@ public class UserController {
 		user.setLastName(userdto.getLastName());
 		//user.setPassword(passwordEncoder.encode(userdto.getPassword()));
 		user.setEmail(userdto.getEmail());
-		user.setActive(userdto.isActive());
+	//	user.setActive(userdto.isActive());
 		
 		Set<Role> roles = new HashSet<Role>();
 		Role role = roleRepository.findByRole(userdto.getRole());
@@ -131,7 +131,10 @@ public class UserController {
 					HttpStatus.NOT_FOUND);
 		}
 		//userRepository.delete(id);	
-		user.setDeleted(true);
+		if(user.getId() != 1) {
+			user.setDeleted(true);
+		}
+		
 		userRepository.save(user);	
 		
 		List<User> users = (ArrayList<User>) userRepository.findAll();

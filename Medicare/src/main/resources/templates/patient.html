@@ -11,19 +11,21 @@
 				</div>
 				<div style="padding: 2%">
 					<div >
-				      <label><input type="radio" name="optradio"> Mobile Number</label>
-				      <label><input type="radio" name="optradio"> Name</label>
+				      <label><input type="radio" name="optradio" value="contactNo"> Mobile Number</label>
+				      <label><input type="radio" name="optradio" value="name"> Name</label>
 				    </div>
     
-					<input type="text" placeholder="Search By"
-						style="width: 75%; margin: 0px !important">
-					<input type="button" 
-					style="width: 20%; color:#fff  margin: 0px !important" value="Search">
+					<input id="app-search" type="text" placeholder="Search By"
+						style="width: 75%; margin: 0px !important"> <input
+						type="button" class="search-btn" disabled="true"
+						onclick="search();"
+						style="width: 20%; color: #fff margin: 0px !important"
+						value="Search">
 					
 				</div> 
 				<div class="card-content table-responsive">
 					<table class="table table-hover">
-						<thead class="text-primary headerdata" />
+						<thead class="text-primary headerdata" ></thead>
 						<tbody class="rowdata">
 
 						</tbody>
@@ -38,7 +40,7 @@
 <script type="text/javascript">
 	var container = "content";
 	
-	var appointmentUrl = baseUrl + "/patient/all";
+	var appointmentUrl = baseUrl + "/patients";
 	var jsonData = getJSON(appointmentUrl);
 
 	$('#app-search').click(function() {
@@ -47,7 +49,13 @@
 
 	function search() {
 		var number = $('#app-search').val();
-		var searchUrl = baseUrl + "/search/patient/by/contactNo/" + number;
+		
+		 var radioValue = $("input[name='optradio']:checked").val();
+         if(radioValue){
+             //alert("Your have selected - " + radioValue);
+         } 
+		
+		var searchUrl = baseUrl + "/search/patient/by/"+radioValue+"/" + number;
 		var searchData = getJSON(searchUrl);
 		$('#app-search').val("");
 	}
@@ -76,7 +84,7 @@
 			//alert("deleting...");
 			var idStr = $(this).attr("id");
 			var id = idStr.split('_')[2];
-			url = baseUrl + "/patient/" + id;
+			url = baseUrl + "/patients/" + id;
 			//alert(url);
 			$.ajax({
 				url : url,
@@ -92,54 +100,60 @@
 	
 	$(".editbtn").click(function() {
 				
-				//alert("heloo.... ");
+				
 				var id = $(this).attr("id").split('_')[2];
 				var firstName = $("#patient_firstname_" + id).text();
-				var lastName = $("#patient_lastName_" + id).text();
+			//	var lastName = $("#patient_lastName_" + id).text();
 				var email = $("#patient_email_" + id).text();
 				var age = $("#patient_age_" + id).text();
 				var address = $("#patient_address_" + id).text();
 				var contactNo = $("#patient_contactNo_" + id).text();
-				var gender = $("#patient_gender_" + id).text();
-				//alert(" role  "+role);
+			//	var gender = $("#patient_gender_" + id).text();
 				
-				$(".edit_patient_id").val(id);
-				$(".edit_patient_firstname").val(firstName);
-				$(".edit_patient_lastName").val(lastName);
-				$(".edit_patient_email").val(email);
-				$(".edit_patient_age").val(age);
-				$(".edit_patient_address").val(address);
-				$(".edit_patient_contactNo").val(contactNo);
-				$(".edit_patient_gender").val(gender);
+				
+				$("#edit_patient_id").val(id);
+				$("#edit_patient_firstname").val(firstName);
+				//$("#edit_patient_lastName").val(lastName);
+				$("#edit_patient_email").val(email);
+				$("#edit_patient_age").val(age);
+				$("#edit_patient_address").val(address);
+				$("#edit_patient_contactNo").val(contactNo);
+			//	$("#edit_patient_gender").val(gender);
 				
 				
 			});
 	
-	$(".edit-patient-btn").click(function() {
-		
-		
-		var id = $(".edit_patient_id").val();
-		var firstName = $(".edit_patient_firstname").val();
-		var lastName = $(".edit_patient_lastName").val();
-		var email = $(".edit_patient_email").val();
-		var age = $(".edit_patient_age").val();
-		var address =  $(".edit_patient_address").val();
-		var contactNo =  $(".edit_patient_contactNo").val();
-		var gender =  $(".edit_patient_gender").val();
+	$(".edit-patient-btn").click(function() {		
+		var id = $("#edit_patient_id").val();
+		var firstName = $("#edit_patient_firstname").val();
+	//	var lastName = $(".edit_patient_lastName").val();
+		var email = $("#edit_patient_email").val();
+		var age = $("#edit_patient_age").val();
+		var address =  $("#edit_patient_address").val();
+		var contactNo =  $("#edit_patient_contactNo").val();
+	//	var gender =  $(".edit_patient_gender").val();
 		
 		var jsondata = {};
 		jsondata["id"]= id;
 		jsondata["firstName"]= firstName;
-		jsondata["lastName"]= lastName;
+	//	jsondata["lastName"]= lastName;
 		jsondata["age"] = age;
 		jsondata["email"]= email;
 		jsondata["address"]= address;
 		jsondata["contactNo"]= contactNo;
-		jsondata["gender"]= gender;
+	//	jsondata["gender"]= gender;
 					
-		url = baseUrl + "/patient/"+id;
+		url = baseUrl + "/patients/"+id;
+		
+		alert(JSON.stringify(jsondata));
+		//alert(url);
 		callAjaxPostJSON(url, "PUT", "", jsondata);
+		
+		
+		
 		clearForm();
+	    $("#editPatient").modal('hide');
+		location.reload(true);
 	});
 	
 	}

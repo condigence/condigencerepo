@@ -42,7 +42,7 @@ public class InvoiceController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getInvoice(@PathVariable("id") int id) {
+	public ResponseEntity<?> getInvoice(@PathVariable("id") Long id) {
 		logger.info("Fetching Appointment with id {}", id);
 		Invoice invoice = invoiceRepository.findOne(id);
 		if (invoice == null) {
@@ -56,7 +56,7 @@ public class InvoiceController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateAppointment(@PathVariable("id") int id, @RequestBody Invoice invoice1) {
+	public ResponseEntity<?> updateAppointment(@PathVariable("id") Long id, @RequestBody Invoice invoice1) {
 		logger.info("Updating User Type with id {}", id);
 
 		Invoice invoice = invoiceRepository.findOne(id);
@@ -75,7 +75,7 @@ public class InvoiceController {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteInvoice(@PathVariable("id") int id) {
+	public ResponseEntity<?> deleteInvoice(@PathVariable("id") Long id) {
 		logger.info("Fetching & Deleting User Type with id {}", id);
 
 		Invoice invoice = invoiceRepository.findOne(id);

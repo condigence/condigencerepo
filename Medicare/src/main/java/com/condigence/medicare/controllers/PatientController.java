@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +25,6 @@ import com.condigence.medicare.repository.PatientRepository;
 import com.condigence.medicare.util.CustomErrorType;
 
 @RestController
-@RequestMapping("/patient")
 public class PatientController {
 
 	public static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
@@ -30,7 +33,7 @@ public class PatientController {
 	PatientRepository patientRepository;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@PostMapping(value = "/patients")
 	public ResponseEntity<?> createPatient(@RequestBody Patient patient, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Patient : {}", patient);
 
@@ -49,8 +52,8 @@ public class PatientController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getPatient(@PathVariable("id") int id) {
+	@GetMapping(value = "/patients/{id}")
+	public ResponseEntity<?> getPatient(@PathVariable("id") Long id) {
 		logger.info("Fetching Patient with id {}", id);
 		Patient patient = patientRepository.findOne(id);
 		if (patient == null) {
@@ -62,8 +65,8 @@ public class PatientController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updatePatient(@PathVariable("id") int id, @RequestBody Patient patient1) {
+	@PutMapping(value = "/patients/{id}")
+	public ResponseEntity<?> updatePatient(@PathVariable("id") Long id, @RequestBody Patient patient1) {
 		logger.info("Updating Patient with id {}", id);
 
 		Patient patient = patientRepository.findOne(id);
@@ -75,14 +78,19 @@ public class PatientController {
 		}
 
 		patient.setContactNo(patient1.getContactNo());
+		patient.setAddress(patient1.getAddress());
+		patient.setAge(patient1.getAge());
+		patient.setEmail(patient1.getEmail());
+		patient.setFirstName(patient1.getFirstName());
+	//	patient.setGender(patient1.getGender());
 
 		patientRepository.save(patient);
 		return new ResponseEntity<Patient>(patient, HttpStatus.OK);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deletePatient(@PathVariable("id") int id) {
+	@DeleteMapping(value = "/patients/{id}")
+	public ResponseEntity<?> deletePatient(@PathVariable("id") Long id) {
 		logger.info("Fetching & Deleting Patient with id {}", id);
 
 		Patient patient = patientRepository.findOne(id);
@@ -91,12 +99,17 @@ public class PatientController {
 			return new ResponseEntity(new CustomErrorType("Unable to delete.patient with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-		patientRepository.delete(id);
+		//patientRepository.delete(id);
+		
+		patient.setDeleted(true);
+		patientRepository.save(patient);
+		
+		
 		return new ResponseEntity<Patient>(HttpStatus.NO_CONTENT);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@GetMapping(value = "/patients")
 	public ResponseEntity<List<Patient>> listAllPatients() {
 		List<Patient> patientList = (ArrayList<Patient>) patientRepository.findAll();
 		if (patientList.isEmpty()) {
@@ -106,7 +119,7 @@ public class PatientController {
 		return new ResponseEntity<List<Patient>>(patientList, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/patients")
 	public ResponseEntity<Patient> deleteAllPatient() {
 		logger.info("Deleting All Appointments");
 		patientRepository.deleteAll();

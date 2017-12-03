@@ -1,0 +1,169 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card ">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">User Role and Permission</h4>
+					<!-- <p class="category">Choose NGO</p> -->
+					<button class="category btn btn-default btn-sm addBtnBg" data-toggle="modal"
+						data-target="#addPermission">Add</button>
+				</div>
+				<!-- <div style="padding:2%"><input class="form-control"type="text" placeholder="Search...." style="width:100%"></div> -->
+				<div class="card-content table-responsive">
+					<table class="table table-hover">
+						<thead class="text-primary headerdata" />
+						<tbody class="rowdata" />
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(".saveBtn").click(function() {
+	//alert("Permmission Allow....!!! ");
+	//To be done
+});
+
+var container = "content";
+var urlPerfix = baseUrl;
+url = urlPerfix + "/roles";
+var jsonData = getJSON(url);
+
+
+function getJSON(url) {
+//alert("hi...");
+	$.ajax({
+		url : url,
+		type : "GET",
+		crossDomain : true,
+		timeout : 50000,
+		success : function(response) {
+
+			populateData(response);
+			//initClickEvent();
+		},
+		error : function(xhr, status, error) {
+		}
+	});
+
+}
+
+
+function deleteUserType(id){
+	 var id = id.split('_')[2];	
+	// alert(id);
+	 alert('Role Deleted!');			
+	 
+	 var urlPerfix = baseUrl;
+		url = urlPerfix + "/roles/" + id;
+		callAjaxPostJSON(url, "DELETE", "", "");
+	 
+}
+
+
+
+function addRole(){	
+		
+		var role = $("#add_user_type_role").val();
+		var jsondata = {};
+		jsondata["role"] = role;
+		
+		//alert(JSON.stringify(jsondata));
+
+		var urlPerfix = baseUrl;
+		url = urlPerfix + "/roles";
+		
+		//alert(url);
+		callAjaxPostJSON(url, "POST", "", jsondata);	
+}
+
+function callAjaxPostJSON(urlMapping, callType, container, data) {
+
+	$.ajax({
+		type : callType,
+		contentType : "application/json",
+		url : urlMapping,
+		data : JSON.stringify(data),
+		crossDomain : true,
+		dataType : 'json',
+		timeout : 100000,
+		success : function(response) {
+			console.log("SUCCESS: ", data);
+			if (!data.error)
+				location.reload(true);
+		},
+		error : function(xhr, status, error) {
+			console.log("ERROR: ", error);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+
+}
+
+
+
+
+function populateData(response) {
+    //alert("hello "+response);
+		
+		var headerdataStr = "";
+		
+		
+		 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Role</th>"
+		 +  "<th>Add</th>" +  "<th>Edit</th>" + "<th>Delete</th>" + "<th>Action</th>"; 
+
+		$('.headerdata').html(headerdataStr);
+
+		var rowDataStr = ""; 
+		 for (i = 0; i < response.length; i++) {
+				
+				rowDataStr = rowDataStr
+						+ "<tr id='row_" + response[i].id + "'>"
+						
+						+ "<td id='user_id_" + response[i].id + "'>"
+						+ response[i].id
+						+ "</td>"
+						
+						
+						+ "<td  id='userRole_name_" + response[i].id + "'>"
+						+ response[i].role
+						+ "</td>"
+						
+					
+						
+						
+						+ "<td>"
+						+ "<input type='checkbox'  id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "</td>"
+						
+						+ "<td>"
+						+ "<input type='checkbox'  id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "</td>"
+						
+						+ "<td>"
+						+ "<input type='checkbox'  id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "</td>"
+						
+						+ "<td>"
+
+						+ "<button id='userRole_savebtn_" + response[i].id + "' class='btn-primary saveBtn'>"
+						+ "<span class='glyphicon glyphicon-floppy-disk'></span>"
+						+ "</button>"
+
+						+ "<button  onclick='deleteUserType(this.id)'       id='userRole_delbtn_" + response[i].id + "'  class='btn-primary'>"
+						+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
+
+						+ "</tr>";
+			} 
+		$('.rowdata').html(rowDataStr);
+
+	}
+	
+	
+
+
+</script>

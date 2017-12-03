@@ -68,19 +68,19 @@ public class PermissionController {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@PostMapping(value = "/permission/add")
+	@PostMapping(value = "/permissions")
 	public ResponseEntity<?> createPermission(@RequestBody RolePermissionDTO rolePermissionDTO, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Role Permission : {}", rolePermissionDTO);
 		
 		System.out.println("Creating Role Permission :"+ rolePermissionDTO);
 
-		if (StringUtils.isEmpty(rolePermissionDTO.getRoleName()) && roleRepository.findByRole(rolePermissionDTO.getRoleName()).getId() != 0) {
-			//logger.error("Unable to User. A User with name {} already	 exist", patient.getFirstName());
-			
-		/*	return new ResponseEntity(
-					new CustomErrorType("Unable to create. A Role with name " + rolePermissionDTO.getRoleName() + " already exist."),
-					HttpStatus.CONFLICT);*/
-		}
+//		if (StringUtils.isEmpty(rolePermissionDTO.getRoleName()) && roleRepository.findByRole(rolePermissionDTO.getRoleName()).getId() != 0) {
+//			//logger.error("Unable to User. A User with name {} already	 exist", patient.getFirstName());
+//			
+//		/*	return new ResponseEntity(
+//					new CustomErrorType("Unable to create. A Role with name " + rolePermissionDTO.getRoleName() + " already exist."),
+//					HttpStatus.CONFLICT);*/
+//		}
 		Permission p = new Permission();
 		p.setRoleId(roleRepository.findByRole(rolePermissionDTO.getRoleName()).getId());
 		p.setPermissionType(rolePermissionDTO.getPermissionType());

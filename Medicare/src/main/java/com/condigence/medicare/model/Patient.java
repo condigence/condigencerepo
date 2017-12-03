@@ -14,14 +14,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "patient")
+@Where(clause = "is_deleted='false'")
 public class Patient implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "patient_id")
-	private Integer id;
+	private Long id;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -31,6 +34,9 @@ public class Patient implements Serializable{
 
 	@Column(name = "age")
 	private int age;
+	
+	@Column(name = "is_deleted")
+	private boolean isDeleted;
 
 	@Column(name = "address")
 	private String address;
@@ -44,15 +50,12 @@ public class Patient implements Serializable{
 	@Column(name = "email")
 	private String email;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinTable(name = "appointment", joinColumns = @JoinColumn(name = "appointment_id"))
-//	private Set<Appointment> appointments;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -110,6 +113,14 @@ public class Patient implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	@Override

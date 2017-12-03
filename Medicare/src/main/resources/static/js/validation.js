@@ -1,3 +1,167 @@
+$('#addAppointmentform').formValidation({
+        framework: 'bootstrap',
+        excluded: ':disabled',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	add_appointment_firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'Patient First Name is required'
+                    }, regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'Patient First Name is Invalid!'
+                    }
+                }
+            },
+            add_appointment_lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'Patient Last Name is required'
+                    }, regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'Patient Last Name is Invalid'
+                    }
+                }
+            },            
+            add_appointment_serviceTypeId: {
+                validators: {
+                    notEmpty: {
+                        message: 'Services Name is required'
+                    }
+                }
+            },          
+            add_appointment_age: {
+                validators: {
+                    notEmpty: {
+                        message: 'Age is required'
+                    }
+                }
+            },
+            pcontact: {
+                validators: {
+                    notEmpty: {
+                        message: 'Contact is required'
+                    },
+                    regexp: {
+                        message: 'The phone number is Invalid',
+                        regexp: /^[0-9\s\-()+\.]+$/
+                    }
+                }
+            },
+            add_appointment_address: {
+                validators: {
+                    notEmpty: {
+                        message: 'Address is required'
+                    }
+                }
+            },
+            add_appointment_gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'Gender is required'
+                    }
+                }
+            },
+            add_appointment_email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Email is required'
+                    },
+                    emailAddress: {
+                        message: 'Not a valid email address'
+                    } 
+                }
+            },
+            add_appointment_dateTime: {
+                validators: {
+                    notEmpty: {
+                        message: 'Date Time is required'
+                    }
+                }
+            },
+            add_appointment_slot: {
+                validators: {
+                    notEmpty: {
+                        message: 'Slot is required'
+                    }
+                }
+            },
+            add_appointment_referredByDoctorId: {
+                validators: {
+                    notEmpty: {
+                        message: 'Doctor Name is required'
+                    }
+                }
+            }
+        }
+    }).on('success.form.fv', function(e) {
+    	
+    
+		var firstName = $(".add_appointment_firstName")
+				.val();
+		var lastName = $(".add_appointment_lastName").val();
+		var age = $(".add_appointment_age").val();
+		var address = $(".add_appointment_address").val();
+		var contactNo = $(".add_appointment_contact")
+				.val();
+		var gender = $(
+				".add_appointment_gender option:selected")
+				.text();
+		var email = $(".add_appointment_email").val();
+		var referredByDoctorId = $(
+				".add_appointment_referredByDoctorId option:selected")
+				.val();
+		var serviceTypeId = $(
+				".add_appointment_serviceTypeId option:selected")
+				.val();
+		
+				
+		var dateTime = $(".add_appointment_dateTime").val();
+
+		var jsondata = {};
+		
+		var user = {};
+		var doctor = {};
+		var patient = {};	
+		
+        var serviceType = {};		
+		var services = [];		
+		serviceType["id"] = serviceTypeId;		
+		services[0] = serviceType;			
+		
+		jsondata["serviceType"] = services;				
+		jsondata["firstName"] = firstName;
+		jsondata["lastName"] = lastName;
+		jsondata["age"] = age;
+		jsondata["address"] = address;
+		jsondata["contactNo"] = contactNo;
+		jsondata["gender"] = gender;
+		jsondata["email"] = email;
+		doctor["id"] = 1;
+		
+		jsondata["referredByDoctor"] = doctor;	
+		jsondata["dateTime"] = "";
+		jsondata["slot"] = 1;
+		
+		user["id"] = loggedInUserId;		
+		jsondata["createdByUserId"] = user;
+	
+		var appointmentAddUrl = baseUrl + "/appointments";
+		callAjaxPostJSON(appointmentAddUrl, "POST", "", jsondata);
+		clearForm();
+	    $("#addAppo").modal('hide');
+		location.reload(true);
+		 
+    });
+  
+
+
+
+
 /*---------------------form Validation to Add User----------------------*/
 
  $('#addUserform').formValidation({
@@ -50,7 +214,6 @@
         }
     }).on('success.form.fv', function(e) {
     	
-    	//e.preventDefault();    	
     	var name = $("#add_user_name").val();
 		var lastName = $("#add_user_last_name").val();
 		var email = $("#add_user_email").val();
@@ -77,7 +240,6 @@
  /*---------------------form Validation to Add Doctor----------------------*/
 
  $('#addDoctorform').formValidation({
-	// alert("hhhhhhh");
 	 
      framework: 'bootstrap',
      excluded: ':disabled',
@@ -153,25 +315,10 @@
              }
          }
          
-         /*,
-         add_doctor_commission: {
-             validators: {
-                 notEmpty: {
-                     message: 'The doctor commission is required'
-                 },
-                 regexp: {
-                     message: 'The commission can only contain the digits, spaces, -, (, ), + and .',
-                     regexp: /^[0-9\s\-()+\.]+$/
-                 }
-             }
-         }*/
+        
      }
  }).on('success.form.fv', function(e) {
- 	
-	 
-	// alert("Adding new doctor!");
- 	e.preventDefault();
- 	
+ 		  	
  	var name = $(".add_doctor_name").val();				
 	
 	var contactNo =	$(".add_doctor_contactNo").val();
@@ -193,11 +340,9 @@
 	jsondata["commission"] = commission;
 	jsondata["addedByUserId"] = 1;
 
-	/* var urlPerfix = "http://localhost:9900";
-	url = urlPerfix + "/doctor/add"; */
+
 	
 	var doctorAddUrl = baseUrl + "/doctors";
-	alert(JSON.stringify(jsondata));
 	callAjaxPostJSON(doctorAddUrl, "POST", "", jsondata);
 
 		 $("#addDoctor").modal('hide');
@@ -207,54 +352,7 @@
 /*---------------------form Validation to Add doctor----------------------*/
 
  /*---------------------form Validation to Add service----------------------*/
-
- $('#addServiceform').formValidation({
-        framework: 'bootstrap',
-        excluded: ':disabled',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-        	add_new_serviceType: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Service name is required'
-                    }
-                }
-            },
-            add_new_serviceType_price: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Service price is required'
-                    },
-                    regexp: {
-                        message: 'The commission can only contain the digits, spaces, -, (, ), + and .',
-                        regexp: /^[0-9\s\-()+\.]+$/
-                    }
-                }
-            }
-        }
-    }).on('success.form.fv', function(e) {
-    	
-    	e.preventDefault();
-    	
-    	var name = $("#add_new_serviceType").val();
-		var price = $("#add_new_serviceType_price").val();
-
-		var jsondata = {};
-		jsondata["name"] = name;
-		jsondata["price"] = price;
-
-		var serviceAddUrl = baseUrl + "/services";
-
-		callAjaxPostJSON(serviceAddUrl, "POST", "", jsondata);
-		 $("#addUser").modal('hide');
-		 location.reload(true);
-    });
-  
- /*---------------------form Validation to Add Service----------------------*/ 
+/*
  
  /*---------------------form Validation to Edit Service Starts----------------------*/ 
  
@@ -290,17 +388,15 @@
  	
  	e.preventDefault();
  	
- 	var name = $("#add_new_serviceType").val();
+ 		var name = $("#add_new_serviceType").val();
 		var price = $("#add_new_serviceType_price").val();
-
 		var jsondata = {};
 		jsondata["name"] = name;
 		jsondata["price"] = price;
-
+		jsondata["createdByUserId"] = loggedInUserId;
 		var serviceAddUrl = baseUrl + "/services";
-
 		callAjaxPostJSON(serviceAddUrl, "POST", "", jsondata);
-		 $("#addUser").modal('hide');
+		 $("#addService").modal('hide');
 		 location.reload(true);
  });
 
@@ -308,140 +404,8 @@
  
  
  
- 
- 
- /*---------------------form Validation to Add Patient----------------------*/
-// $('#addPatientform').formValidation({
-//     framework: 'bootstrap',
-//     excluded: ':disabled',
-//     icon: {
-//         valid: 'glyphicon glyphicon-ok',
-//         invalid: 'glyphicon glyphicon-remove',
-//         validating: 'glyphicon glyphicon-refresh'
-//     },
-//     fields: {
-//    	 add_patient_firstname: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The doctor name is required'
-//                 },
-//                 regexp: {
-//                     regexp: /^[a-zA-Z0-9_\.]+$/,
-//                     message: 'The username can only consist of alphabetical, number, dot and underscore'
-//                 }
-//             }
-//         },
-//         add_patient_lastName: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The doctor name is required'
-//                 },
-//                 regexp: {
-//                     regexp: /^[a-zA-Z0-9_\.]+$/,
-//                     message: 'The username can only consist of alphabetical, number, dot and underscore'
-//                 }
-//             }
-//         },
-//         add_patient_contactNo: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The contact No. is required'
-//                 },stringLength: {
-//                     min: 10,
-//                     max: 15,
-//                     message: 'The username must be more than 10 and less than 15 characters long'
-//                 },
-//                 regexp: {
-//                     message: 'The phone number can only contain the digits, spaces, -, (, ), + and .',
-//                     regexp: /^[0-9\s\-()+\.]+$/
-//                 }
-//             }
-//         },
-//         add_patient_email: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The email is required'
-//                 },
-//                 emailAddress: {
-//                     message: 'The input is not a valid email address'
-//                 }
-//             }
-//         },
-//         add_patient_gender: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The gender is required'
-//                 }
-//             }
-//         },
-//         add_patient_age: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The patient age is required'
-//                 },
-//                 regexp: {
-//                     message: 'The commission can only contain the digits, spaces, -, (, ), + and .',
-//                     regexp: /^[0-9\s\-()+\.]+$/
-//                 }
-//             }
-//         },
-//        
-//         add_patient_address: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'The doctor address is required'
-//                 }
-//             }
-//         }
-//         }
-// }).on('success.form.fv', function(e) {
-// 	
-// 	e.preventDefault();
-// 	
-// 	var firstName = $(".add_patient_firstname").val();				
-// 	var lastName = $(".add_patient_lastName").val();
-//	var contactNo =	$(".add_patient_contactNo").val();
-//	var email =	$(".add_patient_email").val();
-//	var gender = $(".add_patient_gender").val();
-//	var age = $(".add_patient_age").val();
-//	var address =	$(".add_patient_address").val();
-//
-//	var jsondata = {};
-//	jsondata["firstName"] = firstName;
-//	jsondata["lastName"] = lastName;
-//	jsondata["contactNo"] = contactNo;
-//	jsondata["email"] = email;
-//	jsondata["gender"] = gender;
-//	jsondata["age"] = age;
-//	jsondata["address"] = address;			
-//	jsondata["addedByUserId"] = 1;
-//
-//	
-//	var doctorAddUrl = baseUrl + "/patient/add";
-//	alert(JSON.stringify(jsondata));
-//	callAjaxPostJSON(doctorAddUrl, "POST", "", jsondata);
-//
-//		 $("#addPatient").modal('hide');
-//		 location.reload(true);
-// });
-
-/*---------------------form Validation to Add doctor----------------------*/
- 
-    
-//    $('.modal').on('shown.bs.modal', function() {
-//   	$('#addUserform').formValidation('resetForm', true);
-//	//$('#addDoctorform').formValidation('resetForm', true);
-//   });
-//    
-//    
-//    $('.modal').on('hidden.bs.modal', function() {
-//    	$('#addUserform').formValidation('resetForm', true);
-//    //	$('#addDoctorform').formValidation('resetForm', true);
-//    });
-
-
  /*---------------------form Validation to Add Role Permission----------------------*/
- $('#addRolePermissionform').formValidation({
+ $('#addUserRoleform').formValidation({
      framework: 'bootstrap',
      excluded: ':disabled',
      icon: {
@@ -449,41 +413,36 @@
          invalid: 'glyphicon glyphicon-remove',
          validating: 'glyphicon glyphicon-refresh'
      },
-     fields: {     
-     	add_role_name: {
-             validators: {
-                 notEmpty: {
-                     message: 'The role is required'
-                 }
-             }
-         },           
-         add_permissiontype: {
-             validators: {
-                 notEmpty: {
-                     message: 'The permission type is required'
-                 }
-             }
-         }
-         }
+     fields: {
+    	 add_user_type_role: {
+              validators: {
+                  notEmpty: {
+                      message: 'The Role is required'
+                  }
+              }
+          }
+      }
+ 
  }).on('success.form.fv', function(e) {
  	
- 	e.preventDefault();
+ 	 	 	
+ 	var role = $("#add_user_type_role").val();
  	
- 	var roleName = $(".add_role_name").val();				
- 	var permissionType = $(".add_permissiontype").val();
+ 	if(role != " "){
+ 		var jsondata = {};
+ 		jsondata["role"] = role;
+ 	 	
+ 		var serviceAddUrl = baseUrl + "/roles";
+ 		callAjaxPostJSON(serviceAddUrl, "POST", "", jsondata);
+ 		 $("#addUserRole").modal('hide');
+ 		 location.reload(true);
+ 		
+ 	}else{
+ 		//alert("Please Enter Role Name!");
+ 	}
+ 	
 	
-	var jsondata = {};
-	jsondata["roleName"] = roleName;
-	jsondata["permissionType"] = permissionType;
-	
-	
-	var rolePermissionAddUrl = baseUrl + "/permission/add";
-	alert(JSON.stringify(jsondata));
-	alert(rolePermissionAddUrl);
-	callAjaxPostJSON(rolePermissionAddUrl, "POST", "", jsondata);
-
-		 $("#addRolePermission").modal('hide');
-		 location.reload(true);
+ 	
  });
 
 

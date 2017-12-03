@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.condigence.medicare.model.Appointment;
 import com.condigence.medicare.model.Patient;
 
-public interface AppointmentRepository extends CrudRepository<Appointment, Integer> {	
+public interface AppointmentRepository extends CrudRepository<Appointment, Long> {	
 	
 	List<Appointment> findBypatient(Patient patient);
 	

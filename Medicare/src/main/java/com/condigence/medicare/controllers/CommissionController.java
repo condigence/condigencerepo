@@ -9,19 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.condigence.medicare.dto.CommissionDTO;
 import com.condigence.medicare.model.Commission;
 import com.condigence.medicare.repository.CommissionRepository;
+import com.condigence.medicare.services.CommissionService;
 import com.condigence.medicare.util.CustomErrorType;
 
 @RestController
-@RequestMapping("/commission")
 public class CommissionController {
 
 	public static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
@@ -29,8 +34,11 @@ public class CommissionController {
 	@Autowired
 	CommissionRepository commissionRepository;
 
+	@Autowired
+	CommissionService commissionService;
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@PostMapping(value = "/commissions")
 	public ResponseEntity<?> createCommission(@RequestBody Commission commission, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating commission : {}", commission);
 		commissionRepository.save(commission);
@@ -40,8 +48,8 @@ public class CommissionController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getCommission(@PathVariable("id") int id) {
+	@GetMapping(value = "/commissions/{id}")
+	public ResponseEntity<?> getCommission(@PathVariable("id") Long id) {
 		logger.info("Fetching Patient with id {}", id);
 		Commission commission = commissionRepository.findOne(id);
 		if (commission == null) {
@@ -53,8 +61,8 @@ public class CommissionController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateCommission(@PathVariable("id") int id, @RequestBody Commission commission1) {
+	@PutMapping(value = "/commissions/{id}")
+	public ResponseEntity<?> updateCommission(@PathVariable("id") Long id, @RequestBody Commission commission1) {
 		logger.info("Updating commission with id {}", id);
 
 		Commission commission = commissionRepository.findOne(id);
@@ -69,8 +77,8 @@ public class CommissionController {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deletePatient(@PathVariable("id") int id) {
+	@DeleteMapping(value = "/commissions/{id}")
+	public ResponseEntity<?> deletePatient(@PathVariable("id") Long id) {
 		logger.info("Fetching & Deleting commission with id {}", id);
 
 		Commission commission = commissionRepository.findOne(id);
@@ -84,17 +92,17 @@ public class CommissionController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ResponseEntity<List<Commission>> listAllCommissions() {
-		List<Commission> patientList = (ArrayList<Commission>) commissionRepository.findAll();
+	@GetMapping(value = "/commissions")
+	public ResponseEntity<List<CommissionDTO>> listAllCommissions() {
+		List<CommissionDTO> patientList = (ArrayList<CommissionDTO>) commissionService.findAll();
 		if (patientList.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND
 		}
-		return new ResponseEntity<List<Commission>>(patientList, HttpStatus.OK);
+		return new ResponseEntity<List<CommissionDTO>>(patientList, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/commissions")
 	public ResponseEntity<Commission> deleteAllCommission() {
 		logger.info("Deleting All Commissions");
 		commissionRepository.deleteAll();

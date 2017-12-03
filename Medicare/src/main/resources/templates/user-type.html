@@ -21,10 +21,7 @@
 	</div>
 </div>
 <script>
-$(".saveBtn").click(function() {
-	//alert("Permmission Allow....!!! ");
-	//To be done
-});
+
 
 var container = "content";
 var urlPerfix = baseUrl;
@@ -33,7 +30,6 @@ var jsonData = getJSON(url);
 
 
 function getJSON(url) {
-//alert("hi...");
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -53,7 +49,7 @@ function getJSON(url) {
 
 function deleteUserType(id){
 	 var id = id.split('_')[2];	
-	// alert(id);
+	
 	 alert('Role Deleted!');			
 	 
 	 var urlPerfix = baseUrl;
@@ -62,21 +58,40 @@ function deleteUserType(id){
 	 
 }
 
-
-
-function addRole(){	
+function saveUserPermission(idStr){
+	
+	//alert(idStr);
+	
+	var id = idStr.split('_')[2];			
+	
+	//var id = $("#userRole_id_"+idVal).val();
+	//var roleName = $("#userRole_name_"+id).val();	
+	
+	var addPermissionType = $("#userRole_add_"+id).val();
+	var editPermissionType = $("#userRole_edit_"+id).val();
+	var deletePermissionType = $("#userRole_delete_"+id).val();
+	
+	//alert(id);
+	//alert(roleName);
+	//alert(addPermissionType);
+//	alert(editPermissionType);
+//	alert(deletePermissionType);
+	
+	var jsondata = {};
+	
+	jsondata["id"] = id;
+	//jsondata["roleName"] = roleName;
+	//jsondata["permissionType"] = permissionType;
+	
+	//alert(JSON.stringify(jsondata));
+ 	
+	var userRolePermissionAddUrl = baseUrl + "/permissions";
+	//alert(userRolePermissionAddUrl);
+	//callAjaxPostJSON(userRolePermissionAddUrl, "POST", "", jsondata);
+	
+	// location.reload(true);
+	 
 		
-		var role = $("#add_user_type_role").val();
-		var jsondata = {};
-		jsondata["role"] = role;
-		
-		//alert(JSON.stringify(jsondata));
-
-		var urlPerfix = baseUrl;
-		url = urlPerfix + "/roles";
-		
-		//alert(url);
-		callAjaxPostJSON(url, "POST", "", jsondata);	
 }
 
 function callAjaxPostJSON(urlMapping, callType, container, data) {
@@ -107,11 +122,8 @@ function callAjaxPostJSON(urlMapping, callType, container, data) {
 
 
 
-function populateData(response) {
-    //alert("hello "+response);
-		
-		var headerdataStr = "";
-		
+function populateData(response) {		
+		var headerdataStr = "";		
 		
 		 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Role</th>"
 		 +  "<th>Add</th>" +  "<th>Edit</th>" + "<th>Delete</th>" + "<th>Action</th>"; 
@@ -124,7 +136,7 @@ function populateData(response) {
 				rowDataStr = rowDataStr
 						+ "<tr id='row_" + response[i].id + "'>"
 						
-						+ "<td id='user_id_" + response[i].id + "'>"
+						+ "<td id='userRole_id_" + response[i].id + "'>"
 						+ response[i].id
 						+ "</td>"
 						
@@ -132,25 +144,23 @@ function populateData(response) {
 						+ "<td  id='userRole_name_" + response[i].id + "'>"
 						+ response[i].role
 						+ "</td>"
-						
-					
-						
-						
+												
 						+ "<td>"
-						+ "<input type='checkbox'  id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "<input type='checkbox'  value=''  id='userRole_add_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+											     						
 						+ "</td>"
 						
 						+ "<td>"
-						+ "<input type='checkbox'  id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "<input type='checkbox' value=''  id='userRole_edit_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
 						+ "</td>"
 						
 						+ "<td>"
-						+ "<input type='checkbox'  id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
+						+ "<input type='checkbox' value=''   id='userRole_delete_"+response[i].id +"	style='border: transparent; margin: 0.5%; '>"
 						+ "</td>"
 						
 						+ "<td>"
 
-						+ "<button id='userRole_savebtn_" + response[i].id + "' class='btn-primary saveBtn'>"
+						+ "<button onclick='saveUserPermission(this.id)'  id='userRole_savebtn_" + response[i].id + "' class='btn-primary saveBtn'>"
 						+ "<span class='glyphicon glyphicon-floppy-disk'></span>"
 						+ "</button>"
 

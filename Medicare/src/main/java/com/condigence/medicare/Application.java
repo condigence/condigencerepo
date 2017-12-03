@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin("*")
+@CrossOrigin("*") 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer{
 

@@ -35,34 +35,12 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
-  
-
-
 	var container = "page-content";
-	//alert("load all");
 	var serviceurl = baseUrl+"/services";
-	//alert(serviceurl);
 	var jsonData = "";
 	getJSON(serviceurl);
-
-	 // console.log( "ready!" );
 });
 
-
-$('#app-search').click(function() {
-	$(".search-btn").removeAttr("disabled", "disabled");
-});
-
-function search() {		
-	// var radioValue = $("input[name='optradio']:checked").val();
-   //  if(radioValue){
-        // alert("Your have selected - " + radioValue);
-  //   }         
-	var nameval = $('#app-search').val();
-	var searchUrl = baseUrl + "/search/ServiceType/by/name" + nameval;
-	var searchData = getJSON(searchUrl);
-	$('#app-search').val("");
-}
 	
 	function getJSON(serviceurl) {
 		$.ajax({
@@ -82,26 +60,7 @@ function search() {
 	}
 
 	function initClickEvent() {
-
-	
-
-		$(".add-new-serviceType-btn").click(function() {
-			
-			var name = $("#add-new-serviceType").val();
-			var price = $("#add-new-serviceType-price").val();
-
-			var jsondata = {};
-			jsondata["name"] = name;
-			jsondata["price"] = price;
-
-			var urlPerfix = baseUrl;
-			url = urlPerfix + "/services";
-
-			callAjaxPostJSON(url, "POST", "", jsondata);
-
-			clearForm();
-		});
-
+		
 		$(".editbtn")
 				.click(
 						function() {
@@ -174,8 +133,8 @@ function search() {
 			timeout : 100000,
 			success : function(response) {
 				console.log("SUCCESS: ", data);
-				if (!data.error)
-					location.reload(true);
+				//if (!data.error)
+					//location.reload(true);
 			},
 			error : function(xhr, status, error) {
 				console.log("ERROR: ", error);
@@ -228,13 +187,12 @@ function search() {
 	
 	function deleteServiceType(id){
 		 var id = id.split('_')[1];	
-		// alert(id);
 		 alert('Service Deleted!');			
 		 
 		 var urlPerfix = baseUrl;
 			url = urlPerfix + "/services/" + id;
 			callAjaxPostJSON(url, "DELETE", "", "");
-		 
+			location.reload(true);
 	}	
 	
 	

@@ -82,37 +82,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userRepository.findByEmail(name);
 	}
 
-//	@Override
-//	public List<UserDTO> findUsersByName(String name) {
-//		List<UserDTO> userDTOs = new ArrayList<>();
-//		List<User> users = userRepository.findByName(name);
-//		for (User user : users) {
-//			UserDTO userDTO = new UserDTO();
-//			userDTO.setActive(user.isActive());
-//			userDTO.setEmail(user.getEmail());
-//			userDTO.setId((int) user.getId());
-//			userDTO.setLastName(user.getLastName());
-//			userDTO.setName(user.getName());
-//			userDTO.setRole(user.getRoles().iterator().next().getRole());
-//			userDTOs.add(userDTO);
-//		}
-//
-//		return userDTOs;
-//	}
-//
-//	@Override
-//	public List<UserDTO> findUsersByEmail(String email) {
-//		List<UserDTO> userDTOs = new ArrayList<>();
-//		UserDTO userDTO = new UserDTO();
-//		User user = userRepository.findByEmail(email);
-//		userDTO.setActive(user.isActive());
-//		userDTO.setEmail(user.getEmail());
-//		userDTO.setId((int) user.getId());
-//		userDTO.setLastName(user.getLastName());
-//		userDTO.setName(user.getName());
-//		userDTO.setRole(user.getRoles().iterator().next().getRole());
-//		userDTOs.add(userDTO);
-//
-//		return userDTOs;
-//	}
 }

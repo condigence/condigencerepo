@@ -4,18 +4,21 @@
 		<div class="col-md-12">
 			<div class="card ">
 				<div class="card-header" data-background-color="purple">
-					<h4 class="title">Our User List</h4>
+					<h4 class="title">Our Employee List</h4>
 					<!-- <p class="category">Choose NGO</p> -->
-					<button class="category btn btn-default btn-sm addBtnBg" data-toggle="modal"
-						data-target="#addUser">Add</button>
+					<button class="category btn btn-default btn-sm addBtnBg" onclick="populateSelect();" data-toggle="modal"
+						data-target="#addUser">Add Employee</button>
 				</div>
 				<div style="padding: 2%">
-					<div>
-					
+					<div>	
 									
 						<label><input type="radio" name="optradio" value="name">
 							Name</label>
+							<!-- label><input type="radio" name="optradio" value="email">
+							Email</label-->						
 					</div>
+					
+					
 
 					<input id="app-search" type="text" placeholder="Search By"
 						style="width: 75%; margin: 0px !important"> <input
@@ -53,9 +56,10 @@
 	function search() {		
 		 var radioValue = $("input[name='optradio']:checked").val();
          if(radioValue){
-           //  alert("Your have selected - " + radioValue);
+             //alert("Your have selected - " + radioValue);
          }         
 		var number = $('#app-search').val();
+		//alert(number);
 		var searchUrl = baseUrl + "/search/user/by/"+radioValue+"/" + number;
 		var searchData = getJSON(searchUrl);
 		$('#app-search').val("");
@@ -80,6 +84,14 @@
 	
 	
 	function initClickEvent() {
+		
+		$(".addBtnBg").click(function() {
+			$(".form-control").val("");
+			
+		});
+		
+		//$('select option[value="2"]').attr("selected",true);
+		
 				
 		
 	$(".editbtn").click(function() {				
@@ -87,15 +99,22 @@
 				var firstName = $("#user_name_" + id).text();
 				var lastName = $("#user_lastName_" + id).text();
 				var email = $("#user_email_" + id).text();
-				var active = $("#user_active_" + id).text();
+			
+			//	var active = $("#user_active_" + id).text();
 				var role = $("#user_role_" + id).text();
+				
+			//	alert(active);
+				//alert(role);
 							
 				$(".edit_user_id").val(id);
 				$(".edit_user_name").val(firstName);
 				$(".edit_user_last_name").val(lastName);
 				$(".edit_user_email").val(email);
-				$(".edit_user_active").val(active);
-				$(".edit_user_role").val(role);
+				//$(".edit_user_active").val(active);
+				
+				$('.edit_user_role option[value="'+role+'"]').attr("selected",true);
+				
+				//$(".edit_user_role").val(role);
 
 			});	
 	
@@ -112,23 +131,24 @@
 		// alert(lastName);
 		var email = $(".edit_user_email").val();
 		// alert(email);
-		var active = $(".edit_user_active option:selected" ).text();
+	//	var active = $(".edit_user_active option:selected" ).text();
 		// alert(active);
 		//var role =  $(".edit_user_role option:selected" ).val();
 		var role = $(".edit_user_role option:selected").text();	
-		 alert(role);
+		// alert(role);
 		
 		var jsondata = {};
 		jsondata["id"]= id;
 		jsondata["name"]= name;
 		jsondata["lastName"]= lastName;
-		jsondata["active"] = active;
+		//jsondata["active"] = active;
 		jsondata["email"]= email;
 		jsondata["role"]= role;		
 
 		JSON.stringify(jsondata);		
 		var urlPerfix = baseUrl;
 		url = urlPerfix + "/users/"+id;
+		//alert(url);
 		callAjaxPostJSON(url, "PUT", "", jsondata);
 		clearForm();
 		
@@ -145,22 +165,23 @@
 			
 			
 			 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Name</th>" + "<th>Last Name</th>"
-					+  "<th>E-mail</th>" +  "<th>Active</th>" + "<th>Role</th>"; 
+					+  "<th>E-mail</th>" +  "<th>Role</th>"; 
 
 			$('.headerdata').html(headerdataStr);
 
 			var rowDataStr = ""; 
-			
+	
 			 for (i = 0; i < response.length; i++) {
 				
 				//alert(JSON.stringify(response));
 				
-				
+				var a = i +1;
+
 				rowDataStr = rowDataStr
 						+ "<tr id='row_" + response[i].id + "'>"
 						
 						+ "<td id='user_id_" + response[i].id + "'>"
-						+ response[i].id
+						+ a
 						+ "</td>"
 						
 						+ "<td id='user_name_" + response[i].id + "'>"
@@ -175,17 +196,14 @@
 						+ response[i].email
 						+ "</td>"
 						
-						+ "<td id='user_active_" + response[i].id + "'>"
-						+ response[i].active
-						+ "</td>"
-						
+										
 						+ "<td id='user_role_" + response[i].id + "'>"
 						+ response[i].roles[0].role
 						+ "</td>"
 						
 						+ "<td>"
 
-						+ "<button id='user_editbtn_" + response[i].id + "' class='btn-primary editbtn' style='border: transparent; margin: 0.5%' data-toggle='modal'" + "data-target='#editUser' title='Edit User'>"
+						+ "<button onclick='populateSelect()' id='user_editbtn_" + response[i].id + "' class='btn-primary editbtn' style='border: transparent; margin: 0.5%' data-toggle='modal'" + "data-target='#editUser' title='Edit User'>"
 						+ "<span class='glyphicon glyphicon-pencil'></span>"
 						+ "</button>"
 
@@ -212,8 +230,8 @@
 				timeout : 100000,
 				success : function(response) {
 					console.log("SUCCESS: ", response);
-					if (!response.error)
-						location.reload(true);
+					//if (!response.error)
+						//location.reload(true);
 					//window.location.reload();
 				},
 				error : function(xhr, status, error) {
@@ -239,5 +257,6 @@
 				url = urlPerfix + "/users/" + id;
 				callAjaxPostJSON(url, "DELETE", "", "");			 
 		}	
+		
 		
 	</script>	

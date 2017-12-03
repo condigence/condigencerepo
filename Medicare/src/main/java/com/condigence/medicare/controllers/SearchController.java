@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.condigence.medicare.dto.AppointmentDTO;
 import com.condigence.medicare.dto.UserDTO;
 import com.condigence.medicare.model.Appointment;
+import com.condigence.medicare.model.Doctor;
 import com.condigence.medicare.model.Patient;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.AppointmentRepository;
+import com.condigence.medicare.repository.DoctorRepository;
 import com.condigence.medicare.repository.PatientRepository;
 import com.condigence.medicare.repository.UserRepository;
 import com.condigence.medicare.services.AppointmentService;
@@ -30,13 +32,17 @@ public class SearchController {
 
 	public static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
-	
 	@Autowired
 	AppointmentService appointmentService;
-	
+
 	@Autowired
 	UserService userService;
-
+	
+	@Autowired
+	DoctorRepository doctorRepository;
+	
+	@Autowired
+	PatientRepository patientRepository;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/{entity}/by/{attribute}/{string}", method = RequestMethod.GET)
@@ -64,6 +70,22 @@ public class SearchController {
 				objList = (ArrayList<User>) userService.findUsersByName(string);
 			} else if (attribute.equalsIgnoreCase("email")) {
 				objList = (ArrayList<User>) userService.findUsersByEmail(string);
+			}
+			return new ResponseEntity<List<?>>(objList, HttpStatus.OK);
+		} else if (entity.equalsIgnoreCase("doctor")) {
+			objList = new ArrayList<>();
+			if (attribute.equalsIgnoreCase("name")) {
+				objList = (ArrayList<Doctor>) doctorRepository.findByName(string);
+			} else if (attribute.equalsIgnoreCase("contactNo")) {
+				objList = (ArrayList<Doctor>) doctorRepository.findByContactNo(Long.valueOf(string));
+			}
+			return new ResponseEntity<List<?>>(objList, HttpStatus.OK);
+		}else if (entity.equalsIgnoreCase("patient")) {
+			objList = new ArrayList<>();
+			if (attribute.equalsIgnoreCase("name")) {
+				objList = (ArrayList<Patient>) patientRepository.findByFirstName(string);
+			} else if (attribute.equalsIgnoreCase("contactNo")) {
+				objList = (ArrayList<Patient>) patientRepository.findByContactNo(Long.valueOf(string));
 			}
 			return new ResponseEntity<List<?>>(objList, HttpStatus.OK);
 		} else {

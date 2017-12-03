@@ -132,19 +132,27 @@ p {
 					<h4 class="title">Our Doctors List</h4>
 					<!-- <p class="category">Choose NGO</p> -->
 					<button class="category btn btn-default btn-sm addBtnBg"
-						data-toggle="modal" data-target="#addDoctor">Add</button>
+						data-toggle="modal" data-target="#addDoctor">Add Doctor</button>
 				</div>
 				<div style="padding: 2%">
 					<div>
-						<label><input type="radio" name="optradio"> Mobile
-							Number</label> <label><input type="radio" name="optradio">
+						<label><input type="radio" name="optradio" value="contactNo"> Mobile
+							Number</label> <label><input value="name" type="radio" name="optradio">
 							Name</label>
 					</div>
-					<input type="text" placeholder="Search By"
+					<!-- <input type="text" placeholder="Search By"
 						style="width: 75%; margin: 0px !important"> <input
 						type="button"
 						style="width: 20%; color: #fff margin: 0px !important"
+						value="Search"> -->
+						
+						<input id="app-search" type="text" placeholder="Search By"
+						style="width: 75%; margin: 0px !important"> <input
+						type="button" class="search-btn" disabled="true"
+						onclick="search();"
+						style="width: 20%; color: #fff margin: 0px !important"
 						value="Search">
+						
 
 				</div>
 				<div class="card-content table-responsive">
@@ -178,6 +186,27 @@ p {
 	
 	var jsonData = "";
 	getJSON(doctorUrl);
+	
+	
+	
+	$('#app-search').click(function() {
+		$(".search-btn").removeAttr("disabled", "disabled");
+	});
+
+	function search() {		
+		 var radioValue = $("input[name='optradio']:checked").val();
+         if(radioValue){
+           //  alert("Your have selected - " + radioValue);
+         }         
+		var number = $('#app-search').val();
+		var searchUrl = baseUrl + "/search/doctor/by/"+radioValue+"/" + number;
+		//alert(searchUrl);
+		var searchData = getJSON(searchUrl);
+		$('#app-search').val("");
+	}
+	
+	
+	
 
 	function getJSON(url) {
 		$.ajax({
@@ -211,7 +240,7 @@ p {
 				crossDomain : true,
 				timeout : 50000,
 				success : function(response) {
-					 location.reload(true);
+					 //location.reload(true);
 				},
 				error : function(xhr, status, error) {
 				}
@@ -292,8 +321,8 @@ p {
 			timeout : 100000,
 			success : function(response) {
 				console.log("SUCCESS: ", data);
-				if (!data.error)
-					location.reload(true);
+				//if (!data.error)
+					//location.reload(true);
 			},
 			error : function(xhr, status, error) {
 				console.log("ERROR: ", error);

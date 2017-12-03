@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.condigence.medicare.model.Patient;
 
-public interface PatientRepository extends CrudRepository<Patient, Integer> {
+public interface PatientRepository extends CrudRepository<Patient, Long> {
 
 	public List<Patient> findByFirstName(String firstName);
 

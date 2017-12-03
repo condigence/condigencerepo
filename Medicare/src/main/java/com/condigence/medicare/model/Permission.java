@@ -14,25 +14,25 @@ public class Permission {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "permission_id")
-	private int id;
+	private Long id;
 	@Column(name = "role_id")
-	private int roleId;
+	private Long roleId;
 	@Column(name = "permission_type")
 	private String permissionType;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public int getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(int roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 
@@ -48,7 +48,9 @@ public class Permission {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((permissionType == null) ? 0 : permissionType.hashCode());
+		result = prime * result + ((roleId == null) ? 0 : roleId.hashCode());
 		return result;
 	}
 
@@ -61,7 +63,20 @@ public class Permission {
 		if (getClass() != obj.getClass())
 			return false;
 		Permission other = (Permission) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (permissionType == null) {
+			if (other.permissionType != null)
+				return false;
+		} else if (!permissionType.equals(other.permissionType))
+			return false;
+		if (roleId == null) {
+			if (other.roleId != null)
+				return false;
+		} else if (!roleId.equals(other.roleId))
 			return false;
 		return true;
 	}

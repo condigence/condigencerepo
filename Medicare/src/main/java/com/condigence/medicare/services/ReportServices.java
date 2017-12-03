@@ -14,12 +14,8 @@ import org.springframework.stereotype.Service;
 
 import com.condigence.medicare.dto.ReportDTO;
 import com.condigence.medicare.model.Appointment;
-import com.condigence.medicare.model.Doctor;
-import com.condigence.medicare.model.Invoice;
-import com.condigence.medicare.model.Patient;
 import com.condigence.medicare.model.ServiceType;
 import com.condigence.medicare.repository.AppointmentRepository;
-import com.condigence.medicare.repository.InvoiceRepository;
 
 @Service
 public class ReportServices {
@@ -29,9 +25,7 @@ public class ReportServices {
 	@Autowired
 	AppointmentRepository appointmentRepository;
 	
-	@Autowired
-	InvoiceRepository invoiceRepository;
-	
+
 	
 	public List<ReportDTO> getStats(Timestamp timestamp, Timestamp timestamp1) {
 
@@ -69,7 +63,7 @@ public class ReportServices {
 	private Map<String,ReportDTO> getMapOfReport(List<Appointment> listOfAppointment) {
     Map<String,ReportDTO> abmap = new HashMap<String,ReportDTO>();
 		
-		int appointmentId = 0;
+		Long appointmentId = 0L;
 		
 		for(Appointment appointment : listOfAppointment){
 			ReportDTO report = new ReportDTO();
@@ -101,7 +95,7 @@ public class ReportServices {
 					}
 					
 					abmap.put(service.getName(),report);
-					appointmentId = appointment.getId();
+					appointmentId =appointment.getId();
 				}
 			}
 		}

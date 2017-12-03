@@ -6,9 +6,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.condigence.medicare.model.Invoice;
 
-public interface InvoiceRepository extends CrudRepository<Invoice, Integer>{
+public interface InvoiceRepository extends CrudRepository<Invoice, Long>{
 
-	Invoice findByAppointmentId(Integer appointmentId);
+	Invoice findByAppointmentId(Long appointmentId);
 	
 	
 	

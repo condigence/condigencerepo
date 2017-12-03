@@ -20,7 +20,7 @@ import org.springframework.data.annotation.Transient;
 
 public class UserDTO {
 
-	private int id;
+	private Long id;
 	
 	private String email;
 	
@@ -36,11 +36,11 @@ public class UserDTO {
 	
 	//private Set<RoleDTO> roles;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

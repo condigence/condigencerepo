@@ -1,6 +1,7 @@
 package com.condigence.medicare.dto;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 import com.condigence.medicare.model.Doctor;
@@ -10,13 +11,13 @@ import com.condigence.medicare.model.User;
 
 public class AppointmentDTO {
 
-	private Integer appointmentId;
+	private Long appointmentId;
 
 	private Patient patient;
 
 	private Doctor referredByDoctor;
 
-	private Set<ServiceType> serviceType;
+	private List<ServiceType> serviceType;
 
 	private User createdByUserId;
 
@@ -50,11 +51,11 @@ public class AppointmentDTO {
 
 	private String email;
 
-	public Integer getAppointmentId() {
+	public Long getAppointmentId() {
 		return appointmentId;
 	}
 
-	public void setAppointmentId(Integer appointmentId) {
+	public void setAppointmentId(Long appointmentId) {
 		this.appointmentId = appointmentId;
 	}
 
@@ -202,11 +203,11 @@ public class AppointmentDTO {
 		this.email = email;
 	}
 
-	public Set<ServiceType> getServiceType() {
+	public List<ServiceType> getServiceType() {
 		return serviceType;
 	}
 
-	public void setServiceType(Set<ServiceType> serviceType) {
+	public void setServiceType(List<ServiceType> serviceType) {
 		this.serviceType = serviceType;
 	}
 

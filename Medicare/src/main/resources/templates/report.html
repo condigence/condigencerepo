@@ -157,7 +157,7 @@ function populateData(response) {
                 });
                 
                 $( ".ranges" ).click(function() {
-              	  alert( "Handler for .click() called."+$('#reportrange span').text());
+              	  //alert( "Handler for .click() called."+$('#reportrange span').text());
               	url = urlPerfix + "/report/dates/"+$('#reportrange span').text();
               	var jsonData = getJSON(url);
 

@@ -46,7 +46,7 @@ public class ServiceTypeController {
 	}
 
 	@GetMapping(value = "services/{id}")
-	public ResponseEntity<?> getServiceType(@PathVariable("id") int id) {
+	public ResponseEntity<?> getServiceType(@PathVariable("id") Long id) {
 		logger.info("Fetching Service Type with id {}", id);
 		ServiceType servicetype = serviceTypeRepository.findOne(id);
 		if (servicetype == null) {
@@ -61,9 +61,14 @@ public class ServiceTypeController {
 	public ResponseEntity<List<ServiceType>> createServiceType(@RequestBody ServiceType servicetype,
 			UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Service Type : {}", servicetype);
+		//ServiceType service = serviceTypeRepository.findByName(servicetype.getName());
+//		if(null == service) {
+//			
+//		}
+		
 		serviceTypeRepository.save(servicetype);
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
-		return new ResponseEntity<List<ServiceType>>(serviceTypes, HttpStatus.OK);
+		return new ResponseEntity<List<ServiceType>>(serviceTypes, HttpStatus.IM_USED);
 	}
 
 	//
@@ -71,7 +76,7 @@ public class ServiceTypeController {
 	// // ------------------------------------------------
 	//
 	@PutMapping(value = "services/{id}")
-	public ResponseEntity<List<ServiceType>> updateServiceType(@PathVariable("id") int id,
+	public ResponseEntity<List<ServiceType>> updateServiceType(@PathVariable("id") Long id,
 			@RequestBody ServiceType serviceType) {
 		logger.info("Updating Service Type with id {}", id);
 		ServiceType serviceTypeNew = serviceTypeRepository.findOne(id);
@@ -88,7 +93,7 @@ public class ServiceTypeController {
 	 * This method will delete service type by it's id value.
 	 */
 	@DeleteMapping(value = "services/{id}")
-	public ResponseEntity<List<ServiceType>> deleteServiceType(@PathVariable("id") int id) {
+	public ResponseEntity<List<ServiceType>> deleteServiceType(@PathVariable("id") Long id) {
 		logger.info("Fetching & Deleting Service Type with id {}", id);
 
 		ServiceType serviceType = serviceTypeRepository.findOne(id);

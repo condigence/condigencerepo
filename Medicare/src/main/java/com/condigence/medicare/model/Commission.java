@@ -16,19 +16,22 @@ public class Commission implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "commission_id")
-	private Integer id;
+	private Long id;
 
 	@Column(name = "total_commission")
 	private long totalCommission;
 
 	@Column(name = "status") 
 	private String status;
+			
+	@Column(name = "appointment_id")
+	private Long appointmentId;
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((doctorId == null) ? 0 : doctorId.hashCode());
+		int result = 1;	
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + (int) (totalCommission ^ (totalCommission >>> 32));
@@ -44,11 +47,7 @@ public class Commission implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Commission other = (Commission) obj;
-		if (doctorId == null) {
-			if (other.doctorId != null)
-				return false;
-		} else if (!doctorId.equals(other.doctorId))
-			return false;
+		
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -64,14 +63,12 @@ public class Commission implements Serializable{
 		return true;
 	}
 
-	@Column(name = "doctor_id")
-	private Integer doctorId;
-
-	public Integer getId() {
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -91,12 +88,12 @@ public class Commission implements Serializable{
 		this.status = status;
 	}
 
-	public Integer getDoctorId() {
-		return doctorId;
+	public Long getAppointmentId() {
+		return appointmentId;
 	}
 
-	public void setDoctorId(Integer doctorId) {
-		this.doctorId = doctorId;
+	public void setAppointmentId(Long appointmentId) {
+		this.appointmentId = appointmentId;
 	}
 
 }

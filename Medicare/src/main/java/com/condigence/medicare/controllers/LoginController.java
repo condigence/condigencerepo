@@ -119,6 +119,7 @@ public class LoginController {
 
 		modelAndView.addObject("userRole", uRole);
 		modelAndView.addObject("userName", user.getName());
+		modelAndView.addObject("loggedInUserId", user.getId());
 		modelAndView.addObject("userEmail", user.getEmail());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 		modelAndView.addObject("superAdminMessage", "Content Available Only for Users with Super Admin Role");

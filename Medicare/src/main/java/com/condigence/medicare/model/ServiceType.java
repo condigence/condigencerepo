@@ -20,7 +20,7 @@ public class ServiceType implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "service_type_id")
-	private Integer id;
+	private Long id;
 
 	@Column(name = "service_type")
 	private String name;
@@ -41,11 +41,11 @@ public class ServiceType implements Serializable{
 	@Column(name = "created_by_user_id")
 	private Integer createdByUserId;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

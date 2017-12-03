@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <!-- div class="col-lg-6 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header" data-background-color="green">
                     <span class="glyphicon glyphicon-paperclip"></span>
@@ -43,7 +43,7 @@
                     <h3 class="title total-cancel-appointments"></h3>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header" data-background-color="orange">
@@ -55,6 +55,34 @@
                 </div>
             </div>
         </div>
+        
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+                <div class="card-content">
+                    <p class="category">Number of Patients</p>
+                    <h3 class="title toatal-patients">03</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+                <div class="card-content">
+                    <p class="category">Number of Roles</p>
+                    <h3 class="title toatal-roles">03</h3>
+                </div>
+            </div>
+        </div>
+        
+       
+        
+       
     </div>
     <hr/>
     
@@ -85,9 +113,10 @@
         $('.total-doctors').text(response.totalDoctors);
         $('.total-appointments').text(response.totalAppointments);
         $('.total-services').text(response.totalServices);
-        $('.total-cancel-appointments').text(response.cancelAppointments);
+      //  $('.total-cancel-appointments').text(response.cancelAppointments);
         $('.toatal-users').text(response.totalUsers);
         $('.toatal-patients').text(response.totalPatients);
+        $('.toatal-roles').text(response.totalRoles);
         //{"totalAppointments":"3","cancelAppointments":null,"totalUsers":"2","totalDoctors":"2","totalServices":"2","patients":"2"}
     }
 </script>

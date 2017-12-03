@@ -44,7 +44,7 @@ public class UserTypeController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping(value = "/roles/{id}")
-	public ResponseEntity<?> getUserType(@PathVariable("id") int id) {
+	public ResponseEntity<?> getUserType(@PathVariable("id") Long id) {
 		logger.info("Fetching User Type with id {}", id);
 		Role usertype = userTypeRepository.findOne(id);
 		if (usertype == null) {
@@ -60,13 +60,13 @@ public class UserTypeController {
 	public ResponseEntity<?> createUserType(@RequestBody Role usertype, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating User Type : {}", usertype);
 
-		if (userTypeRepository.exists(usertype.getId())) {
-			logger.error("Unable to create. A User Type with name {} already exist", usertype.getRole());
-			return new ResponseEntity(
-					new CustomErrorType(
-							"Unable to create. A User Type with name " + usertype.getRole()+ " already exist."),
-					HttpStatus.CONFLICT);
-		}
+//		if (userTypeRepository.exists(usertype.getId())) {
+//			logger.error("Unable to create. A User Type with name {} already exist", usertype.getRole());
+//			return new ResponseEntity(
+//					new CustomErrorType(
+//							"Unable to create. A User Type with name " + usertype.getRole()+ " already exist."),
+//					HttpStatus.CONFLICT);
+//		}
 		userTypeRepository.save(usertype);
 
 		//HttpHeaders headers = new HttpHeaders();
@@ -76,7 +76,7 @@ public class UserTypeController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping(value = "/roles/{id}")
-	public ResponseEntity<?> updateUserType(@PathVariable("id") int id, @RequestBody Role usertype) {
+	public ResponseEntity<?> updateUserType(@PathVariable("id") Long id, @RequestBody Role usertype) {
 		logger.info("Updating User Type with id {}", id);
 
 		Role newUserType = userTypeRepository.findOne(id);
@@ -95,7 +95,7 @@ public class UserTypeController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping(value = "/roles/{id}")
-	public ResponseEntity<?> deleteUserType(@PathVariable("id") int id) {
+	public ResponseEntity<?> deleteUserType(@PathVariable("id") Long id) {
 		logger.info("Fetching & Deleting User Type with id {}", id);
 
 		Role userType = userTypeRepository.findOne(id);

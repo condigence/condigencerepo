@@ -25,6 +25,7 @@ import com.condigence.medicare.model.Doctor;
 import com.condigence.medicare.repository.DoctorRepository;
 import com.condigence.medicare.util.CustomErrorType;
 
+
 @RestController
 @CrossOrigin(origins = { "*" }, maxAge = 4800, allowCredentials = "false")
 public class DoctorController {
@@ -47,7 +48,7 @@ public class DoctorController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping(value = "doctors/{id}")
-	public ResponseEntity<?> getDoctor(@PathVariable("id") int id) {
+	public ResponseEntity<?> getDoctor(@PathVariable("id") Long id) {
 		logger.info("Fetching Doctor with id {}", id);
 		Doctor doctor = doctorRepository.findOne(id);
 		if (doctor == null) {
@@ -67,7 +68,7 @@ public class DoctorController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping(value = "doctors/{id}")
-	public ResponseEntity<?> deleteDoctor(@PathVariable("id") int id) {
+	public ResponseEntity<?> deleteDoctor(@PathVariable("id") Long id) {
 		logger.info("Fetching & Deleting Doctor with id {}", id);
 
 		Doctor doctor = doctorRepository.findOne(id);

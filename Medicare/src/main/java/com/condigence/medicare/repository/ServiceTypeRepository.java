@@ -4,9 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.condigence.medicare.model.ServiceType;
 
-public interface ServiceTypeRepository extends CrudRepository<ServiceType, Integer> {
+public interface ServiceTypeRepository extends CrudRepository<ServiceType, Long> {
 
-	public ServiceType findById(String id);
+	public ServiceType findById(Long id);
 
 	public ServiceType findByName(String search);
 

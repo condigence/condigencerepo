@@ -18,17 +18,17 @@ public class Role implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="role_id")
-	private int id;
+	private Long id;
 	@Column(name="role")
 	private String role;
 	
 	@Column(name = "is_deleted")
 	private boolean isDeleted;	
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getRole() {
@@ -46,15 +46,12 @@ public class Role implements Serializable{
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
-	
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
@@ -67,7 +64,12 @@ public class Role implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Role other = (Role) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (isDeleted != other.isDeleted)
 			return false;
 		if (role == null) {
 			if (other.role != null)
@@ -76,6 +78,10 @@ public class Role implements Serializable{
 			return false;
 		return true;
 	}
+
+	
+	
+	
 	
 	
 }

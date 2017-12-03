@@ -27,7 +27,7 @@ public class Appointment implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "appointment_id")
-	private Integer id;
+	private Long id;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_id")
@@ -70,11 +70,11 @@ public class Appointment implements Serializable {
 	@Column(name = "slot")
 	private int slot;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

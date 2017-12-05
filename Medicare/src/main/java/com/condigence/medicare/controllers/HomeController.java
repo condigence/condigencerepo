@@ -71,6 +71,13 @@ public class HomeController {
 		return "print";
 	}
 	
+	
+	@RequestMapping("/test")
+	public String test() {
+		return "multiselect";
+	}
+	
+	
 	@RequestMapping("/add-appointment")
 	public String addAppointment() {
 		return "add-appointment";

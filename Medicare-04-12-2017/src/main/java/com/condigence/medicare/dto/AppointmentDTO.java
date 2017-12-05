@@ -1,7 +1,8 @@
 package com.condigence.medicare.dto;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.condigence.medicare.model.Doctor;
 import com.condigence.medicare.model.Patient;
@@ -17,8 +18,6 @@ public class AppointmentDTO {
 	private Doctor referredByDoctor;
 
 	private List<ServiceType> serviceType;
-	
-	private List<String> services;	
 
 	private User createdByUserId;
 
@@ -28,9 +27,9 @@ public class AppointmentDTO {
 
 	private boolean isCancled;
 
-	private String dateTime;
+	private Date dateTime;
 
-	private String modifiedDateTime;
+	private Date modifiedDateTime;
 
 	private String status;
 
@@ -92,27 +91,19 @@ public class AppointmentDTO {
 		this.isCancled = isCancled;
 	}
 
-	public String getDateTime() {
+	public Date getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(String dateTime) {
+	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
 	}
 
-	public String getModifiedDateTime() {
+	public Date getModifiedDateTime() {
 		return modifiedDateTime;
 	}
 
-	public List<String> getServices() {
-		return services;
-	}
-
-	public void setServices(List<String> services) {
-		this.services = services;
-	}
-
-	public void setModifiedDateTime(String modifiedDateTime) {
+	public void setModifiedDateTime(Date modifiedDateTime) {
 		this.modifiedDateTime = modifiedDateTime;
 	}
 

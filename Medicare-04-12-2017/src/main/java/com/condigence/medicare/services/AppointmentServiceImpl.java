@@ -70,7 +70,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 			appointmentDTO.setServiceType(new ArrayList<>(set));
 
-			appointmentDTO.setDateTime("2017-05-25 14:56:59");
+			appointmentDTO.setDateTime(appointment.getDateTime());
 			appointmentDTO.setSlot(appointment.getSlot());
 			appointmentDTO.setStatus(appointment.getStatus());
 			appointmentDTO.setToken(appointment.getToken());
@@ -82,7 +82,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			appointmentDTO.setCreatedByUserId(user);
 			appointmentDTO.setDeleted(appointment.isDeleted());
 			appointmentDTO.setModified(appointment.isModified());
-			appointmentDTO.setModifiedDateTime("2017-05-25 14:56:59");
+			appointmentDTO.setModifiedDateTime(appointment.getModifiedDateTime());
 			Patient patient = new Patient();
 			patient.setAddress(appointment.getPatient().getAddress());
 			patient.setAge(appointment.getPatient().getAge());
@@ -111,8 +111,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appointment.setReferredByDoctor(doctor);
 
 		Set<ServiceType> servicesSet = new HashSet<>();
-		for (String obj : appointmentDto.getServices()) {
-			ServiceType serviceType = serviceTypeRepository.findOne(Long.valueOf(obj));
+		for (ServiceType obj : appointmentDto.getServiceType()) {
+			ServiceType serviceType = serviceTypeRepository.findById(obj.getId());
 			servicesSet.add(serviceType);
 		}
 		appointment.setServices(servicesSet);
@@ -127,10 +127,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 		patient.setId(appointmentDto.getAppointmentId());
 		patient.setLastName(appointmentDto.getLastName());
 
-		//appointment.setDateTime("2017-05-25 14:56:59");
+		appointment.setDateTime(appointmentDto.getDateTime());
 		appointment.setDeleted(appointmentDto.isDeleted());
 		appointment.setModified(appointmentDto.isModified());
-		//appointment.setModifiedDateTime(appointmentDto.getModifiedDateTime());
+		appointment.setModifiedDateTime(appointmentDto.getModifiedDateTime());
 		appointment.setSlot(appointmentDto.getSlot());
 		appointment.setStatus(appointmentDto.getStatus());
 		appointment.setToken(appointmentDto.getToken());
@@ -182,7 +182,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 			appointmentDTO.setServiceType(new ArrayList<>(set));
 
-			appointmentDTO.setDateTime("2017-12-06 14:56:59");
+			appointmentDTO.setDateTime(appointment.getDateTime());
 			appointmentDTO.setSlot(appointment.getSlot());
 			appointmentDTO.setStatus(appointment.getStatus());
 			appointmentDTO.setToken(appointment.getToken());
@@ -194,7 +194,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			appointmentDTO.setCreatedByUserId(user);
 			appointmentDTO.setDeleted(appointment.isDeleted());
 			appointmentDTO.setModified(appointment.isModified());
-			appointmentDTO.setModifiedDateTime("2017-12-06 14:56:59");
+			appointmentDTO.setModifiedDateTime(appointment.getModifiedDateTime());
 			Patient patient = new Patient();
 			patient.setAddress(appointment.getPatient().getAddress());
 			patient.setAge(appointment.getPatient().getAge());
@@ -237,7 +237,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 			appointmentDTO.setServiceType(new ArrayList<>(set));
 
-			//appointmentDTO.setDateTime(appointment.getDateTime());
+			appointmentDTO.setDateTime(appointment.getDateTime());
 			appointmentDTO.setSlot(appointment.getSlot());
 			appointmentDTO.setStatus(appointment.getStatus());
 			appointmentDTO.setToken(appointment.getToken());
@@ -249,7 +249,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			appointmentDTO.setCreatedByUserId(user);
 			appointmentDTO.setDeleted(appointment.isDeleted());
 			appointmentDTO.setModified(appointment.isModified());
-			appointmentDTO.setModifiedDateTime("2017-12-06 14:56:59");
+			appointmentDTO.setModifiedDateTime(appointment.getModifiedDateTime());
 			Patient patient = new Patient();
 			patient.setAddress(appointment.getPatient().getAddress());
 			patient.setAge(appointment.getPatient().getAge());

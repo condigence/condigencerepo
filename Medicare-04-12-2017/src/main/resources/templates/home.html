@@ -195,27 +195,7 @@ body {
 }
 
 
-.checkbox input[type=checkbox] {
 
-    overflow: hidden;
-    left: 58px;
-    pointer-events: none;
-}
-
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
-     color: #fff; 
-     text-decoration: none; 
-     background-color: #337ab7; 
-     outline: 0; 
-}
-
-.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, .has-success.radio label, .has-success.radio-inline label {
-     color: #000; 
-}
-
-.fv-form-bootstrap .fv-icon-no-label {
-    top: 0px;
-}
 
 </style>
 
@@ -786,13 +766,28 @@ body {
 							</div>
 						</div>
 
-						
+						<!-- div class="form-group">
+							<label class="col-md-3 col-sm-12 control-label">Services</label>
+							<div class="col-md-9 col-sm-6">
+								<select class="form-control add_appointment_serviceTypeId"  style="border: 1px solid #eee;
+    cursor: pointer;"
+									val="">
+									<option value="0">All Test</option>
+									<option value="1">Blood Test</option>
+									<option value="2">X-ray</option>
+									<option value="3">ECG</option>
+								</select>
+							</div>
+						</div-->
 						
 						<div class="form-group">
   
    <div class="col-md-12 col-sm-12">
-        <select id="boot-multiselect-demo"   class="add_appointment_serviceTypeId  form-control" placeholder="Select Services" multiple="multiple"   >
-        					           
+        <select id="dates-field2"  class="add_appointment_serviceTypeId multiselect-ui form-control" placeholder="Select Services" multiple="multiple" name="add_appointment_serviceTypeId"  >
+         
+            <option value="1">X-ray</option>
+            <option value="2">Blood Test</option>
+            <option value="3">ECG</option>
         </select>
     </div>
 </div>					
@@ -849,7 +844,7 @@ body {
 							<div class="col-md-12 col-sm-12">
 
 								<input type='text' placeholder="Select date"
-									class="form-control add_appointment_dateTime" val=""  data-format="yyyy-MM-dd hh:mm:ss"  name="add_appointment_dateTime"
+									class="form-control add_appointment_dateTime" val="" name="add_appointment_dateTime"
 									id='datetimepicker2' />
 							</div>
 						</div>
@@ -872,7 +867,8 @@ body {
 								<select class="form-control add_appointment_referredByDoctorId" name="add_appointment_referredByDoctorId"  style="border: 1px solid #eee;
     cursor: pointer;" val="">
 									
-									
+									<option value="1">Dr. Vishal</option>
+									<option value="2">Dr. Sahil</option>
 								</select>
 							</div>
 						</div>
@@ -925,7 +921,7 @@ body {
 								<div class="form-group">
     <label class="col-md-3 col-sm-12 control-label" for="rolename">Services</label>
     <div class="col-md-9 col-sm-6">
-        <select id="dates-field2"  class="edit_appointment_serviceTypeId multiselect-ui form-control" multiple="multiple">
+        <select id="dates-field2"  class="add_appointment_serviceTypeId multiselect-ui form-control" multiple="multiple">
             <option value="0">All Test</option>
             <option value="1">Blood Test</option>
             <option value="2">X-ray</option>
@@ -1023,7 +1019,9 @@ body {
 								<select class="form-control edit_appointment_referredByDoctorId"
 									val="">
 
-									
+									<option value="1">Dr. Vishal</option>
+									<option value="2">Dr. Sahil</option>
+									<option value="3">Dr. Kripa</option>
 								</select>
 							</div>
 						</div>
@@ -1274,9 +1272,10 @@ body {
 							<img src="img/logo.png" />
 						</div>
 						<div class="col-md-6">
-							<p>27/97-C6,C7, FCC Building, Near Federal bank Tower</p>
+							<p>27/97-C6,C7, FCC Building, Near Fedeeral bank Tower</p>
 
 							<p>Mavoor Road, Calicut - 16</p>
+							<p>Phone : 04952740606</p>
 							<p>E-mail : home@medicarediagnostics.in</p>
 							<p>Website : www.medicarediagnostics.in</p>
 
@@ -1385,7 +1384,7 @@ body {
 
 			<!-- Modal content-->
 			<div class="modal-content" style="padding: 13px 10px;">
-<form class="form" style="max-width: none; width: 1005px;">
+
 				<div class="modal-body" style="text-align: center;">
 					<div class="row">
 						<div class="col-md-6">
@@ -1454,15 +1453,11 @@ body {
 						</div>
 					
 					
-</form>
+
 				</div>
 				<div class="modal-footer" style="text-align: center">
-					
-						
-					<button type="button" class="btn btn-primary btn-sm" id="create_pdf"  data-dismiss="modal">Print</button>
-						
-						
-						
+					<button type="button" class="btn btn-primary btn-sm"
+						data-dismiss="modal">Print</button>
 					<button type="button" class="btn btn-info btn-sm"
 						data-dismiss="modal">Cancel</button>
 				</div>
@@ -1972,34 +1967,38 @@ body {
 	});
 	
 	$(function() {
-	   /*  $('.multiselect-ui').multiselect({
+	    $('.multiselect-ui').multiselect({
 	        includeSelectAllOption: true
-	    }); */
+	    });
 	    
-		    	    
+
+	    	    
 	    
 	});
 	
 	
 	function populateSelect(){
 		//container, forEntity, forAttribute
+		var forentity = "roles";
 		
-		var container = "";
-		var forAttribute ="";
-		var forentity = "roles";		
 		var urlPerfix = baseUrl;
-		url = urlPerfix + "/"+forentity+"/";		
+		url = urlPerfix + "/"+forentity+"/";
+		//alert(url);
+		//var jsonData = getJSON(url);	
+		//alert(JSON.stringify(jsonData));
 		
 		$.ajax({
 			url : url,
 			type : "GET",
 			crossDomain : true,
 			timeout : 50000,
-			success : function(response) {				
+			success : function(response) {
+				
 				var optStr = "";
 				 for (i = 0; i < response.length; i++) {
 					 optStr = optStr + '<option selected="true" value="'+response[i].id+'">'+response[i].role+'</option>';
-				}					
+				}		
+			
 				$('#add_user_role').html(optStr);
 				$('#edit_user_role').html(optStr);				
 			},
@@ -2008,78 +2007,6 @@ body {
 		});		
 				
 	}
-	
-	
-	function populateDoctorSelect(){
-		//container, forEntity, forAttribute
-		
-		var container = "";
-		var forAttribute ="";
-		var forentity = "doctors";		
-		var urlPerfix = baseUrl;
-		url = urlPerfix + "/"+forentity+"/";		
-		
-		$.ajax({
-			url : url,
-			type : "GET",
-			crossDomain : true,
-			timeout : 50000,
-			success : function(response) {	
-				//alert(JSON.stringify(response));
-				var optStr = "";
-				 for (i = 0; i < response.length; i++) {
-					 optStr = optStr + '<option selected="true" value="'+response[i].id+'">'+response[i].name+'</option>';
-				}					
-				$('.add_appointment_referredByDoctorId').html(optStr);
-				//$('.edit_appointment_referredByDoctorId').html(optStr);
-				
-			},
-			error : function(xhr, status, error) {
-			}
-		});		
-				
-	}
-	
-	
-	function populateServiceMultiSelect(){
-		//container, forEntity, forAttribute
-		
-		var container = "";
-		var forAttribute ="";
-		var forentity = "services";		
-		var urlPerfix = baseUrl;
-		url = urlPerfix + "/"+forentity+"/";	
-		//alert(url);
-		
-		$.ajax({
-			url : url,
-			type : "GET",
-			crossDomain : true,
-			timeout : 50000,
-			success : function(response) {	
-				//alert(JSON.stringify(response));
-				var optStr = "";
-				 for (i = 0; i < response.length; i++) {
-					 optStr = optStr + '<option selected="true" value="'+response[i].id+'">'+response[i].name+'</option>';
-				}	
-				// alert(optStr);
-				$('#boot-multiselect-demo').html(optStr);
-				
-				 $('#boot-multiselect-demo').multiselect({
-			            includeSelectAllOption: true,
-			            buttonWidth: 250,
-			            enableFiltering: true
-			        });
-
-						
-			},
-			error : function(xhr, status, error) {
-			}
-		});	
-		
-			
-	}
-	 
 	 
 </script>
 </html>

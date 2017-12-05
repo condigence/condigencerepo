@@ -6,7 +6,7 @@
 				<div class="card-header" data-background-color="purple">
 					<h4 class="title">Appointments List</h4>
 					<!-- <p class="category">Recently book for appointment</p> -->
-					<button class="category btn btn-default btn-sm addBtnBg"  onclick="populateServiceMultiSelect();populateDoctorSelect();"
+					<button class="category btn btn-default btn-sm addBtnBg"
 						data-toggle="modal" data-target="#addAppo">Add Appointment</button>
 
 				</div>
@@ -257,7 +257,7 @@
 			//alert(response[i].appointmentId);
 			var services = "";
 			for(j = 0; j < response[i].serviceType.length; j++){
-				services = services +  "<li  style='margin-left: -40px;'>"+response[i].serviceType[j].name+"</li>"
+				services = services +  "<li  style='margin-left: -40px;'>"+response[i].serviceType[0].name+"</li>"
 			}			
 			
 		 var serviceStr = 	'<ul style="list-style-type:none">'							
@@ -315,7 +315,7 @@
 				
 
 					+ "<td>"
-					+ "<button id='edit_appointment_btn_" + id + "' class='hide btn-primary editbtn' data-toggle='modal'" + "data-target='#appoEditModal' title='Edit Appointment'>"
+					+ "<button id='edit_appointment_btn_" + id + "' class='btn-primary editbtn' data-toggle='modal'" + "data-target='#appoEditModal' title='Edit Appointment'>"
 					+ "<span class='glyphicon glyphicon-pencil'></span>"
 					+ "</button>"
 
@@ -333,11 +333,6 @@
 		$('.rowdata').html(rowDataStr);
 
 	}
-	
-	
-	
-	
-	
 </script>
 <style>
 .multiselect .dropdown-toggle .btn .btn-default{

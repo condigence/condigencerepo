@@ -21,12 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.condigence.medicare.dto.AppointmentDTO;
-import com.condigence.medicare.dto.Billing;
 import com.condigence.medicare.model.Appointment;
-import com.condigence.medicare.model.ServiceType;
 import com.condigence.medicare.repository.AppointmentRepository;
 import com.condigence.medicare.services.AppointmentService;
-import com.condigence.medicare.services.BillingService;
 import com.condigence.medicare.util.CustomErrorType;
 
 @RestController
@@ -39,9 +36,6 @@ public class AppointmentController {
 
 	@Autowired
 	AppointmentService appointmentService;
-
-	@Autowired
-	BillingService billingService;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping(value = "/appointments")
@@ -116,35 +110,6 @@ public class AppointmentController {
 		logger.info("Deleting All UserTypes");
 		appointmentRepository.deleteAll();
 		return new ResponseEntity<Appointment>(HttpStatus.NO_CONTENT);
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/bill/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Billing> createBilling(@PathVariable("id") Long id) {
-
-		logger.info("Fetching appointment of patient   with id {}", id);
-
-		Appointment appointment = appointmentRepository.findOne(id);
-
-		Billing billing = billingService.getBill(appointment);
-
-		System.out.println(" Patient Bill No :" + billing.getBillNo());
-		System.out.println(" Patient Name :" + billing.getName());
-		System.out.println(" Patient Bill Date :" + billing.getDate());
-
-		for (ServiceType s : billing.getListofServices()) {
-			System.out.println(" service  Name : " + s.getName() + " Service Price : " + s.getPrice());
-		}
-		System.out.println(" Patient  Total Price :" + billing.getTotalPrice());
-
-		if (billing == null) {
-			logger.error("Unable to delete. User Type with id {} not found.", id);
-			return new ResponseEntity(new CustomErrorType("Unable to delete. User Type with id " + id + " not found."),
-					HttpStatus.NOT_FOUND);
-		}
-		// appointmentRepository.delete(id);
-
-		return new ResponseEntity<Billing>(billing, HttpStatus.OK);
 	}
 
 }

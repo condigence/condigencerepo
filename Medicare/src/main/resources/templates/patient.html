@@ -69,7 +69,7 @@
 			timeout : 50000,
 			success : function(response) {
 				populateData(response);
-				console.log(response);
+				//console.log(response);
 				initClickEvent();
 
 			},
@@ -178,12 +178,12 @@
 				//alert(JSON.stringify(response[i].roles[0].role));
 
 				//var id = response[i].appointmentId;
-				
+				var a = i + 1;
 				rowDataStr = rowDataStr
 						+ "<tr id='row_" + response[i].id + "'>"
 						
 						+ "<td id='patient_id_" + response[i].id + "'>"
-						+ response[i].id
+						+ a
 						+ "</td>"
 						
 						+ "<td id='patient_firstname_" + response[i].id + "'>"
@@ -220,7 +220,7 @@
 						+ "<span class='glyphicon glyphicon-pencil'></span>"
 						+ "</button>"
 
-						+ "<button id='patient_delbtn_" + response[i].id + "' class='btn-primary delbtn' style='border: transparent; margin: 0.5%' title='Cancel User'>"
+						+ "<button id='patient_delbtn_" + response[i].id + "' class='hide btn-primary delbtn' style='border: transparent; margin: 0.5%' title='Cancel User'>"
 						+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
 
 						+ "</tr>";

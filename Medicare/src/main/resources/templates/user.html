@@ -86,13 +86,11 @@
 	function initClickEvent() {
 		
 		$(".addBtnBg").click(function() {
-			$(".form-control").val("");
+			//$(".form-control").val(" ");
 			
 		});
 		
-		//$('select option[value="2"]').attr("selected",true);
-		
-				
+						
 		
 	$(".editbtn").click(function() {				
 				var id = $(this).attr("id").split('_')[2];
@@ -251,8 +249,14 @@
 		}		
 		
 		function deleteUser(id){
-			 var id = id.split('_')[2];				
-			 alert('User Deleted!');				 
+			 var id = id.split('_')[2];		
+			 if(id == 1){
+				 alert('This User Can\'t be Deleted!');	
+			 }else{
+				 alert('User Deleted!');	
+			 }
+			 
+						 
 			 var urlPerfix = baseUrl;
 				url = urlPerfix + "/users/" + id;
 				callAjaxPostJSON(url, "DELETE", "", "");			 

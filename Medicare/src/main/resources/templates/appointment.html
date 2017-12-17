@@ -108,7 +108,7 @@
 
 		});
 
-		$(".add-appointment-btn")
+		/* $(".add-appointment-btn")
 				.click(
 						function() {
 
@@ -150,11 +150,11 @@
 
 							//alert(JSON.stringify(jsondata));
 						
-							var appointmentAddUrl = baseUrl + "/appointment/add";
+							var appointmentAddUrl = baseUrl + "/appointments";
 							callAjaxPostJSON(appointmentAddUrl, "POST", "", jsondata);
 							clearForm();
 						});
-
+ */
 		$(".editbtn").click(
 				function() {
 					var id = $(this).attr("id").split('_')[3];
@@ -258,7 +258,7 @@
 				success : function(response) {
 				
 					//for (i = 0; i < response.length; i++) {
-					console.log("hello  ,..."+response.listofServices[1]);
+					//console.log("hello  ,..."+response.listofServices[1]);
 					//}
 				
 					var patientName = response.name;
@@ -277,7 +277,7 @@
 					for (i = 0; i < listofService.length; i++) {
 						
 						var no = 1;
-						console.log(" i"+  no +" name :   "+listofService[0].name+"  price : "+listofService[0].price);
+						//console.log(" i"+  no +" name :   "+listofService[0].name+"  price : "+listofService[0].price);
 					listof = listof
 									+	"<div class='col-md-2'>"
 						            +		 "<p><span id='"+ no +"'>"+ no +"</span></p>"
@@ -426,7 +426,7 @@
 					+ "<span class='glyphicon glyphicon-print'></span>"
 					+ "</button>"
 
-					+ "<button id='delete_appointment_btn_" + id + "' class='btn-primary delbtn' title='Cancel Appointment'>"
+					+ "<button id='delete_appointment_btn_" + id + "' class='hide btn-primary delbtn' title='Cancel Appointment'>"
 					+ "<span class='glyphicon glyphicon-remove'></span>"
 					+ "</button></td>"
 

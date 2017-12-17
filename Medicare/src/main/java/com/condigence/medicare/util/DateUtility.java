@@ -15,7 +15,7 @@ public class DateUtility {
 		Date date = formatter.parse(dateStr);
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 		String yourDate = sdf.format(date);
-		System.out.println(yourDate);
+		//System.out.println(yourDate);
 
 	}
 	

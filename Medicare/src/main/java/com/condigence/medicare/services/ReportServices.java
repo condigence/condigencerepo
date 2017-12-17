@@ -41,16 +41,15 @@ public class ReportServices {
 		
 		
 	    for (String key : abmap.keySet()) {
-	    	logger.info("------------------------------------------------");
-	    	logger.info("Iterating or looping map using java5 foreach loop");
-	    	logger.info("key: " + key );
-	    	logger.info("DoctorCommission of value: " + abmap.get(key).getDoctorCommission());
-	    	logger.info("NoOfPatient of value: " + abmap.get(key).getNoOfPatient());
-	    	logger.info("NoOfRefDoctor of value: " + abmap.get(key).getNoOfRefDoctor());
-	    	logger.info("PerServiceCost of value: " + abmap.get(key).getPerServiceCost());
-	    	logger.info("ServiceName of value: " + abmap.get(key).getServiceName());
-	    	logger.info("TotalServiceCost of value: " + abmap.get(key).getTotalServiceCost());
-	    	logger.info("TotalAmount of value: " + abmap.get(key).getTotalAmount());
+//	    	logger.info("------------------------------------------------");
+//	    	logger.info("key: " + key );
+//	    	logger.info("DoctorCommission of value: " + abmap.get(key).getDoctorCommission());
+//	    	logger.info("NoOfPatient of value: " + abmap.get(key).getNoOfPatient());
+//	    	logger.info("NoOfRefDoctor of value: " + abmap.get(key).getNoOfRefDoctor());
+//	    	logger.info("PerServiceCost of value: " + abmap.get(key).getPerServiceCost());
+//	    	logger.info("ServiceName of value: " + abmap.get(key).getServiceName());
+//	    	logger.info("TotalServiceCost of value: " + abmap.get(key).getTotalServiceCost());
+//	    	logger.info("TotalAmount of value: " + abmap.get(key).getTotalAmount());
 	    	
 	    	listOfReport.add(abmap.get(key));
 	    	}

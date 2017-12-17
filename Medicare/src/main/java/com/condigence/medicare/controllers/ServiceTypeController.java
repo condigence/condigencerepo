@@ -47,10 +47,10 @@ public class ServiceTypeController {
 
 	@GetMapping(value = "services/{id}")
 	public ResponseEntity<?> getServiceType(@PathVariable("id") Long id) {
-		logger.info("Fetching Service Type with id {}", id);
+		//logger.info("Fetching Service Type with id {}", id);
 		ServiceType servicetype = serviceTypeRepository.findOne(id);
 		if (servicetype == null) {
-			logger.error("Service Type with id {} not found.", id);
+		//	logger.error("Service Type with id {} not found.", id);
 			return new ResponseEntity(new CustomErrorType("ServiceType with id " + id + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
@@ -60,7 +60,7 @@ public class ServiceTypeController {
 	@PostMapping(value = "/services")
 	public ResponseEntity<List<ServiceType>> createServiceType(@RequestBody ServiceType servicetype,
 			UriComponentsBuilder ucBuilder) {
-		logger.info("Creating Service Type : {}", servicetype);
+		//logger.info("Creating Service Type : {}", servicetype);
 		//ServiceType service = serviceTypeRepository.findByName(servicetype.getName());
 //		if(null == service) {
 //			
@@ -78,7 +78,7 @@ public class ServiceTypeController {
 	@PutMapping(value = "services/{id}")
 	public ResponseEntity<List<ServiceType>> updateServiceType(@PathVariable("id") Long id,
 			@RequestBody ServiceType serviceType) {
-		logger.info("Updating Service Type with id {}", id);
+		//logger.info("Updating Service Type with id {}", id);
 		ServiceType serviceTypeNew = serviceTypeRepository.findOne(id);
 
 		serviceTypeNew.setName(serviceType.getName());
@@ -94,7 +94,7 @@ public class ServiceTypeController {
 	 */
 	@DeleteMapping(value = "services/{id}")
 	public ResponseEntity<List<ServiceType>> deleteServiceType(@PathVariable("id") Long id) {
-		logger.info("Fetching & Deleting Service Type with id {}", id);
+		//logger.info("Fetching & Deleting Service Type with id {}", id);
 
 		ServiceType serviceType = serviceTypeRepository.findOne(id);
 		serviceType.setDeleted(true);
@@ -112,7 +112,7 @@ public class ServiceTypeController {
 
 	@DeleteMapping(value = "/services")
 	public ResponseEntity<List<ServiceType>> deleteAllServiceType() {
-		logger.info("Deleting All ServiceTypes");
+		//logger.info("Deleting All ServiceTypes");
 		serviceTypeRepository.deleteAll();
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
 		if (serviceTypes.isEmpty()) {

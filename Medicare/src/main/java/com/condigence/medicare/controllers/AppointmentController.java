@@ -128,14 +128,14 @@ public class AppointmentController {
 
 		Billing billing = billingService.getBill(appointment);
 
-		System.out.println(" Patient Bill No :" + billing.getBillNo());
-		System.out.println(" Patient Name :" + billing.getName());
-		System.out.println(" Patient Bill Date :" + billing.getDate());
+//		System.out.println(" Patient Bill No :" + billing.getBillNo());
+//		System.out.println(" Patient Name :" + billing.getName());
+//		System.out.println(" Patient Bill Date :" + billing.getDate());
 
 		for (ServiceType s : billing.getListofServices()) {
-			System.out.println(" service  Name : " + s.getName() + " Service Price : " + s.getPrice());
+			//System.out.println(" service  Name : " + s.getName() + " Service Price : " + s.getPrice());
 		}
-		System.out.println(" Patient  Total Price :" + billing.getTotalPrice());
+		//System.out.println(" Patient  Total Price :" + billing.getTotalPrice());
 
 		if (billing == null) {
 			logger.error("Unable to delete. User Type with id {} not found.", id);

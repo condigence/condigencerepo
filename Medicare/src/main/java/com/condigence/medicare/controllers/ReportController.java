@@ -30,7 +30,7 @@ public class ReportController {
 
 		Date date = new Date();
 
-		logger.info("heelo date for test current Date : " + date + " yesterday Date : " + yesterday());
+		//logger.info("heelo date for test current Date : " + date + " yesterday Date : " + yesterday());
 
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 		java.sql.Timestamp timestamp1 = new java.sql.Timestamp(lastYearSameDate().getTime());

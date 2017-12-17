@@ -105,11 +105,13 @@ function populateData(response) {
 		
 		 for (i = 0; i < response.length; i++) {
 
+			 var a = i + 1;
+			 
 			rowDataStr = rowDataStr
 					+ "<tr id='row_" + i + "'>"
 					
 					+ "<td id='service_Name_" + i + "'>"
-					+ i
+					+ a
 					+ "</td>"
 					
 					+ "<td class='text-danger' id='service_Name_" + i + "'>"

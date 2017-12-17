@@ -28,9 +28,17 @@ public class BillingServiceImpl  implements BillingService {
 		
 		for(ServiceType s: appointment.getServices()) {
 			totalPrice += s.getPrice(); 
+			System.out.println(" service "+s.getName());
+			System.out.println(" service price "+s.getPrice());
+			
 		}
 		
 		billing.setTotalPrice(totalPrice);
+		
+		System.out.println(" hello ...... "+ billing.getBillNo());
+		System.out.println(" hello ...... "+ billing.getName());
+		System.out.println(" hello ...... "+ billing.getTotalPrice());
+		System.out.println(" hello ...... "+ billing.getTotalPrice());
 		
 		return billing;
 	}

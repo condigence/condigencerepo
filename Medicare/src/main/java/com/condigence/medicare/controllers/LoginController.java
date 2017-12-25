@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.condigence.medicare.dto.ResetPasswordDTO;
 import com.condigence.medicare.model.Role;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.services.UserService;
@@ -78,6 +79,22 @@ public class LoginController {
 		return modelAndView;
 	}
 
+	@RequestMapping("/resetpassword")
+	public String resetPassword() {
+		return "reset-password";
+	}
+
+	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
+	public ModelAndView resetPassword(ResetPasswordDTO resetPasswordDTO) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		user.setPassword(resetPasswordDTO.getNewPassword());
+		userService.saveUser(user);
+		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -88,13 +105,13 @@ public class LoginController {
 		String uRole = "";
 		for (Role r : roles) {
 			String role = r.getRole();
-			isSuperAdmin = role.equals("SUPERADMIN") ? true : false;			
+			isSuperAdmin = role.equals("SUPERADMIN") ? true : false;
 		}
 
 		if (isSuperAdmin) {
-			uRole ="SUPERADMIN";
+			uRole = "SUPERADMIN";
 		} else {
-			uRole ="ADMIN";
+			uRole = "ADMIN";
 		}
 
 		logger.debug("Welcome {}, {}", app, global);
@@ -109,7 +126,7 @@ public class LoginController {
 		modelAndView.addObject("loggedInUserId", user.getId());
 		modelAndView.addObject("userEmail", user.getEmail());
 		modelAndView.addObject("superAdminMessage", "Content Available Only for Users with Super Admin Role");
-				
+
 		modelAndView.setViewName("home");
 		return modelAndView;
 	}

@@ -55,7 +55,7 @@ public class UserController {
 	 * @param ucBuilder
 	 * @return
 	 */
-	//@CrossOrigin(origins = "http://example.com")
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping(value = "/users")
 	public ResponseEntity<?> createUser(@RequestBody UserDTO userdto, UriComponentsBuilder ucBuilder) {
@@ -75,20 +75,45 @@ public class UserController {
 		user.setEmail(userdto.getEmail());
 		user.setActive(true);
 		Set<Role> roles = new HashSet<Role>();
-		//Role role = roleRepository.findByRole("ADMIN");
 		Role role = roleRepository.findByRole(userdto.getRole());
 		roles.add(role);
 		user.setRoles(roles);
-		
 		userRepository.save(user);
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(ucBuilder.path("/api/addAppointment/{id}").buildAndExpand(user.getId()).toUri());
-		// return new ResponseEntity<String>("User created", HttpStatus.CREATED);
-
 		List<User> users = (ArrayList<User>) userRepository.findAll();
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-
 	}
+	
+	
+//	
+//	@SuppressWarnings({ "rawtypes", "unchecked" })
+//	@PostMapping(value = "/resetpassword")
+//	public ResponseEntity<?> resetPassword(@RequestBody UserDTO userdto, UriComponentsBuilder ucBuilder) {
+//		logger.info("Creating User : {}", userdto);
+//
+//		if (StringUtils.isEmpty(userdto.getEmail()) && userRepository.findByEmail(userdto.getEmail()) != null) {
+//			logger.error("Unable to User. A User with name {} already	 exist", userdto.getName());
+//			return new ResponseEntity(
+//					new CustomErrorType("Unable to create. A Users with name " + userdto.getName() + " already exist."),
+//					HttpStatus.CONFLICT);
+//		}
+//
+//		User user = new User();
+//		user.setName(userdto.getName());
+//		user.setLastName(userdto.getLastName());
+//		user.setPassword(passwordEncoder.encode(userdto.getPassword()));
+//		user.setEmail(userdto.getEmail());
+//		user.setActive(true);
+//		Set<Role> roles = new HashSet<Role>();
+//		Role role = roleRepository.findByRole(userdto.getRole());
+//		roles.add(role);
+//		user.setRoles(roles);
+//		userRepository.save(user);
+//		List<User> users = (ArrayList<User>) userRepository.findAll();
+//		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+//	}
+//	
+	
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PutMapping(value = "/users/{id}")
@@ -103,12 +128,9 @@ public class UserController {
 					HttpStatus.NOT_FOUND);
 		}
 
-		user.setName(userdto.getName());		
+		user.setName(userdto.getName());
 		user.setLastName(userdto.getLastName());
-		//user.setPassword(passwordEncoder.encode(userdto.getPassword()));
 		user.setEmail(userdto.getEmail());
-	//	user.setActive(userdto.isActive());
-		
 		Set<Role> roles = new HashSet<Role>();
 		Role role = roleRepository.findByRole(userdto.getRole());
 		roles.add(role);
@@ -130,30 +152,24 @@ public class UserController {
 					new CustomErrorType("Unable to delete. User	 Type with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-		//userRepository.delete(id);	
-		if(user.getId() != 1) {
+		if (user.getId() != 1) {
 			user.setDeleted(true);
 		}
-		
-		userRepository.save(user);	
-		
+		userRepository.save(user);
 		List<User> users = (ArrayList<User>) userRepository.findAll();
-		return new ResponseEntity<List<User>>(users, HttpStatus.OK);		
+		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping(value = "/users")
 	public ResponseEntity<List<User>> listAllUsers(HttpServletResponse response) {
-
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-
-		List<User> userList = (ArrayList<User>) userRepository.findAll();
+		List<User> userList = (ArrayList<User>) userRepository.findAllByOrderByIdDesc();		
 		if (userList.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
-			// You many decide to return HttpStatus.NOT_FOUND
 		}
 		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
 	}
@@ -164,5 +180,4 @@ public class UserController {
 		userRepository.deleteAll();
 		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 	}
-
 }

@@ -8,6 +8,8 @@ import com.condigence.medicare.model.Doctor;
 
 public interface DoctorRepository extends CrudRepository<Doctor, Long> {
 	
+	public List<Doctor> findAllByOrderByIdDesc();
+	
 	public Doctor findOne(Long id);
 	
 	public List<Doctor> findByName(String name);

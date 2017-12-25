@@ -16,6 +16,11 @@ import org.hibernate.annotations.Where;
 @Where(clause = "is_deleted='false'")
 public class Doctor implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "doctor_id")

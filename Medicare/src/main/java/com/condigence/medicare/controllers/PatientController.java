@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -111,7 +109,7 @@ public class PatientController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping(value = "/patients")
 	public ResponseEntity<List<Patient>> listAllPatients() {
-		List<Patient> patientList = (ArrayList<Patient>) patientRepository.findAll();
+		List<Patient> patientList = (ArrayList<Patient>) patientRepository.findAllByOrderByIdDesc();
 		if (patientList.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND

@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.condigence.medicare.dto.AppointmentDTO;
 import com.condigence.medicare.dto.CommissionDTO;
 import com.condigence.medicare.model.Appointment;
 import com.condigence.medicare.model.Commission;

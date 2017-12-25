@@ -1,6 +1,5 @@
 package com.condigence.medicare.services;
 
-import java.util.Date;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;

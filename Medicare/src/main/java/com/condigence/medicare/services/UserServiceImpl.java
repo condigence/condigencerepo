@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.condigence.medicare.dto.UserDTO;
 import com.condigence.medicare.model.Role;
 import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.RoleRepository;
@@ -42,7 +41,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
-		Role userRole = roleRepository.findByRole("SUPERADMIN");
+		//TODO : FIX ME Vish
+		Role userRole = roleRepository.findByRole("ADMIN");
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}

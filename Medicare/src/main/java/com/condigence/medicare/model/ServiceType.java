@@ -17,6 +17,11 @@ import org.hibernate.annotations.Where;
 @Where(clause = "is_deleted='false'")
 public class ServiceType implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "service_type_id")

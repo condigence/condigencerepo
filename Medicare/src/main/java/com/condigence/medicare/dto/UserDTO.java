@@ -1,40 +1,22 @@
 package com.condigence.medicare.dto;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
-
 public class UserDTO {
 
 	private Long id;
-	
+
 	private String email;
-	
+
 	private String password;
-	
+
 	private String name;
-	
+
 	private String lastName;
-	
+
 	private boolean active;
-	
+
 	private String role;
-	
-	//private Set<RoleDTO> roles;
+
+	// private Set<RoleDTO> roles;
 
 	public Long getId() {
 		return id;
@@ -98,18 +80,19 @@ public class UserDTO {
 				+ lastName + ", active=" + active + ", role=" + role + "]";
 	}
 
-//	public Set<RoleDTO> getRoles() {
-//		return roles;
-//	}
-//
-//	public void setRoles(Set<RoleDTO> roles) {
-//		this.roles = roles;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "UserDTO [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", lastName="
-//				+ lastName + ", active=" + active + ", roles=" + roles + "]";
-//	}
+	// public Set<RoleDTO> getRoles() {
+	// return roles;
+	// }
+	//
+	// public void setRoles(Set<RoleDTO> roles) {
+	// this.roles = roles;
+	// }
+	//
+	// @Override
+	// public String toString() {
+	// return "UserDTO [id=" + id + ", email=" + email + ", password=" + password +
+	// ", name=" + name + ", lastName="
+	// + lastName + ", active=" + active + ", roles=" + roles + "]";
+	// }
 
 }

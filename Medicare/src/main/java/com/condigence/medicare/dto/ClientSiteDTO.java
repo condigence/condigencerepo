@@ -1,10 +1,14 @@
 package com.condigence.medicare.dto;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 
 public class ClientSiteDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 

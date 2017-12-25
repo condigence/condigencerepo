@@ -13,6 +13,11 @@ import javax.persistence.Table;
 @Table(name = "commission")
 public class Commission implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "commission_id")

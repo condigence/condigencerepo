@@ -10,6 +10,8 @@ import com.condigence.medicare.model.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {	
 	
+	public List<User> findAllByOrderByIdDesc();
+	
 	List<User> findByLastName(String name);
 
 	List<User> findByName(String name);

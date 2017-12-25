@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.condigence.medicare.model.ServiceType;
 import com.condigence.medicare.repository.ServiceTypeRepository;
-import com.condigence.medicare.util.CustomErrorType;
 
 @RestController
 @CrossOrigin(origins = { "*" }, maxAge = 4800, allowCredentials = "false")
@@ -38,10 +35,7 @@ public class ServiceTypeController {
 	 */
 	@GetMapping(value = "/services")
 	public ResponseEntity<List<ServiceType>> listAllServiceTypes() {
-		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
-		if (serviceTypes.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
-		}
+		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAllByOrderByIdDesc();
 		return new ResponseEntity<List<ServiceType>>(serviceTypes, HttpStatus.OK);
 	}
 
@@ -49,11 +43,11 @@ public class ServiceTypeController {
 	public ResponseEntity<?> getServiceType(@PathVariable("id") Long id) {
 		//logger.info("Fetching Service Type with id {}", id);
 		ServiceType servicetype = serviceTypeRepository.findOne(id);
-		if (servicetype == null) {
-		//	logger.error("Service Type with id {} not found.", id);
-			return new ResponseEntity(new CustomErrorType("ServiceType with id " + id + " not found"),
-					HttpStatus.NOT_FOUND);
-		}
+//		if (servicetype == null) {
+//		//	logger.error("Service Type with id {} not found.", id);
+//			return new ResponseEntity(new CustomErrorType("ServiceType with id " + id + " not found"),
+//					HttpStatus.NOT_FOUND);
+//		}
 		return new ResponseEntity<ServiceType>(servicetype, HttpStatus.OK);
 	}
 
@@ -102,9 +96,9 @@ public class ServiceTypeController {
 		// serviceTypeRepository.delete(serviceType.getId());
 
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
-		if (serviceTypes.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
-		}
+		// if (serviceTypes.isEmpty()) {
+		// return new ResponseEntity(HttpStatus.NO_CONTENT);
+		// }
 		return new ResponseEntity<List<ServiceType>>(serviceTypes, HttpStatus.OK);
 	}
 
@@ -115,9 +109,9 @@ public class ServiceTypeController {
 		//logger.info("Deleting All ServiceTypes");
 		serviceTypeRepository.deleteAll();
 		List<ServiceType> serviceTypes = (ArrayList<ServiceType>) serviceTypeRepository.findAll();
-		if (serviceTypes.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
-		}
+//		if (serviceTypes.isEmpty()) {
+//			return new ResponseEntity(HttpStatus.NO_CONTENT);
+//		}
 		return new ResponseEntity<List<ServiceType>>(serviceTypes, HttpStatus.OK);
 	}
 

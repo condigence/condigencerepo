@@ -30,9 +30,9 @@ public class ClientSiteController {
 	@GetMapping(value = "/clientsites")
 	public ResponseEntity<List<ClientSite>> listAllServiceTypes() {
 		List<ClientSite> clientsites = (ArrayList<ClientSite>) clientSiteRepository.findAll();
-		if (clientsites.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
-		}
+//		if (clientsites.isEmpty()) {
+//			return new ResponseEntity(HttpStatus.NO_CONTENT);
+//		}
 		return new ResponseEntity<List<ClientSite>>(clientsites, HttpStatus.OK);
 	}
 

@@ -1,7 +1,7 @@
 
-DROP SCHEMA IF EXISTS `visharya_medicare_db`;
+#DROP SCHEMA IF EXISTS `visharya_medicare_db`;
 
-create database visharya_medicare_db;
+#create database visharya_medicare_db;
 
 use visharya_medicare_db;
 

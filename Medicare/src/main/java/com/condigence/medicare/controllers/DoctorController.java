@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -35,7 +33,6 @@ public class DoctorController {
 	@Autowired
 	DoctorRepository doctorRepository;
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping(value = "/doctors")
 	public ResponseEntity<?> createDoctor(@RequestBody Doctor doctor, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Doctor : {}", doctor);
@@ -58,7 +55,6 @@ public class DoctorController {
 		return new ResponseEntity<Doctor>(doctor, HttpStatus.OK);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PutMapping(value = "doctors/{id}")
 	public ResponseEntity<?> updateDoctor(@PathVariable("id") int id, @RequestBody Doctor doctor) {
 		logger.info("Updating Doctor with id {}", id);
@@ -86,7 +82,7 @@ public class DoctorController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping(value = "/doctors")
 	public ResponseEntity<List<Doctor>> listAllAppointments() {
-		List<Doctor> doctorList = (ArrayList<Doctor>) doctorRepository.findAll();
+		List<Doctor> doctorList = (ArrayList<Doctor>) doctorRepository.findAllByOrderByIdDesc();
 		if (doctorList.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND

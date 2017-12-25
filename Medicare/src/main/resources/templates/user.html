@@ -6,23 +6,20 @@
 				<div class="card-header" data-background-color="purple">
 					<h4 class="title">Our Employee List</h4>
 					<!-- <p class="category">Choose NGO</p> -->
-					<button class="category btn btn-default btn-sm addBtnBg" onclick="populateSelect();" data-toggle="modal"
+					<button class="category btn btn-default btn-sm addBtnBg"
+						onclick="populateSelect();" data-toggle="modal"
 						data-target="#addUser">Add Employee</button>
 				</div>
 				<div style="padding: 2%">
-					<div>	
-									
+					<div>
+
 						<label><input type="radio" name="optradio" value="name">
 							Name</label>
-							<!-- label><input type="radio" name="optradio" value="email">
-							Email</label-->						
 					</div>
-					
-					
 
 					<input id="app-search" type="text" placeholder="Search By"
 						style="width: 75%; margin: 0px !important"> <input
-						type="button" class="search-btn" disabled="true"
+						type="button" class="search-btn" disabled
 						onclick="search();"
 						style="width: 20%; color: #fff margin: 0px !important"
 						value="Search">
@@ -46,26 +43,22 @@
 	var urlPerfix = baseUrl;
 	url = urlPerfix + "/users/";
 	var jsonData = getJSON(url);
-	
-	
-	
+
 	$('#app-search').click(function() {
 		$(".search-btn").removeAttr("disabled", "disabled");
 	});
 
-	function search() {		
-		 var radioValue = $("input[name='optradio']:checked").val();
-         if(radioValue){
-             //alert("Your have selected - " + radioValue);
-         }         
+	function search() {
+		var radioValue = $("input[name='optradio']:checked").val();
+		if (radioValue) {
+		}
 		var number = $('#app-search').val();
-		//alert(number);
-		var searchUrl = baseUrl + "/search/user/by/"+radioValue+"/" + number;
+		var searchUrl = baseUrl + "/search/user/by/" + radioValue + "/"
+				+ number;
 		var searchData = getJSON(searchUrl);
 		$('#app-search').val("");
 	}
-	
-		
+
 	function getJSON(url) {
 		$.ajax({
 			url : url,
@@ -81,170 +74,146 @@
 		});
 
 	}
-	
-	
+
 	function initClickEvent() {
-		
-		$(".addBtnBg").click(function() {
-			//$(".form-control").val(" ");
-			
+
+		$(".editbtn").click(function() {
+			var id = $(this).attr("id").split('_')[2];
+			var firstName = $("#user_name_" + id).text();
+			var lastName = $("#user_lastName_" + id).text();
+			var email = $("#user_email_" + id).text();
+
+			$(".edit_user_id").val(id);
+			$(".edit_user_name").val(firstName);
+			$(".edit_user_last_name").val(lastName);
+			$(".edit_user_email").val(email);
+
 		});
-		
-						
-		
-	$(".editbtn").click(function() {				
-				var id = $(this).attr("id").split('_')[2];
-				var firstName = $("#user_name_" + id).text();
-				var lastName = $("#user_lastName_" + id).text();
-				var email = $("#user_email_" + id).text();
-				//var role = $("#user_role_" + id).text();
-				
-									
-				$(".edit_user_id").val(id);
-				$(".edit_user_name").val(firstName);
-				$(".edit_user_last_name").val(lastName);
-				$(".edit_user_email").val(email);
-				
-			//	$('.edit_user_role option[value="'+role+'"]').attr("selected",true);
-			
-			});	
-	
-	
-	 $(".save-updated-user-btn").click(function(){		
-		 
-	
-		 var id = $("#edit_user_id").val();
-		var name = $("#edit_user_name").val();	
-		var lastName = $(".edit_user_last_name").val();
-		var email = $(".edit_user_email").val();
-	
-		//var role = $(".edit_user_role option:selected").text();	
-		
-		var role = "ADMIN";
-		var jsondata = {};
-		jsondata["id"]= id;
-		jsondata["name"]= name;
-		jsondata["lastName"]= lastName;
-		jsondata["email"]= email;
-		jsondata["role"]= role;		
 
-		JSON.stringify(jsondata);		
-		var urlPerfix = baseUrl;
-		url = urlPerfix + "/users/"+id;
-		callAjaxPostJSON(url, "PUT", "", jsondata);
-		clearForm();
-		
-	});
-	
-	 
-	}	
-	
-		
-		function populateData(response) {
-        
-			
-			var headerdataStr = "";
-			
-			
-			 headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Name</th>" + "<th>Last Name</th>"
-					+  "<th>E-mail</th>" +  "<th>Role</th>"; 
+		$(".save-updated-user-btn").click(function() {
 
-			$('.headerdata').html(headerdataStr);
+			var id = $("#edit_user_id").val();
+			var name = $("#edit_user_name").val();
+			var lastName = $(".edit_user_last_name").val();
+			var email = $(".edit_user_email").val();
 
-			var rowDataStr = ""; 
-	
-			 for (i = 0; i < response.length; i++) {
-				
-				//alert(JSON.stringify(response));
-				
-				var a = i +1;
+			var role = "ADMIN";
+			var jsondata = {};
+			jsondata["id"] = id;
+			jsondata["name"] = name;
+			jsondata["lastName"] = lastName;
+			jsondata["email"] = email;
+			jsondata["role"] = role;
 
+			JSON.stringify(jsondata);
+			var urlPerfix = baseUrl;
+			url = urlPerfix + "/users/" + id;
+			callAjaxPostJSON(url, "PUT", "", jsondata);
+			clearForm();
+		});
+
+	}
+
+	function populateData(response) {
+
+		var headerdataStr = "";
+
+		headerdataStr = headerdataStr + "<th>S.N.</th>" + "<th>Name</th>"
+				+ "<th>Last Name</th>" + "<th>E-mail</th>" + "<th>Role</th>";
+
+		$('.headerdata').html(headerdataStr);
+
+		var rowDataStr = "";
+
+		for (i = 0; i < response.length; i++) {
+
+			if (response[i].roles[0].role != "SUPERADMIN") {
+
+				var a = i + 1;
 				rowDataStr = rowDataStr
 						+ "<tr id='row_" + response[i].id + "'>"
-						
+
 						+ "<td id='user_id_" + response[i].id + "'>"
 						+ a
 						+ "</td>"
-						
+
 						+ "<td id='user_name_" + response[i].id + "'>"
 						+ response[i].name
 						+ "</td>"
-						
+
 						+ "<td id='user_lastName_" + response[i].id + "'>"
 						+ response[i].lastName
 						+ "</td>"
-						
+
 						+ "<td id='user_email_" + response[i].id + "'>"
 						+ response[i].email
 						+ "</td>"
-						
-										
+
 						+ "<td id='user_role_" + response[i].id + "'>"
 						+ response[i].roles[0].role
 						+ "</td>"
-						
+
 						+ "<td>"
 
-						+ "<button onclick='populateSelect()' id='user_editbtn_" + response[i].id + "' class='btn-primary editbtn' style='border: transparent; margin: 0.5%' data-toggle='modal'" + "data-target='#editUser' title='Edit User'>"
+						+ "<button onclick='populateSelect()' id='user_editbtn_"
+						+ response[i].id
+						+ "' class='btn-primary editbtn' style='border: transparent; margin: 0.5%' data-toggle='modal'"
+						+ "data-target='#editUser' title='Edit User'>"
 						+ "<span class='glyphicon glyphicon-pencil'></span>"
 						+ "</button>"
 
-						+ "<button   onclick='deleteUser(this.id)'   id='user_delbtn_" + response[i].id + "' class='hide btn-primary delbtn' style='border: transparent; margin: 0.5%' title='Cancel User'>"
-						+ "<span class='glyphicon glyphicon-remove'></span>" + "</button></td>"
+						+ "<button   onclick='deleteUser(this.id)'   id='user_delbtn_"
+						+ response[i].id
+						+ "' class='hide btn-primary delbtn' style='border: transparent; margin: 0.5%' title='Cancel User'>"
+						+ "<span class='glyphicon glyphicon-remove'></span>"
+						+ "</button></td>"
 
 						+ "</tr>";
-			} 
-			$('.rowdata').html(rowDataStr);
 
+			}
 		}
-	
-		
-		
-		function callAjaxPostJSON(urlMapping, callType, container, data) {
+		$('.rowdata').html(rowDataStr);
 
-			$.ajax({
-				type : callType,
-				contentType : "application/json",
-				url : urlMapping,
-				data : JSON.stringify(data),
-				crossDomain : true,
-				dataType : 'json',
-				timeout : 100000,
-				success : function(response) {
-					console.log("SUCCESS: ", response);
-					//if (!response.error)
-						//location.reload(true);
-					//window.location.reload();
-				},
-				error : function(xhr, status, error) {
-					console.log("ERROR: ", error);
+	}
 
-				},
-				done : function(e) {
-					console.log("DONE");
-				}
-			});
+	function callAjaxPostJSON(urlMapping, callType, container, data) {
 
+		$.ajax({
+			type : callType,
+			contentType : "application/json",
+			url : urlMapping,
+			data : JSON.stringify(data),
+			crossDomain : true,
+			dataType : 'json',
+			timeout : 100000,
+			success : function(response) {
+				console.log("SUCCESS: ", response);
+			},
+			error : function(xhr, status, error) {
+				console.log("ERROR: ", error);
+
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+
+	}
+
+	function clearForm() {
+		$(".form-control").val("");
+	}
+
+	function deleteUser(id) {
+		var id = id.split('_')[2];
+		if (id == 1) {
+			alert('This User Can\'t be Deleted!');
+		} else {
+			alert('User Deleted!');
 		}
-		
-		
-		function clearForm() {
-			$(".form-control").val("");
-		}		
-		
-		function deleteUser(id){
-			 var id = id.split('_')[2];		
-			 if(id == 1){
-				 alert('This User Can\'t be Deleted!');	
-			 }else{
-				 alert('User Deleted!');	
-			 }
-			 
-						 
-			 var urlPerfix = baseUrl;
-				url = urlPerfix + "/users/" + id;
-				callAjaxPostJSON(url, "DELETE", "", "");			 
-		}	
-		
-		
-	</script>	
+
+		var urlPerfix = baseUrl;
+		url = urlPerfix + "/users/" + id;
+		callAjaxPostJSON(url, "DELETE", "", "");
+	}
+</script>

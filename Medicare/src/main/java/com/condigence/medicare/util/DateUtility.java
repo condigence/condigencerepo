@@ -31,10 +31,10 @@ public class DateUtility {
 		return df.format(uDate);
 	}
 
-	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
-		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-		return sDate;
-	}
+//	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+//		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+//		return sDate;
+//	}
 
 	public static Timestamp getTimestamp(Date date) {
 		return date == null ? null : new java.sql.Timestamp(date.getTime());

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -37,7 +35,6 @@ public class CommissionController {
 	@Autowired
 	CommissionService commissionService;
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping(value = "/commissions")
 	public ResponseEntity<?> createCommission(@RequestBody Commission commission, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating commission : {}", commission);

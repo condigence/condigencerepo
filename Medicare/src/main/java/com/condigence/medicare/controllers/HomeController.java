@@ -24,6 +24,9 @@ public class HomeController {
 	public String dashboard() {
 		return "dashboard";
 	}
+	
+	
+	
 
 	@RequestMapping("/user")
 	public String user() {
@@ -80,11 +83,11 @@ public class HomeController {
 	
 	@RequestMapping("/test")
 	public String test() {
-		return "multiselect";
+		return "test";
 	}
 	
 	
-	@RequestMapping("/add-appointment")
+	@RequestMapping("/newappointment")
 	public String addAppointment() {
 		return "add-appointment";
 	}

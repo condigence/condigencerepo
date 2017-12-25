@@ -275,9 +275,9 @@ body {
 
 			<div class="sidebar-wrapper" style="background: aliceblue;">
 				<ul class="nav">
-					<!--  li class=" tab" id="add-appointment"><a> <span
+					<li class=" tab" ><a href="/medicare/newappointment"> <span
 							class="glyphicon glyphicon-paperclip"></span> New Appointment
-					</a></li-->
+					</a></li>
 
 					<li class="active tab" id="dashboard"><a> <span
 							class="glyphicon glyphicon-th-large"></span> Dashboard
@@ -304,7 +304,8 @@ body {
 
 					<li class="tab" id="commission"
 						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
-							class="glyphicon glyphicon-piggy-bank"></span> Doctors Commissions </a></li>
+							class="glyphicon glyphicon-piggy-bank"></span> Doctors
+							Commissions </a></li>
 
 					<li class="tab" id="user"
 						th:classappend="${!isSuperAdmin} ? 'hide' :  ''"><a><span
@@ -353,20 +354,23 @@ body {
 									<li><a href="#">1 new service added</a></li>
 
 								</ul></li> -->
+
+
+							<li style="margin-right: 25px;margin-top: 10px;color: #337ab7;">Welcome, Admin <span
+								th:text="${userName}"></span></li>
+
 							<li style="background: #82D4D4; color: white; border-radius: 20%"><a
 								href="#pablo" class="dropdown-toggle" data-toggle="dropdown"
 								href="#" style="padding: 20%;"> <img src="img/usr.png"
 									style="width: 25px; margin-right: 5px;" />
 							</a>
 								<ul class="dropdown-menu">
-									<li style="padding: 4%;"><a href=""
-										th:classappend="${userRole} ? 'hide' :  ''">Hello, Super
-											Admin <span th:text="${userName}"></span>
-									</a></li>
-									<li style="padding: 4%;"><a href=""
-										th:classappend="${userRole} ? '' :  'hide'">Hello, Admin <span
-											th:text="${userName}"></span>
-									</a></li>
+
+
+									<li style="padding: 4%;"><a href="/medicare/resetpassword"
+										th:classappend="${userRole} ? '' :  'hide'"><span
+											class="glyphicon glyphicon-cog"></span>Settings </a></li>
+
 
 
 									<li style="text-align: center; padding: 15px;">
@@ -826,7 +830,7 @@ body {
 								<!-- label class="col-md-3 col-sm-12 control-label">First Name </label-->
 								<div class="col-md-12 col-sm-12">
 									<input class="form-control pname add_appointment_firstName"
-										name="add_appointment_firstName" val="" type="text"
+										name="add_appointment_firstName"   type="text"
 										placeholder="Enter Patient Name">
 								</div>
 							</div>
@@ -835,7 +839,7 @@ body {
 
 								<div class="col-md-12 col-sm-12">
 									<input class="form-control pname add_appointment_lastName"
-										name="add_appointment_lastName" val="" type="text"
+										name="add_appointment_lastName"   type="text"
 										placeholder="Enter Patient Last Name">
 								</div>
 							</div>
@@ -847,7 +851,7 @@ body {
 								<div class="col-md-12 col-sm-12">
 									<select id="boot-multiselect-demo"
 										class="add_appointment_serviceTypeId  form-control"
-										placeholder="Select Services" multiple="multiple">
+										 multiple="multiple">
 
 									</select>
 								</div>
@@ -858,7 +862,7 @@ body {
 							<div class="form-group">
 
 								<div class="col-md-12 col-sm-12">
-									<input class="form-control add_appointment_age" val=""
+									<input class="form-control add_appointment_age"  
 										name="add_appointment_age" type="text"
 										placeholder="Enter patient Age">
 								</div>
@@ -867,7 +871,7 @@ body {
 							<div class="form-group">
 
 								<div class="col-md-12 col-sm-12">
-									<input class="form-control add_appointment_contact" val=""
+									<input class="form-control add_appointment_contact"  
 										type="text" placeholder="Mobile Number" name="pcontact">
 								</div>
 							</div>
@@ -875,7 +879,7 @@ body {
 							<div class="form-group">
 
 								<div class="col-md-12 col-sm-12">
-									<input class="form-control add_appointment_address" val=""
+									<input class="form-control add_appointment_address"  
 										name="add_appointment_address" type="text"
 										placeholder="Address">
 								</div>
@@ -885,7 +889,7 @@ body {
 
 								<div class="col-md-12 col-sm-12">
 
-									<select class="form-control add_appointment_gender" val=""
+									<select class="form-control add_appointment_gender"  
 										name="add_appointment_gender">
 										<option value="">Choose Gender</option>
 										<option value="M">M</option>
@@ -898,7 +902,7 @@ body {
 							<div class="form-group">
 
 								<div class="col-md-12 col-sm-12">
-									<input class="form-control add_appointment_email" val=""
+									<input class="form-control add_appointment_email"  
 										name="add_appointment_email" type="text" placeholder="Email">
 								</div>
 							</div>
@@ -909,7 +913,7 @@ body {
 								<div class="col-md-12 col-sm-12">
 
 									<input type='text' placeholder="Select date"
-										class="form-control add_appointment_dateTime" val=""
+										class="form-control add_appointment_dateTime"  
 										data-format="yyyy-MM-dd hh:mm:ss"
 										name="add_appointment_dateTime" id='datetimepicker2' />
 								</div>
@@ -920,7 +924,7 @@ body {
 							<div class="form-group">
 
 								<div class="col-md-12 col-sm-12">
-									<input class="form-control add_appointment_slot" val=""
+									<input class="form-control add_appointment_slot"  
 										name="add_appointment_slot" type="text"
 										placeholder="Enter Time Slot">
 								</div>
@@ -933,7 +937,7 @@ body {
 
 									<select class="form-control add_appointment_referredByDoctorId"
 										name="add_appointment_referredByDoctorId"
-										style="border: 1px solid #eee; cursor: pointer;" val="">
+										style="border: 1px solid #eee; cursor: pointer;"  >
 
 
 									</select>
@@ -979,7 +983,7 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Services</label>
 							<div class="col-md-9 col-sm-6">
 								<select class="form-control edit_appointment_serviceTypeId"
-									val="">
+									 >
 									<option value="1">Blood Test</option>
 									<option value="2">X-ray</option>
 									<option value="3">ECG</option>
@@ -1005,7 +1009,7 @@ body {
 							<div class="col-md-9 col-sm-6">
 
 								<input type='date' placeholder="Select date"
-									class="form-control edit_appointment_dateTime" val=""
+									class="form-control edit_appointment_dateTime"  
 									id='datetimepicker2' />
 							</div>
 						</div>
@@ -1013,7 +1017,7 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Name </label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control pname edit_appointment_firstName"
-									val="" type="text">
+									  type="text">
 							</div>
 						</div>
 
@@ -1022,14 +1026,14 @@ body {
 							</label>
 							<div class="col-md-9 col-sm-6">
 								<input class="form-control pname edit_appointment_lastName"
-									val="" type="text">
+									  type="text">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Age</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_appointment_age" val=""
+								<input class="form-control edit_appointment_age"  
 									type="text">
 							</div>
 						</div>
@@ -1038,14 +1042,14 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Contact
 								No </label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control pcontact" val="" type="text">
+								<input class="form-control pcontact"   type="text">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Address</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_appointment_address" val=""
+								<input class="form-control edit_appointment_address"  
 									type="text">
 							</div>
 						</div>
@@ -1054,7 +1058,7 @@ body {
 							<label class="col-md-3 col-sm-12 control-label">Gender</label>
 							<div class="col-md-9 col-sm-6">
 
-								<select class="form-control edit_appointment_gender" val="">
+								<select class="form-control edit_appointment_gender"  >
 									<option value=""></option>
 
 									<option value="M">M</option>
@@ -1067,7 +1071,7 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Email</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_appointment_email" val=""
+								<input class="form-control edit_appointment_email"  
 									type="text">
 							</div>
 						</div>
@@ -1075,7 +1079,7 @@ body {
 						<div class="form-group">
 							<label class="col-md-3 col-sm-12 control-label">Slot</label>
 							<div class="col-md-9 col-sm-6">
-								<input class="form-control edit_appointment_slot" val=""
+								<input class="form-control edit_appointment_slot"  
 									type="text">
 							</div>
 						</div>
@@ -1087,7 +1091,7 @@ body {
 							<div class="col-md-9 col-sm-6">
 
 								<select class="form-control edit_appointment_referredByDoctorId"
-									val="">
+									 >
 
 
 								</select>
@@ -1361,7 +1365,7 @@ body {
 							</div>
 							<div class="col-md-4">
 								<p>
-									Bill Date & Time : <span id="billingDate"></span>
+									Bill Date and Time : <span id="billingDate"></span>
 								</p>
 							</div>
 							<!-- <div class="col-md-4">
@@ -1772,7 +1776,7 @@ body {
 								<label class="col-md-3 col-sm-12 control-label">Name</label>
 								<div class="col-md-9 col-sm-6">
 									<input class="form-control add_doctor_name"
-										name="add_doctor_name" type="type" value=""
+										name="add_doctor_name"  value=""
 										placeholder="Doctor Name">
 								</div>
 							</div>

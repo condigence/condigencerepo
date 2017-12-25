@@ -1,6 +1,5 @@
 package com.condigence.medicare.dto;
 
-import java.util.Date;
 import java.util.Set;
 
 import com.condigence.medicare.model.ServiceType;

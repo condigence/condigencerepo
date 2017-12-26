@@ -9,22 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.condigence.medicare.dto.AppointmentDTO;
 import com.condigence.medicare.dto.Billing;
 import com.condigence.medicare.model.Appointment;
+import com.condigence.medicare.model.User;
 import com.condigence.medicare.repository.AppointmentRepository;
 import com.condigence.medicare.services.AppointmentService;
 import com.condigence.medicare.services.BillingService;
+import com.condigence.medicare.services.UserService;
+import com.condigence.medicare.util.AppProperties;
 import com.condigence.medicare.util.CustomErrorType;
+import com.condigence.medicare.util.GlobalProperties;
 
 /**
  * @author Vishnustiwary@gmail.com
@@ -44,9 +52,25 @@ public class AppointmentController {
 
 	@Autowired
 	AppointmentService appointmentService;
+	
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	BillingService billingService;
+	
+	private AppProperties app;
+	private GlobalProperties global;
+
+	@Autowired
+	public void setApp(AppProperties app) {
+		this.app = app;
+	}
+
+	@Autowired
+	public void setGlobal(GlobalProperties global) {
+		this.global = global;
+	}
 
 	/**
 	 * @param appointment
@@ -136,6 +160,22 @@ public class AppointmentController {
 					HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Billing>(billing, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping("/newappointment")
+	public ModelAndView newAppointment() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		User user =  userService.findUsersByEmail(currentPrincipalName).get(0);
+		modelAndView.setViewName("new-appointment");
+		modelAndView.addObject("host", app.getHost());
+		modelAndView.addObject("port", app.getPort());
+		modelAndView.addObject("userName", user.getName());
+		modelAndView.addObject("loggedInUserId", user.getId());
+		modelAndView.addObject("userEmail", user.getEmail());
+		return modelAndView;
 	}
 
 }

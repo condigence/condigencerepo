@@ -195,7 +195,7 @@ select.form-control {
 .form-group .help-block {
 	margin-top: -30px;
 	font-size: 11px;
-	margin-left: 330px;
+	
 }
 
 .modal-footer {
@@ -808,8 +808,7 @@ body {
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content"
-				style="padding: 13px 10px; height: 600px; overflow: auto">
+			<div class="modal-content">
 
 				<form name="addAppointment" id="addAppointmentform">
 
@@ -820,24 +819,25 @@ body {
 							style="color: white; padding-bottom: 2%; text-align: center">New
 							Appointment</h4>
 					</div>
-					<div class="modal-body" style="text-align:;">
+					<div class="modal-body" style="text-align:center;">
 
 						<div class="row">
 
 
 
 							<div class="form-group">
-								<!-- label class="col-md-3 col-sm-12 control-label">First Name </label-->
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">First Name </label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control pname add_appointment_firstName"
 										name="add_appointment_firstName"   type="text"
 										placeholder="Enter Patient Name">
 								</div>
-							</div>
+							</div>						
+							
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Last Name </label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control pname add_appointment_lastName"
 										name="add_appointment_lastName"   type="text"
 										placeholder="Enter Patient Last Name">
@@ -847,8 +847,8 @@ body {
 
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Service Type </label>
+								<div class="col-md-9 col-sm-9">
 									<select id="boot-multiselect-demo"
 										class="add_appointment_serviceTypeId  form-control"
 										 multiple="multiple">
@@ -860,8 +860,8 @@ body {
 
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Age </label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control add_appointment_age"  
 										name="add_appointment_age" type="text"
 										placeholder="Enter patient Age">
@@ -869,16 +869,16 @@ body {
 							</div>
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Contact </label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control add_appointment_contact"  
 										type="text" placeholder="Mobile Number" name="pcontact">
 								</div>
 							</div>
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Address </label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control add_appointment_address"  
 										name="add_appointment_address" type="text"
 										placeholder="Address">
@@ -886,8 +886,8 @@ body {
 							</div>
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Gender</label>
+								<div class="col-md-9 col-sm-9">
 
 									<select class="form-control add_appointment_gender"  
 										name="add_appointment_gender">
@@ -900,8 +900,8 @@ body {
 							</div>
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Email</label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control add_appointment_email"  
 										name="add_appointment_email" type="text" placeholder="Email">
 								</div>
@@ -909,8 +909,8 @@ body {
 
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Date </label>
+								<div class="col-md-9 col-sm-9">
 
 									<input type='text' placeholder="Select date"
 										class="form-control add_appointment_dateTime"  
@@ -922,8 +922,8 @@ body {
 
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Slot </label>
+								<div class="col-md-9 col-sm-9">
 									<input class="form-control add_appointment_slot"  
 										name="add_appointment_slot" type="text"
 										placeholder="Enter Time Slot">
@@ -932,8 +932,8 @@ body {
 
 
 							<div class="form-group">
-
-								<div class="col-md-12 col-sm-12">
+								<label class="col-md-3 col-sm-9 control-label">Ref. Doc</label>
+								<div class="col-md-9 col-sm-9">
 
 									<select class="form-control add_appointment_referredByDoctorId"
 										name="add_appointment_referredByDoctorId"
@@ -1480,7 +1480,7 @@ body {
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header"
-					style="background-color: #84B54D; color: white; text-align: center; padding: 0px">
+					style="background-color: #337ab7; color: white; text-align: center; padding: 0px">
 					<h3 style="font-weight: bold">Daily Reports</h3>
 					<!-- <h4 class="modal-title"
 					style="color: white; padding-bottom: 2%; text-align: center">Daily
@@ -1495,8 +1495,8 @@ body {
 								11/June/17</p>
 						</div>
 						<div class="table-responsive">
-							<table class="table " style="border: 1px solid #84B54D;">
-								<thead style="background-color: #84B54D; color: white">
+							<table class="table " style="border: 1px solid #337ab7;">
+								<thead style="background-color: #337ab7; color: white">
 									<tr>
 										<th>S.No</th>
 										<th>Service</th>
@@ -1510,24 +1510,24 @@ body {
 								</thead>
 								<tbody>
 									<tr>
-										<td class="reportTd">1</td>
-										<td class="reportTd">KUB</td>
-										<td class="reportTd">500</td>
-										<td class="reportTd">5</td>
-										<td class="reportTd">2500</td>
-										<td class="reportTd">5</td>
-										<td class="reportTd">1250</td>
-										<td class="reportTd">1250</td>
+										<td class=" ">1</td>
+										<td class=" ">KUB</td>
+										<td class=" ">500</td>
+										<td class=" ">5</td>
+										<td class=" ">2500</td>
+										<td class=" ">5</td>
+										<td class=" ">1250</td>
+										<td class=" ">1250</td>
 									</tr>
 									<tr>
-										<td class="reportTd">2</td>
-										<td class="reportTd">ANOMALY</td>
-										<td class="reportTd">1200</td>
-										<td class="reportTd">10</td>
-										<td class="reportTd">12000</td>
-										<td class="reportTd">8</td>
-										<td class="reportTd">4800</td>
-										<td class="reportTd">7200</td>
+										<td class=" ">2</td>
+										<td class=" ">ANOMALY</td>
+										<td class=" ">1200</td>
+										<td class=" ">10</td>
+										<td class=" ">12000</td>
+										<td class=" ">8</td>
+										<td class=" ">4800</td>
+										<td class=" ">7200</td>
 									</tr>
 
 								</tbody>

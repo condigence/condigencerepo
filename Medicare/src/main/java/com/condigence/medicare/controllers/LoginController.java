@@ -80,8 +80,19 @@ public class LoginController {
 	}
 
 	@RequestMapping("/resetpassword")
-	public String resetPassword() {
-		return "reset-password";
+	public ModelAndView resetPassword() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		User user = userService.findUsersByEmail(currentPrincipalName).get(0);
+		modelAndView.setViewName("reset-password");
+		modelAndView.addObject("host", app.getHost());
+		modelAndView.addObject("port", app.getPort());
+		modelAndView.addObject("userName", user.getName());
+		modelAndView.addObject("loggedInUserId", user.getId());
+		modelAndView.addObject("userEmail", user.getEmail());
+		return modelAndView;
+
 	}
 
 	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)

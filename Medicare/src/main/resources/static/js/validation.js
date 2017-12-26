@@ -13,7 +13,7 @@ $('#addAppointmentform').formValidation({
 					message : 'Patient First Name is required'
 				},
 				regexp : {
-					regexp : /^[a-zA-Z0-9_\.]+$/,
+					regexp : /^[a-zA-Z0-9_\s\.]+$/,
 					message : 'Patient First Name is Invalid!'
 				}
 			}
@@ -24,7 +24,7 @@ $('#addAppointmentform').formValidation({
 					message : 'Patient Last Name is required'
 				},
 				regexp : {
-					regexp : /^[a-zA-Z0-9_\.]+$/,
+					regexp : /^[a-zA-Z0-9_\s\.]+$/,
 					message : 'Patient Last Name is Invalid'
 				}
 			}
@@ -34,6 +34,10 @@ $('#addAppointmentform').formValidation({
 			validators : {
 				notEmpty : {
 					message : 'Age is required'
+				},				
+				regexp : {
+					message : 'Invalid Age',
+					regexp : /^\d{2}$/
 				}
 			}
 		},
@@ -42,10 +46,14 @@ $('#addAppointmentform').formValidation({
 				notEmpty : {
 					message : 'Contact is required'
 				},
+				
 				regexp : {
-					message : 'The phone number is Invalid',
-					regexp : /^[0-9\s\-()+\.]+$/
+					message : 'Invalid phone number',
+					regexp : /^\d{10}$/
 				}
+				
+				
+				
 			}
 		},
 		add_appointment_address : {
@@ -68,7 +76,7 @@ $('#addAppointmentform').formValidation({
 					message : 'Email is required'
 				},
 				emailAddress : {
-					message : 'Not a valid email address'
+					message : 'Invalid email address'
 				}
 			}
 		},
@@ -255,7 +263,7 @@ $('#addDoctorform')
 								regexp : {
 
 									regexp : /^[a-zA-Z0-9_\s\.]+$/,
-									message : 'The username can only consist of alphabetical, number, dot and underscore'
+									message : 'Invalid username'
 								}
 							}
 						},
@@ -265,7 +273,7 @@ $('#addDoctorform')
 									message : 'The contact No. is required'
 								},
 								regexp : {
-									message : 'The phone number can only contain the digits, spaces, -, (, ), + and .',
+									message : 'Invalid  phone number',
 									regexp : /^\d{10}$/
 								}
 							}
@@ -276,7 +284,7 @@ $('#addDoctorform')
 									message : 'The email is required'
 								},
 								emailAddress : {
-									message : 'The input is not a valid email address'
+									message : 'Invalid email'
 								}
 							}
 						},
@@ -373,7 +381,7 @@ $('#addServiceform')
 									message : 'The Service price is required'
 								},
 								regexp : {
-									message : 'The commission can only contain the digits, spaces, -, (, ), + and .',
+									message : 'Invalid commission',
 									regexp : /^[0-9\s\-()+\.]+$/
 								}
 							}
@@ -434,10 +442,4 @@ $('#addUserRoleform').formValidation({
 	}
 
 });
-
-
-
-/////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////
 

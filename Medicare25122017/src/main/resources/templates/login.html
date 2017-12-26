@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Medicare Login</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet"
+	href="css/bootstrap.min.css">
+<script
+	src="js/jquery-3.1.0.min.js"></script>
+<script
+	src="js/bootstrap.min.js"></script>
+	
+	
+	
+<style type="text/css">
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #080808;
+}
+
+
+
+</style>	
+	
+	
+</head>
+
+<body style="background: aliceblue;">
+	<!--form th:action="@{/registration}" method="get">
+		<button class="btn btn-md btn-warning btn-block" style="background:#2A6294;border-color:#fff" type="Submit">Go
+			To Registration Page</button>
+	</form-->
+	
+	<div>
+		<nav class="navbar navbar-inverse" style="background-color: #337ab7; border-color: #337ab7;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Medicare Diganostic</a>
+				</div>
+				<ul class="nav navbar-nav" >
+					<li class="active"><a href="#">Login</a></li>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Help</a></li>
+				</ul>
+				
+				
+			</div>
+		</nav>
+		
+	</div>
+	
+	
+
+	<div class="container">
+		
+		<form th:action="@{/login}" method="POST" class="form-signin">
+			<h3 class="form-signin-heading" th:text="Welcome"></h3>
+			<br /> <input type="text" id="email" name="email"
+				th:placeholder="Email" class="form-control" /> <br /> <input
+				type="password" th:placeholder="Password" id="password"
+				name="password" class="form-control" /> <br />
+
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email or Password
+					invalid, please verify</p>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" name="Submit"
+				value="Login" type="Submit" th:text="Login"></button>
+		</form>
+	</div>
+	<script type="text/javascript">
+	
+	$( document ).ready(function() {
+		$("#email").val("");
+		$("#password").val("");
+	});
+	</script>
+</body>
+</html>

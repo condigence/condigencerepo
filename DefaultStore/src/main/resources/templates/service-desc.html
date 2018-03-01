@@ -1,0 +1,170 @@
+<!--Main Content-->
+<div class="container">
+	<div class="product-desc-layout">
+		<!--Section: Blog v.1-->
+		<section class="py-5 px-5 text-center text-lg-left">
+			<!--Grid row-->
+			<div class="row">
+				<!--Grid column-->
+				<div class="col-lg-5 col-xl-5 pb-3">
+					<!--Featured image-->
+					<div class="view overlay hm-white-slight rounded z-depth-2">
+						<img
+							src=""
+							alt="Sample image for first version of blog listing"
+							class="img-fluid"> <a>
+							<div class="mask"></div>
+						</a>
+					</div>
+				</div>
+				<!--Grid column-->
+
+				<!--Grid column-->
+				<div class="col-lg-7 col-xl-7 text-left">
+					<h5 class="mb-4 font-bold dark-grey-text">
+						<strong id="ser-desc-name-text"></strong>
+					</h5>
+					<p class="font-content-Normal font-size-regular"
+						id="ser-desc-exp-text"></p>
+					<p
+						class="font-content-Normal font-size-regular font-content-justify"
+						id="ser-desc-desc-text"></p>
+					<p class="font-content-Normal font-size-regular">
+						Service Charge : &#8377;<span id="ser-desc-charge-text"></span><sup>
+							/hr</sup>
+					</p>
+					<div class="font-content-Normal font-size-regular pb-3">
+						Rating :
+						<fieldset class="rating">
+							<input type="radio" id="star5" name="rating" value="5" /> <label
+								class="full" for="star5" title="Awesome - 5 stars"></label> <input
+								type="radio" id="star4half" name="rating" value="4 and a half" />
+							<label class="half" for="star4half"
+								title="Pretty good - 4.5 stars"></label> <input type="radio"
+								id="star4" name="rating" value="4" /> <label class="full"
+								for="star4" title="Pretty good - 4 stars"></label> <input
+								type="radio" id="star3half" name="rating" value="3 and a half" />
+							<label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+							<input type="radio" id="star3" name="rating" value="3" /> <label
+								class="full" for="star3" title="Meh - 3 stars"></label> <input
+								type="radio" id="star2half" name="rating" value="2 and a half" />
+							<label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+							<input type="radio" id="star2" name="rating" value="2" /> <label
+								class="full" for="star2" title="Kinda bad - 2 stars"></label> <input
+								type="radio" id="star1half" name="rating" value="1 and a half" />
+							<label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+							<input type="radio" id="star1" name="rating" value="1" /> <label
+								class="full" for="star1" title="Sucks big time - 1 star"></label>
+							<input type="radio" id="starhalf" name="rating" value="half" />
+							<label class="half" for="starhalf"
+								title="Sucks big time - 0.5 stars"></label>
+						</fieldset>
+					</div>
+					<a id="234242"
+						class="btn btn-primary btn-sm mb-3 book-selected-service">Book
+						Now</a>
+					<!--<a class="btn btn-warning btn-sm mb-3">Add to Cart</a>-->
+				</div>
+				<!--Grid column-->
+
+			</div>
+			<!--Grid row-->
+
+			<hr class="mb-3 mt-3 pb-3">
+
+			<!--Grid row-->
+			<div class="row pl-3 pr-3 service-review-container"></div>
+			<!--Grid row-->
+		</section>
+		<!--Section: Blog v.1-->
+		<button type="button" class="btn grey btn-sm d-block  mx-auto"
+			data-toggle="collapse" data-target="#demo">Show More</button>
+	</div>
+</div>
+<!--/.Main Content-->
+
+<script>
+    
+    var serDesc = $("#selected-service-desc").val();	
+	var serExp = $("#selected-service-exp").val();	
+	
+	var serviceId = $("#selected-service-id").val();
+	
+	var serviceName = $("#selected-service-name").val();
+	var serviceAmount = $("#selected-service-amount").val();
+	
+	var serAppDate = $("#selected-service-date").val();	
+	
+	$("#ser-desc-desc-text").text(serDesc);
+	$("#ser-desc-exp-text").text(serExp);
+	
+	$("#ser-desc-name-text").text(serviceName);
+	$("#ser-desc-charge-text").text(serviceAmount);
+	
+	
+	// Need to change the hard code data
+	var serviceReviewsURL = serviceURL + "/serviceReviewComments";		
+	$.ajax({
+		url : serviceReviewsURL,
+		type : "GET",
+		crossDomain : true,
+		timeout : 50000,
+		success : function(response) {			
+			populateServicesReviews(reviewsComments);					
+			
+		},
+		error : function(xhr, status, error) {
+			console.log("ERROR: ", error);
+		}
+	});
+	
+	
+	function populateServicesReviews(response){
+		var container = "service-review-container";
+		
+		var servicereviews = "";
+		for (var i = 0; i < response.length; i++) {	
+			
+			var servicereview = `<div class="media w-100" id="`+response[i].reviewCommentsId+`">
+		        <img class="d-flex mr-3 rounded-circle" src="" alt="Generic placeholder image">
+		        <div class="media-body text-left">
+		            <h6 class="d-flex mb-0 mt-0 font-content-bold">
+		                <div class="mr-auto p-2">`+response[i].customerName+`</div>
+		                <div class="p-2 font-size-light font-content-Light justify-content-end justify-content-end" id="service-review-date"></div>
+		            </h6>
+		            <div class="mb-0 pb-1 font-content-Normal">
+		                <fieldset class="rating">
+		                    <input type="radio" id="star5" name="rating" value="5" />
+		                    <label class="full" for="star5" title="Awesome - 5 stars"></label>
+		                    <input type="radio" id="star4half" name="rating" value="4 and a half" />
+		                    <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+		                    <input type="radio" id="star4" name="rating" value="4" />
+		                    <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+		                    <input type="radio" id="star3half" name="rating" value="3 and a half" />
+		                    <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+		                    <input type="radio" id="star3" name="rating" value="3" />
+		                    <label class="full" for="star3" title="Meh - 3 stars"></label>
+		                    <input type="radio" id="star2half" name="rating" value="2 and a half" />
+		                    <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+		                    <input type="radio" id="star2" name="rating" value="2" />
+		                    <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+		                    <input type="radio" id="star1half" name="rating" value="1 and a half" />
+		                    <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+		                    <input type="radio" id="star1" name="rating" value="1" />
+		                    <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+		                    <input type="radio" id="starhalf" name="rating" value="half" />
+		                    <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+		                </fieldset>
+		                <small>`+response[i].reviewRating+`</small>
+		            </div>
+		            <p class="mb-0 font-content-Normal font-content-justify"><small>`+response[i].reviewComments+`</small></p>
+		            <hr class="mb-3 mt-3 pb-3">
+		        </div>
+		    </div>`;			
+			servicereviews = servicereviews + servicereview;			
+		}		
+		
+		$("."+container).html(servicereviews);			
+	}
+    
+    </script>

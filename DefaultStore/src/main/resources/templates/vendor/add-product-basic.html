@@ -1,0 +1,271 @@
+<div class="row body_content" >
+	<div class="col-sm-6">
+		<div class="dropzone_image">
+			<!-- <form enctype="multipart/form-data" action="upload" method="POST"
+				class="dropzone" id="fileUploadForm" name="fileUploadForm">
+				<span id="fileUploadStatus"> </span>
+			</form> -->
+			
+			
+			<form enctype="multipart/form-data" action="upload" method="POST"
+				class="dropzone dropzone_height" id="fileUploadForm" name="fileUploadForm">
+				<span id="fileUploadStatus"> </span>
+			</form>
+			
+			
+			
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<p class="title">Title
+		<p>
+			<input type="text" id="productTitle" name="productTitle"
+				class="input_title" placeholder="Title of product">
+		<p class="version">Version
+		<p>
+			<input type="text" id="productVersion" name="productVersion"
+				class="input_version" placeholder="Type here...">
+		<p class="description">Description
+		<p>
+			<textarea class="textarea_description" rows=""
+				name="productDescription" id="productDescription"
+				placeholder="Description"></textarea>
+	</div>
+
+</div>
+<!--product images and its details ends here-->
+<!-- select cetogory starts here-->
+<div class="clear-line-sm"></div>
+<div class="row">
+	<div class="col-sm-6">
+		<p class="category">Category</p>
+		<!-- <input type="text" class="input_category" placeholder="Choose Category">-->
+		<!-- select class="select_category">
+			<option value="volvo">Select</option>
+			<option value="saab">Business Model</option>
+			<option value="saab">Business Model1</option>
+			<option value="opel">Business Model2</option>
+			<option value="audi">Business Model3</option>
+		</select-->
+
+		<select id="categoryId" name="categoryId" class="select_category">
+		</select>
+
+
+	</div>
+	<div class="col-sm-6"></div>
+</div>
+<!-- select cetogory ends here-->
+<div class="clear-line-sm"></div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="row">
+			<div class="col-sm-6">
+				<p class="requirement_heading">Requirements</p>
+			</div>
+			<div class="col-sm-6">
+				<img src="images/deleterequirement.png" class="deleteIcn_req hvr-grow" /> <img
+					src="images/icnedit.png" class="edit_icon" id="edit_icon_req hvr-grow" /> <img
+					src="images/addrequirement.png" class="addIcn_req hvr-grow" />
+			</div>
+		</div>
+
+
+		<!--Product Requirement starts here-->
+
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table">
+					<thead class="tab_req_heading">
+						<tr>
+							<th>Name</th>
+							<th>Reference</th>
+							
+						</tr>
+					</thead>
+					<tbody class="pro_req_write" style="display: none;">
+						<tr class="border_write_pro_detail">
+							<td><input type="text" class="Pro_nameDate"
+								id="product_req_name" placeholder="Requirement Name"></td>
+							<td><input type="text" class="pro_reference"
+								id="product_req_ref" placeholder="Reference"><span class="check_close_icon">
+									<div>
+										<img src="images/icncheck.png" class="check_icon" />
+									</div>
+									<div>
+										<img src="images/icn_close.png" class="delete_icon" />
+									</div>
+							</span></td>
+						</tr>
+					</tbody>
+					<tbody style="display: none" class="pro_req_read">
+						<tr class="view_pro_detail">
+							<td>Name</td>
+							<td>https://dribbble.com/shots/4162533-Join…</td>
+							
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--Product Dependency ends here-->
+	</div>
+	<div class="col-sm-6">
+		<div class="row">
+			<div class="col-sm-6">
+				<p class="requirement_heading">Dependency</p>
+			</div>
+			<div class="col-sm-6">
+				<img src="images/deleterequirement.png" class="deleteIcn_dep" /> <img
+					src="images/icnedit.png" class="edit_icon" id="edit_icon_dep" /> <img
+					src="images/addrequirement.png" class="addIcn_dep" />
+			</div>
+		</div>
+
+		<!--Product Dependency  starts here-->
+
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table">
+					<thead class="tab_req_heading">
+						<tr>
+							<th>Name</th>
+							<th>Reference</th>
+						
+						</tr>
+					</thead>
+					<tbody class="pro_dep_write" style="display: none;">
+						<tr class="border_write_pro_detail">
+							<td><input type="text" class="Pro_nameDate"
+								id="product_dep_name" placeholder="Requirement Name"></td>
+							<td><input type="text" class="pro_reference"
+								id="product_dep_ref" placeholder="Reference"><span class="check_close_icon"><span class="check_close_icon">
+									<div>
+										<img src="images/icncheck.png" class="check_icon_dep" />
+									</div>
+									<div>
+										<img src="images/icn_close.png" class="delete_icon_dep" />
+									</div>
+							</span></td>
+						</tr>
+					</tbody>
+					<tbody style="display: none" class="pro_dep_read">
+						<tr class="view_dep_detail">
+							<td>Name</td>
+							<td>https://dribbble.com/shots/4162533-Join…</td>
+							
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--Dependency Requirement ends here-->
+	</div>
+</div>
+<script type="text/javascript">
+
+
+var myDropzone = new Dropzone("#fileUploadForm");
+
+	populateCategorySelect();
+	
+	
+	$('.create_product_btn').click(function(e) {
+		var container = "product-content";
+		var productURL = baseURL + "/products";
+ 
+		var productRequirements = [];		
+		var productRequirement = {};		
+		productRequirement["requirementName"] = $('#product_req_name').val();
+		productRequirement["requirementRefrence"] = $('#product_req_ref').val();	
+		productRequirements.push(productRequirement);
+		
+		var productDependencies = [];
+		var productDependency = {};
+		productDependency["dependencyName"]=  $('#product_dep_name').val();
+		productDependency["dependencyRefrence"]=  $('#product_dep_ref').val();		
+		productDependencies.push(productDependency);		
+
+		var productData = {
+			"productTitle" : $('#productTitle').val(),
+			"productVersion" : $('#productVersion').val(),
+			"productDescription" : $('#productDescription').val(),
+		    "categoryId" : $('#categoryId').find(":selected").val(),
+			//"categoryId" : "84fd80b5-dd79-4539-956c-381cebb6e6e2",
+			"productRequirements" : productRequirements,
+			"productDependencies" : productDependencies
+
+		};
+		alert(JSON.stringify(productData));
+		callAjaxPostJSON(productURL, "POST", container, productData);
+		alert("Success");
+	});
+
+	$(".addIcn_req").click(function() {
+		$(".pro_req_write").show();
+		$(".pro_req_read").hide();
+
+	});
+	$(".addIcn_dep").click(function() {
+		$(".pro_dep_write").show();
+		$(".pro_dep_read").hide();
+
+	});
+	$(".delete_icon").click(function() {
+		$(".pro_details").hide();
+
+	});
+	$(".check_icon").click(function() {
+		$(".pro_req_read").show();
+		$(".pro_req_write").hide();
+		$("#edit_icon_req").hide();
+
+	});
+	$(".delete_icon_dep").click(function() {
+		$(".pro_dep_write").hide();
+
+	});
+
+	$(".check_icon_dep").click(function() {
+		$(".pro_dep_write").hide();
+		$(".pro_dep_read").show();
+		$("#edit_icon_dep").hide();
+
+	});
+
+	/* $(".navbar a").on("click", function() {
+		$(this).addClass("active");
+	}); */
+
+	$(".view_pro_detail").hover(function() {
+		$("#edit_icon_req").show();
+	}, function() {
+		$("#edit_icon_req").hide();
+	});
+
+	$(".view_dep_detail").hover(function() {
+		$("#edit_icon_dep").show();
+	}, function() {
+		$("#edit_icon_dep").hide();
+	});
+
+	$(".has-sub").hover(function() {
+		$(".body_content").addClass("body_contentIndex");
+	}, function() {
+		$(".body_content").removeClass("body_contentIndex");
+	});
+
+	$(".view_pro_detail").on("click", function() {
+		$(".pro_req_write").show();
+		$(".pro_req_read").hide();
+	});
+
+	$(".view_dep_detail").on("click", function() {
+		$(".pro_dep_write").show();
+		$(".pro_dep_read").hide();
+	});
+</script>

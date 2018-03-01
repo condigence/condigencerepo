@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Digit Market Vendor_Reset password</title>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="service/css/bootstrap.min.css">
+		
+		<!-- Latest compiled Stylesheet libraries -->
+		<link rel="stylesheet" href="service/css/myStyles.css"/>
+		<link rel="stylesheet" href="service/css/mediaStyles.css"/>
+		<link rel="stylesheet" href="service/css/hover.css" />
+		
+		<!-- side nav bar Stylesheet -->
+		<link href="service/dist/vertical-responsive-menu.min.css" rel="stylesheet">
+	
+		
+	</head>
+	<body class="bodyBG">
+	   <!--header bar starts here-->
+      	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse productNav">
+			<div class="row productHeaderRow">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header_nav_border">
+					<img src="service/images/logo.png" class="Pro_page_logo" />
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 user_detasils_border">
+					<div class="row">
+						<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+							<p class="userName" th:text="${userName}">Lohith Kumar</p>
+							<!-- <img src="images/icninbox.png" class="inbox" /> 
+							<span class="notification_num">3</span> -->
+						</div>
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<div class="dropdown">
+								<img src="service/images/icnprofile.png" class="user_profile dropdown-toggle" data-toggle="dropdown" />
+								<ul class="dropdown-menu userDetail_dropdown">
+									<li class="">
+										<form action="login.html" method="get"
+											class="vendor-logout-form">
+											 <button type="Submit" class="vendor-logout-btn">
+												<img src="service/images/icnlogout.png" class="logout" />
+											</button> 
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+        
+        <!--header bar ends here-->
+       
+        <div class="row productMainBody">
+            <!--side nav bar starts here-->
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				  
+				<button type="button" id="toggleMenu" class="toggle_menu">
+					<i class="fa fa-bars"></i>
+				</button>
+				  
+				<nav class="vertical_nav side_nav_bar sideNavDiv">
+					<ul id="js-menu" class="menu side_nav_bar_ul">
+						<li class="menu--item side_nav_bar_menu"  onclick="getAppointmentInfo();">
+							<a  class="menu--link" title="Dashboard"  style="text-decoration: none;">
+							  <img src="service/images/icndashboard.png" class="side_nav_bar_icon"/>
+							  <span class="navbar_menu_txt">Dashboard</span>
+							</a>
+						</li>    
+						<li class="menu--item side_nav_bar_menu default_selected_menu" onclick="getAddService('list');">
+							<a  class="menu--link" title="Services" style="text-decoration: none;">
+							  <img src="service/images/icnproducts.png" class="side_nav_bar_icon"/>
+							  <span class="navbar_menu_txt">Services</span>
+							</a>
+						</li> 
+						
+					</ul>
+						
+					<button id="collapse_menu" class="collapse_menu">
+					</button>
+
+				</nav>
+            </div>
+            <!--side nav bar ends here-->		
+		
+			
+            <div class="col-sm-10 service-main-container">            
+            
+            </div>           
+            
+               
+             
+		</div>
+       
+		<!-- Latest compiled and minified jQuery -->
+		<script src="service/js/jquery.min.js"></script>
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="service/js/bootstrap.min.js"></script>
+		<script src="service/dist/vertical-responsive-menu.min.js"></script>
+		 <script src="service/dist/bootstrap-imageupload.js"></script>
+		 <script src="service/js/app.js"></script>
+		 <script th:inline="javascript">
+		 
+        	/*<![CDATA[*/ 
+			    var port = [[${port}]];
+			    var host = [[${host}]]; 
+			    var loggedInUserId = [[${loggedInUserId}]];  
+			    var loggedInUserName = [[${userName}]];
+			    
+			    
+			    var dmAdminURL = "http://172.30.66.149:8000";
+			    var dmServiceURL = "http://localhost:8085/DefaultStoreService";
+			    var dmWebURL = "http://localhost:8089/DefaultStore";
+			    
+			    
+				//var baseURL = "http://localhost:8089/DigitMarketVendor";				
+			//	$('.userName').html(loggedInUserName);
+			
+			var container = "service-main-container";
+			var dashboardURL = dmWebURL + "/get-service-list-page";
+			callAjax(dashboardURL, container, "GET");	
+			
+			
+			
+			
+			$.ajax({
+				url : dmServiceURL+"/servicedetails",
+				type : "GET",
+				crossDomain : true,
+				timeout : 50000,
+				success : function(response) {
+					console.log("SUCCESS: ", response);
+					
+					$.each(response, function(i){
+						var str = '<tr class="service_table_content">'						   
+					    			+'<td><label class="container_check" id="" ><input type="checkbox" class="check"/><span class="checkbox_td"></span></label></td>'
+					   				+'<td>' + this.serviceName + '</td>'
+					    			+'<td>category</td>'
+					    			+'<td>1</td>'
+					    			+'<td><span><select class="form-control status_dropdown" id="">'
+					    			+'<option>Active</option><option>Hide</option><option>Disable</option></select></span><span>'
+					    			+'<img src="images/icnedit.png" class="service_editicn" style="display:none"/></span></td>'					
+					   				+'</tr>';
+					   				
+					    $('#listOfServices').append(str);
+					});
+				},
+				error : function(xhr, status, error) {
+					console.log("ERROR: ", error);
+				}
+			});
+			
+			
+			
+			
+			
+			
+			
+			 /*]]>*/
+   			</script>
+		<script>
+           $(document).ready(function(){
+		   
+				<!-- upload file script function starts here -->
+				function bs_input_file() {
+					$(".input-file").before(
+						function() {
+							if ( ! $(this).prev().hasClass('input-ghost') ) {
+								var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
+								element.attr("name",$(this).attr("name"));
+								element.change(function(){
+									element.next(element).find('input').val((element.val()).split('\\').pop());
+								});
+								$(this).find("button.btn-choose").click(function(){
+									element.click();
+								});
+								$(this).find("button.btn-reset").click(function(){
+									element.val(null);
+									$(this).parents(".input-file").find('input').val('');
+								});
+								$(this).find('input').css("cursor","pointer");
+								$(this).find('input').mousedown(function() {
+									$(this).parents('.input-file').prev().click();
+									return false;
+								});
+								return element;
+							}
+						}
+					);
+				}
+				$(function() {
+					bs_input_file();
+				});
+				<!-- upload file script function ends here -->
+				
+					<!-- photo upload starts here -->
+					var $imageupload = $('.imageupload');
+					$imageupload.imageupload();
+
+					$('#imageupload-disable').on('click', function() {
+						$imageupload.imageupload('disable');
+						$(this).blur();
+					})
+
+					$('#imageupload-enable').on('click', function() {
+						$imageupload.imageupload('enable');
+						$(this).blur();
+					})
+
+					$('#imageupload-reset').on('click', function() {
+						$imageupload.imageupload('reset');
+						$(this).blur();
+					});
+				<!-- photo upload ends here -->			
+				
+				
+				
+			});
+           
+           
+           
+           function saveService(){
+        	
+					 
+					 alert("Save Service!");
+					 
+						var container = "";
+						var serviceURL = dmServiceURL + "/servicedetails";
+						
+						var serviceDetailsData = {
+							"serviceName" : $('#serviceName').val(),
+							"serviceOfferingDescription" : $('#serviceOfferingDescription').val(),
+							"serviceBillingRatePerHour" : $('#serviceBillingRatePerHour').val(),
+							"experienceInMonths" : $('#experienceInMonths').val(),							
+							"providerFirstName" : $('#providerFirstName').val(),
+							"providerLastName" : $('#providerLastName').val(),
+							"providerContact_Number" : $('#providerContact_Number').val(),
+							"providerAlternativeContactNumber" : $('#providerAlternativeContactNumber').val(),
+							"providerHomeAddress" : $('#providerHomeAddress').val(),						
+							"providerWorkAddress" : $('#providerWorkAddress').val(),
+							"providerEmail" : $('#providerEmail').val(),						
+						   // "categoryId" : $('#categoryId').find(":selected").val()
+							"categoryId" : "84fd80b5-dd79-4539-956c-381cebb6e6e2"					
+						};
+						//alert(JSON.stringify(serviceDetailsData));					
+						callAjaxPostJSON(serviceURL, "POST", container, serviceDetailsData);
+						alert("Service Created Successfully");
+						window.location.reload();
+				
+				
+        	   
+           }
+           
+           
+           
+           
+           function getAddService(page){
+        	   var pageToLoad = "";
+        	   if(page == "list"){
+        		   pageToLoad = "/get-service-list-page";
+        		   
+        	   }else{
+        		   pageToLoad = "/get-service-add-page";
+        		   
+        	   }
+        	   
+        		var container = "service-main-container";
+    			var dashboardURL = dmWebURL + pageToLoad;
+    			callAjax(dashboardURL, container, "GET");	
+           }
+           
+           
+           function getAppointmentInfo(){
+        	   
+        	   alert("dgfdgd");
+        	   
+           }
+           
+           
+           </script>
+	</body>
+</html>

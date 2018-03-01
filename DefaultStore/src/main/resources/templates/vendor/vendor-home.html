@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Digit Market- Home</title>
+
+<!-- Latest compiled and minified jQuery -->
+<script src="js/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript implementation-->
+<script src="js/app.js"></script>
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+
+<link rel="stylesheet"
+	href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Latest compiled Stylesheet libraries -->
+<link rel="stylesheet" href="css/myStyles.css" />
+<link rel="stylesheet" href="css/mediaStyles.css" />
+<link rel="stylesheet" href="css/hover.css" />
+
+</head>
+<body class="bodyBG">
+	<nav
+		class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse productNav">
+		<div class="row productHeaderRow">
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header_nav_border">
+				<img src="images/logo.png" class="Pro_page_logo" />
+			</div>
+			<div
+				class="col-lg-10 col-md-10 col-sm-10 col-xs-10 user_detasils_border">
+				<!--  <img src="images/icnlogout.png" class="logout"/>
+                    <img src="images/icnprofile.png" class="user_profile"/> -->
+				<div class="row">
+					<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+
+						<p class="userName" th:text="${userName}"></p>
+						<img src="images/icninbox.png" class="inbox" /> <span
+							class="notification_num">3</span>
+					</div>
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+						<div class="dropdown">
+							<img src="images/icnprofile.png"
+								class="user_profile dropdown-toggle" data-toggle="dropdown" />
+
+							<ul class="dropdown-menu userDetail_dropdown">
+								<!--  -->
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<p class="logout_txt">LOGOUT</p>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+										<li>
+
+											<form th:action="@{/logout}" method="get"
+												class="vendor-logout-form">
+												<button type="Submit" class="vendor-logout-btn">
+													<img src="images/icnlogout.png" class="logout" />
+												</button>
+											</form>
+
+
+										</li>
+									</div>
+								</div>
+
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</nav>
+	<!--header bar ends here-->
+
+	<div class="row productMainBody">
+		<!--side nav bar starts here-->
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sideNavDiv">
+			<div class="navigation">
+				<ul>
+					<li class="has-sub" id="vendor-dashboard"><a href="#"> <img
+							src="images/icndashboard.png" class="" /> <span
+							class="navbar_menu_txt">Dashboard</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a></li>
+					<li class="has-sub"><a href="#"> <img
+							src="images/icnleads.png" class="" /> <span
+							class="navbar_menu_txt">Leads</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a></li>
+					<li class="has-sub"><a href="#"> <img
+							src="images/icnproducts.png" class="" /> <span
+							class="navbar_menu_txt">Products</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a>
+						<ul class="submenu ">
+							<li id="add-product"  class="tab"><a style="color: #FF8800 !important;" href="#">Add Product</a></li>
+							<li id="list-products" class="tab"><a href="#">List of
+									Products</a></li>
+						</ul></li>
+						
+					<li class="has-sub"><a href="#"> <img
+							src="images/icnproducts.png" class="" /> <span
+							class="navbar_menu_txt">Services</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a>
+						<ul class="submenu ">
+							<li id="add-product" class="tab"><a href="#">Add Services</a></li>
+							<li id="list-products" class="tab"><a href="#">List of
+									Services</a></li>
+						</ul></li>
+					<li class="has-sub"><a href="#"> <img
+							src="images/icnorg.png" class="" /> <span
+							class="navbar_menu_txt">Your Organization</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a></li>
+					<li class="has-sub"><a href="#"> <img
+							src="images/icnresource.png" class="" /> <span
+							class="navbar_menu_txt">Resources</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a></li>
+					<li class="has-sub"><a href="#"> <img
+							src="images/icnsettings.png" class="" /> <span
+							class="navbar_menu_txt">Settings</span> <img
+							src="images/icnarrow.png" class="navbar_menu_arrow" />
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--side nav bar ends here-->
+
+		<!-- main-content or body_content container starts here -->
+		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 main-content"></div>
+		<!-- main-content or body_content container starts here -->
+
+	</div>
+
+	<script th:inline="javascript">
+        /*<![CDATA[*/    
+        	
+			    var port = [[${port}]];
+			    var host = [[${host}]];   
+			    
+			    var loggedInUserId = [[${loggedInUserId}]];  
+			    var loggedInUserName = [[${userName}]];      
+			    
+				var baseURL = "http://"+host+":"+port+"/DefaultDigitMarketStore/vendor";	
+				
+				$('.userName').html(loggedInUserName);
+	
+	 /*]]>*/
+    </script>
+	<script>
+		$(document).ready(function() {
+			$('#vendor-dashboard').addClass('default_selected');
+			
+			var container = "main-content";
+			var dashboardURL = baseURL + "/vendor-dashboard";
+			callAjax(dashboardURL, container, "GET");	
+			
+			$("ul > .tab").click(function() {
+				$(this).addClass("active").siblings().removeClass("active");
+				var id = $(this).attr('id');			
+				$("#" + id).parent().parent().siblings().removeClass("default_selected");
+				$("#" + id).parent().parent().addClass("default_selected");
+				var tabUrl = baseURL + "/" + id;
+				callAjax(tabUrl, container, "GET");
+			});		
+			
+			$("ul > .has-sub").click(function() {				
+				$(this).siblings().removeClass("default_selected");
+				$(this).addClass("default_selected");
+			});		
+			
+			$(".has-sub").hover(function() {
+				$(".main-content").addClass("body_contentIndex");
+			}, function() {
+				$(".main-content").removeClass("body_contentIndex");
+			});
+			
+		
+		});		
+
+		function populateCategorySelect() {					
+			$.ajax({
+				type : "GET",
+				url : "http://172.30.66.149:8000/v1/category",
+				success : function(data) {
+					var optStr = '<option>Select</option>';
+					for (var i = 0; i < data.length; i++) {
+						optStr = optStr + '<option value="'+data[i].id+'">'
+								+ data[i].text + '</option>';
+					}
+					$('#categoryId').html(optStr);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

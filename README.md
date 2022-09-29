@@ -1,2 +1,2 @@
 # condigencerepo
-Repositotr for condigence
+Repositotry for condigence
